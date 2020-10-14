@@ -22,7 +22,6 @@ namespace Trippy_Land.Models
         public string TenDiaDiem { get; set; }
 
         [Display(Name = "Ảnh")]
-        [Required(ErrorMessage = "Yêu cầu nhập ảnh")]
         [StringLength(500)]
         public string PictureId { get; set; }
 

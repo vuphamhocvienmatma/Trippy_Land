@@ -54,6 +54,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -129,6 +132,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TinhController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,9 +140,18 @@
     <Compile Include="Migrations\202010140446596_PNV01.designer.cs">
       <DependentUpon>202010140446596_PNV01.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010140833239_PNV011.cs" />
+    <Compile Include="Migrations\202010140833239_PNV011.designer.cs">
+      <DependentUpon>202010140833239_PNV011.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010140843069_PNV012.cs" />
+    <Compile Include="Migrations\202010140843069_PNV012.designer.cs">
+      <DependentUpon>202010140843069_PNV012.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\DanhGia.cs" />
+    <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\DiaDiem.cs" />
     <Compile Include="Models\KhachSan.cs" />
     <Compile Include="Models\MonAn.cs" />
@@ -154,6 +167,12 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\Tinh\Can-Tho.jpg" />
+    <Content Include="Content\Image\Tinh\Da-Nang.jpg" />
+    <Content Include="Content\Image\Tinh\Ha-Giang.jpg" />
+    <Content Include="Content\Image\Tinh\Ha-Noi.jpg" />
+    <Content Include="Content\Image\Tinh\Lao-Cai.jpg" />
+    <Content Include="Content\Image\Tinh\Sai-Gon.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -285,10 +304,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Tinh\DanhSachTinh.cshtml" />
+    <Content Include="Views\Tinh\ThemMoiTinh.cshtml" />
+    <Content Include="Views\Tinh\CapNhatTinh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -302,6 +323,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010140446596_PNV01.resx">
       <DependentUpon>202010140446596_PNV01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010140833239_PNV011.resx">
+      <DependentUpon>202010140833239_PNV011.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010140843069_PNV012.resx">
+      <DependentUpon>202010140843069_PNV012.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

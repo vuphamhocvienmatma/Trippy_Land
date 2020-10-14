@@ -18,13 +18,13 @@ namespace Trippy_Land.Models
         [Column(TypeName = "NVARCHAR")]
         [StringLength(50)]
         [Display(Name = "Tên đăng nhập")]
-        [Required(ErrorMessage = "Yêu cầu nhập tên người dùng")]
+        [Required(ErrorMessage = "Yêu cầu nhập tên đăng nhập")]
         public string TenDangNhap { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [Display(Name = "Mật khẩu")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Yêu cầu nhập tên mật khẩu")]
+        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
         public string MatKhau { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
