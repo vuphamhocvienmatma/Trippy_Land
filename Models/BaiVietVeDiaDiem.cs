@@ -31,6 +31,10 @@ namespace Trippy_Land.Models
         [Display(Name = "Địa điểm")]
         public int idDiaDiem { get; set; }
 
+        [Display(Name = "Ảnh bài viết")]
+        [StringLength(500)]
+        public string PictureId { get; set; }
+
         [ForeignKey("idDiaDiem")]
         public virtual DiaDiem DiaDiem { get; set; }
     }
