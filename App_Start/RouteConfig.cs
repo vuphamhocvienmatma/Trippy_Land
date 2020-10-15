@@ -16,7 +16,7 @@ namespace Trippy_Land
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Tinh", action = "DanhSachTinh", id = UrlParameter.Optional }
+                defaults: new { controller = "MonAn", action = "DanhSachMonAn", id = UrlParameter.Optional }
             );
         }
     }

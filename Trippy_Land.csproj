@@ -132,6 +132,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\KhachSanController.cs" />
     <Compile Include="Controllers\MonAnController.cs" />
     <Compile Include="Controllers\TinhController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,12 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\KhachSan\fu_DN.jpg" />
+    <Content Include="Content\Image\KhachSan\Hn_Deawoo.jpg" />
+    <Content Include="Content\Image\KhachSan\inter_DN.jpg" />
+    <Content Include="Content\Image\KhachSan\Majetic.jpg" />
+    <Content Include="Content\Image\KhachSan\rex_SG.jpg" />
+    <Content Include="Content\Image\KhachSan\So_me.jpg" />
     <Content Include="Content\Image\MonAn\bun-cha.jpg" />
     <Content Include="Content\Image\MonAn\hu-tieu.jpg" />
     <Content Include="Content\Image\MonAn\pho-bo.jpg" />
@@ -307,6 +314,10 @@
     <Content Include="Views\MonAn\DanhSachMonAn.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Views\MonAn\ThemMonAn.cshtml" />
+    <Content Include="Views\MonAn\CapNhatMonAn.cshtml" />
+    <Content Include="Views\KhachSan\DanhSachKhachSan.cshtml" />
+    <Content Include="Views\KhachSan\ThemKhachSan.cshtml" />
+    <Content Include="Views\KhachSan\CapNhatKhachSan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

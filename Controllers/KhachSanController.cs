@@ -7,42 +7,42 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Controllers
 {
-    public class MonAnController : Controller
+    public class KhachSanController : Controller
     {
-        public ActionResult DanhSachMonAn()
+        public ActionResult DanhSachKhachSan()
         {
             HienThiDanhSachTinh();
-            var lstDanhSachMonAn = DataProvider.Entities.MonAns.ToList();
-            return View(lstDanhSachMonAn);
+            var lstDanhSachKhachSan = DataProvider.Entities.KhachSans.ToList();
+            return View(lstDanhSachKhachSan);
         }
 
-        public ActionResult XoaMonAn(int Id)
+        public ActionResult XoaKhachSan(int Id)
         {
-            //Lấy đối tượng món ăn
-            MonAn objMonan = DataProvider.Entities.MonAns.Find(Id);
-            if (objMonan != null)
+            //Lấy đối tượng khách sạn
+            KhachSan objKhachSan = DataProvider.Entities.KhachSans.Find(Id);
+            if (objKhachSan != null)
             {
                 //Xóa
-                DataProvider.Entities.MonAns.Remove(objMonan);
+                DataProvider.Entities.KhachSans.Remove(objKhachSan);
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return RedirectToAction("DanhSachMonAn");
+            return RedirectToAction("DanhSachKhachSan");
         }
 
-        public ActionResult ThemMonAn()
+        public ActionResult ThemKhachSan()
         {
             HienThiDanhSachTinh();
-            return View(new MonAn());
+            return View(new KhachSan());
         }
 
         /// <summary>
-        /// Hàm thêm mới món ăn
+        /// Hàm thêm mới khách sạn
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThemMonAn(MonAn objMonAn, HttpPostedFileBase fUpload)
+        public ActionResult ThemKhachSan(KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
             if (ModelState.IsValid)
             {
@@ -51,54 +51,54 @@ namespace Trippy_Land.Controllers
                     fUpload.ContentLength > 0)
                 {
                     //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/MonAn/" + fUpload.FileName));
+                    fUpload.SaveAs(Server.MapPath("~/Content/Image/KhachSan/" + fUpload.FileName));
                     //Lưu vào db
-                    objMonAn.PictureId = fUpload.FileName;
+                    objKhachSan.PictureId = fUpload.FileName;
                 }
                 //thêm vào database
-                DataProvider.Entities.MonAns.Add(objMonAn);
+                DataProvider.Entities.KhachSans.Add(objKhachSan);
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return RedirectToAction("DanhSachMonAn");
+            return RedirectToAction("DanhSachKhachSan");
         }
 
-        public ActionResult CapNhatMonAn(int Id)
+        public ActionResult CapNhatKhachSan(int Id)
         {
             HienThiDanhSachTinh();
-            MonAn objMonAn = DataProvider.Entities.MonAns.Where(c => c.Id == Id).Single<MonAn>();
+            KhachSan objKhachSan = DataProvider.Entities.KhachSans.Where(c => c.Id == Id).Single<KhachSan>();
 
-            return View(objMonAn);
+            return View(objKhachSan);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CapNhatMonAn(int Id, MonAn objMonAn, HttpPostedFileBase fUpload)
+        public ActionResult CapNhatKhachSan(int Id, KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
             HienThiDanhSachTinh();
-            var objOld_MonAn = DataProvider.Entities.MonAns.Find(Id);
+            var objOld_KhachSan = DataProvider.Entities.KhachSans.Find(Id);
             string img_Name = "";
             //Xử lý upload file
             if (fUpload != null &&
                 fUpload.ContentLength > 0)
             {
                 //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/image/MonAn/" + fUpload.FileName));
+                fUpload.SaveAs(Server.MapPath("~/Content/image/KhachSan/" + fUpload.FileName));
                 //Lưu vào db
-                objMonAn.PictureId = fUpload.FileName;
+                objKhachSan.PictureId = fUpload.FileName;
                 img_Name = fUpload.FileName;
             }
-            if (objOld_MonAn != null)
+            if (objOld_KhachSan != null)
             {
                 if (string.IsNullOrEmpty(img_Name))
                 {
-                    objMonAn.PictureId = objOld_MonAn.PictureId;
+                    objKhachSan.PictureId = objOld_KhachSan.PictureId;
                 }
-                DataProvider.Entities.Entry(objOld_MonAn).CurrentValues.SetValues(objMonAn);
+                DataProvider.Entities.Entry(objOld_KhachSan).CurrentValues.SetValues(objKhachSan);
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return RedirectToAction("DanhSachMonAn");
+            return RedirectToAction("DanhSachKhachSan");
         }
 
         public void HienThiDanhSachTinh(int? idTinh = null)
