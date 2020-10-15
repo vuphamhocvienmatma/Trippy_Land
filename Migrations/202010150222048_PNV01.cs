@@ -12,10 +12,12 @@
                 c => new
                 {
                     Id = c.Int(nullable: false, identity: true),
-                    TenDiaDiem = c.String(nullable: false, maxLength: 200),
+                    TenBaiViet = c.String(nullable: false, maxLength: 200),
                     TomTatBaiViet = c.String(maxLength: 4000),
                     NoiDungBaiViet = c.String(maxLength: 4000),
                     idDiaDiem = c.Int(nullable: false),
+                    PictureId = c.String(maxLength: 500),
+                    DaDuyet = c.Boolean(nullable: false),
                 })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DiaDiem", t => t.idDiaDiem, cascadeDelete: true)
@@ -27,7 +29,7 @@
                 {
                     Id = c.Int(nullable: false, identity: true),
                     TenDiaDiem = c.String(nullable: false, maxLength: 200),
-                    PictureId = c.String(nullable: false, maxLength: 500),
+                    PictureId = c.String(maxLength: 500),
                     HoatDongChinh = c.String(nullable: false, maxLength: 4000),
                     KinhNghiem = c.String(nullable: false, maxLength: 4000),
                     idTinh = c.Int(nullable: false),
@@ -42,7 +44,7 @@
                 {
                     Id = c.Int(nullable: false, identity: true),
                     TenTinh = c.String(nullable: false, maxLength: 200),
-                    PictureId = c.String(nullable: false, maxLength: 500),
+                    PictureId = c.String(maxLength: 500),
                     ChiTiet = c.String(maxLength: 4000),
                 })
                 .PrimaryKey(t => t.Id);
@@ -83,7 +85,7 @@
                 {
                     Id = c.Int(nullable: false, identity: true),
                     TenKhachSan = c.String(nullable: false, maxLength: 200),
-                    PictureId = c.String(nullable: false, maxLength: 500),
+                    PictureId = c.String(maxLength: 500),
                     ChiTiet = c.String(maxLength: 4000),
                     LichSuKhachSan = c.String(maxLength: 4000),
                     DiaDiemChiTiet = c.String(maxLength: 4000),
@@ -99,7 +101,7 @@
                 {
                     Id = c.Int(nullable: false, identity: true),
                     TenMonAn = c.String(nullable: false, maxLength: 200),
-                    PictureId = c.String(nullable: false, maxLength: 500),
+                    PictureId = c.String(maxLength: 500),
                     ChiTiet = c.String(maxLength: 4000),
                     LichSuaMonAn = c.String(maxLength: 4000),
                     NguyenLieu = c.String(maxLength: 4000),
