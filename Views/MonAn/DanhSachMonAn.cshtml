@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Trippy_Land.Models.MonAn>
+
+@{
+    ViewBag.Title = "Danh sách món ăn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách món ăn</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "ThemMonAn")
+</p>
+<table class="table table-bordered table-hover table-responsive" style="text-align:center">
+    <tr>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.PictureId)
+        </th>
+        <th style="width: 100px;">
+            @Html.DisplayNameFor(model => model.TenMonAn)
+        </th>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.ChiTiet)
+        </th>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.LichSuaMonAn)
+        </th>
+        @*<th style="width: 200px;">
+                @Html.DisplayNameFor(model => model.NguyenLieu)
+            </th>
+            <th style="width: 200px;">
+                @Html.DisplayNameFor(model => model.CachLam)
+            </th>*@
+        <th style="width: 100px;">
+            @Html.DisplayNameFor(model => model.Tinh.TenTinh)
+        </th>
+        <th style="width: 150px;">
+            Nghiệp vụ xử lý
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/Content/Image/MonAn/@item.PictureId" width="1000" height="1000" class="img-thumbnail" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMonAn)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiTiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LichSuaMonAn)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.NguyenLieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CachLam)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "CapNhatMonAn", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "XoaMonAn", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

@@ -18,7 +18,7 @@ namespace Trippy_Land.Models
         [StringLength(200)]
         [Display(Name = "Tên bài viết")]
         [Required(ErrorMessage = "Yêu cầu nhập tên bài viết")]
-        public string TenDiaDiem { get; set; }
+        public string TenBaiViet { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Tóm tắt bài viết")]
@@ -34,6 +34,9 @@ namespace Trippy_Land.Models
         [Display(Name = "Ảnh bài viết")]
         [StringLength(500)]
         public string PictureId { get; set; }
+
+        [Display(Name = "Đã duyệt")]
+        public bool DaDuyet { get; set; }
 
         [ForeignKey("idDiaDiem")]
         public virtual DiaDiem DiaDiem { get; set; }

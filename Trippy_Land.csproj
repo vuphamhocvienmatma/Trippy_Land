@@ -132,24 +132,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\KhachSanController.cs" />
+    <Compile Include="Controllers\MonAnController.cs" />
     <Compile Include="Controllers\TinhController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010140446596_PNV01.cs" />
-    <Compile Include="Migrations\202010140446596_PNV01.designer.cs">
-      <DependentUpon>202010140446596_PNV01.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010140833239_PNV011.cs" />
-    <Compile Include="Migrations\202010140833239_PNV011.designer.cs">
-      <DependentUpon>202010140833239_PNV011.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010140843069_PNV012.cs" />
-    <Compile Include="Migrations\202010140843069_PNV012.designer.cs">
-      <DependentUpon>202010140843069_PNV012.cs</DependentUpon>
+    <Compile Include="Migrations\202010150222048_PNV01.cs" />
+    <Compile Include="Migrations\202010150222048_PNV01.designer.cs">
+      <DependentUpon>202010150222048_PNV01.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
+    <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
     <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\DiaDiem.cs" />
@@ -167,6 +162,15 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\KhachSan\fu_DN.jpg" />
+    <Content Include="Content\Image\KhachSan\Hn_Deawoo.jpg" />
+    <Content Include="Content\Image\KhachSan\inter_DN.jpg" />
+    <Content Include="Content\Image\KhachSan\Majetic.jpg" />
+    <Content Include="Content\Image\KhachSan\rex_SG.jpg" />
+    <Content Include="Content\Image\KhachSan\So_me.jpg" />
+    <Content Include="Content\Image\MonAn\bun-cha.jpg" />
+    <Content Include="Content\Image\MonAn\hu-tieu.jpg" />
+    <Content Include="Content\Image\MonAn\pho-bo.jpg" />
     <Content Include="Content\Image\Tinh\Can-Tho.jpg" />
     <Content Include="Content\Image\Tinh\Da-Nang.jpg" />
     <Content Include="Content\Image\Tinh\Ha-Giang.jpg" />
@@ -307,6 +311,13 @@
     <Content Include="Views\Tinh\DanhSachTinh.cshtml" />
     <Content Include="Views\Tinh\ThemMoiTinh.cshtml" />
     <Content Include="Views\Tinh\CapNhatTinh.cshtml" />
+    <Content Include="Views\MonAn\DanhSachMonAn.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\MonAn\ThemMonAn.cshtml" />
+    <Content Include="Views\MonAn\CapNhatMonAn.cshtml" />
+    <Content Include="Views\KhachSan\DanhSachKhachSan.cshtml" />
+    <Content Include="Views\KhachSan\ThemKhachSan.cshtml" />
+    <Content Include="Views\KhachSan\CapNhatKhachSan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,14 +332,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010140446596_PNV01.resx">
-      <DependentUpon>202010140446596_PNV01.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010140833239_PNV011.resx">
-      <DependentUpon>202010140833239_PNV011.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010140843069_PNV012.resx">
-      <DependentUpon>202010140843069_PNV012.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010150222048_PNV01.resx">
+      <DependentUpon>202010150222048_PNV01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
