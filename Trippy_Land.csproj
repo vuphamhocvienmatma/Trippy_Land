@@ -132,6 +132,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DiaDiemController.cs" />
     <Compile Include="Controllers\KhachSanController.cs" />
     <Compile Include="Controllers\MonAnController.cs" />
     <Compile Include="Controllers\TinhController.cs" />
@@ -162,6 +163,9 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\DiaDiem\Linh-Ung.jpg" />
+    <Content Include="Content\Image\DiaDiem\my-khe.jpg" />
+    <Content Include="Content\Image\DiaDiem\Sa-pa.jpg" />
     <Content Include="Content\Image\KhachSan\fu_DN.jpg" />
     <Content Include="Content\Image\KhachSan\Hn_Deawoo.jpg" />
     <Content Include="Content\Image\KhachSan\inter_DN.jpg" />
@@ -318,6 +322,9 @@
     <Content Include="Views\KhachSan\DanhSachKhachSan.cshtml" />
     <Content Include="Views\KhachSan\ThemKhachSan.cshtml" />
     <Content Include="Views\KhachSan\CapNhatKhachSan.cshtml" />
+    <Content Include="Views\DiaDiem\DanhSachDiaDiem.cshtml" />
+    <Content Include="Views\DiaDiem\ThemDiaDiem.cshtml" />
+    <Content Include="Views\DiaDiem\CapNhatDiaDiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
