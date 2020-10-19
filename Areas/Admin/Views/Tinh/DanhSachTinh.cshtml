@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Trippy_Land.Models.Tinh>
+
+@{
+    ViewBag.Title = "Danh sách địa phương";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("DanhSachTinh", "Tinh", FormMethod.Post))
+{
+    <h2>Quản lý thông tin các tỉnh</h2>
+    <fieldset>
+        <legend>Nhập thông tin tìm kiếm</legend>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:10%;">Từ khóa:</td>
+                <td style="width:30%;">
+                    @Html.TextBox("tuKhoa", null,
+                   new { @class = "form-control" })
+                </td>
+                <td>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" style="margin: 7.5px 0; text-align:right" ; />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("Thêm mới", "ThemMoiTinh")
+</p>
+<table class="table table-bordered table-hover table-responsive table-sm" style="text-align:center">
+    <tr>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.PictureId)
+        </th>
+        <th style="width: 150px;">
+            @Html.DisplayNameFor(model => model.TenTinh)
+        </th>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.ChiTiet)
+        </th>s
+        <th style="width: 120px;">
+            Nghiệp vụ xử lý
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/Content/Image/Tinh/@item.PictureId" width="1000" height="1000" class="img-thumbnail" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiTiet)
+            </td>
+            <td>
+                @Html.ActionLink("Cập nhật", "CapNhatTinh", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "XoaTinh", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

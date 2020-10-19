@@ -19,5 +19,7 @@ namespace Trippy_Land.Models
         [Display(Name = "Tên chủ đề")]
         [Required(ErrorMessage = "Yêu cầu nhập tên chủ đề")]
         public string TenChuDe { get; set; }
+
+        public virtual ICollection<BaiVietVeDiaDiem> BaiVietVeDiaDiems { get; set; }
     }
 }

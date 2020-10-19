@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Trippy_Land.Models.DiaDiem>
+
+@{
+    ViewBag.Title = "DanhSachDiaDiem";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("DanhSachDiaDiem", "DiaDiem", FormMethod.Post))
+{
+    <h2>Quản lý thông tin địa điểm</h2>
+    <fieldset>
+        <legend>Nhập thông tin tìm kiếm</legend>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:10%;">Từ khóa:</td>
+                <td style="width:30%;">
+                    @Html.TextBox("tuKhoa", null,
+                   new { @class = "form-control" })
+                </td>
+                <td style="width:10%;">Tỉnh thành:</td>
+                <td style="width:30%;">
+                    @*Hiển thị danh sách loại khách hàng*@
+                    @Html.DropDownList("idTinh", (SelectList)ViewBag.Tinh,
+                   "---Tỉnh thành---", new { @class = "form-control" })
+                </td>
+                <td>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" style="margin: 7.5px 0; text-align:right" ; />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("Thêm mới", "ThemDiaDiem")
+</p>
+<table class="table table-bordered table-hover table-responsive" style="text-align:center">
+    <tr>
+        <th style="width: 300px;">
+            @Html.DisplayNameFor(model => model.PictureId)
+        </th>
+
+        <th style="width: 150px;">
+            @Html.DisplayNameFor(model => model.TenDiaDiem)
+        </th>
+
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.HoatDongChinh)
+        </th>
+        <th style="width: 200px;">
+            @Html.DisplayNameFor(model => model.KinhNghiem)
+        </th>
+        <th style="width: 100px;">
+            @Html.DisplayNameFor(model => model.Tinh.TenTinh)
+        </th>
+        <th style="width: 150px;">
+            Nghiệp vụ xử lý
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/Content/Image/DiaDiem/@item.PictureId" width="1000" height="1000" class="img-thumbnail" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDiaDiem)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.HoatDongChinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KinhNghiem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "CapNhatDiaDiem", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "XoaDiaDiem", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

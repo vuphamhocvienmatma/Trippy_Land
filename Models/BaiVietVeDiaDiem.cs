@@ -40,5 +40,11 @@ namespace Trippy_Land.Models
 
         [ForeignKey("idDiaDiem")]
         public virtual DiaDiem DiaDiem { get; set; }
+
+        [Display(Name = "Chủ đề")]
+        public int IdChude { get; set; }
+
+        [ForeignKey("IdChude")]
+        public virtual ChuDeBaiVietVeDiaDiem ChuDeBaiVietVeDiaDiem { get; set; }
     }
 }
