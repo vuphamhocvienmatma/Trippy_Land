@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
 
@@ -11,8 +10,7 @@
     <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
+    <title>Trippy Land - Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +19,7 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="~/Scripts/js/jquery-3.2.1.min.js"></script>
+    @RenderSection("Scripts", false)
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
@@ -35,10 +34,10 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i>BookStore</h1>
-                <p>Hệ thống quản lý thông tin sách</p>
+                <h1><i class="fa fa-th-list"></i>Trippy Land</h1>
+                <p>Hệ thống Trippy Land</p>
             </div>
-            @RenderSection("tieuDeTrang", required: false)
+            @*@RenderSection("tieuDeTrang", required: false)*@
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -61,7 +60,7 @@
     <!-- Data table plugin-->
     <script type="text/javascript" src="~/Scripts/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">$('#stdTable').DataTable();</script>
+    @*<script type="text/javascript">$('#stdTable').DataTable();</script>*@
     <!-- Google analytics script-->
     <script type="text/javascript">
         if (document.location.hostname == 'pratikborsadiya.in') {

@@ -188,6 +188,7 @@
     <Content Include="Content\Image\Tinh\Ha-Noi.jpg" />
     <Content Include="Content\Image\Tinh\Lao-Cai.jpg" />
     <Content Include="Content\Image\Tinh\Sai-Gon.jpg" />
+    <Content Include="Content\IMG_7125.jpg" />
     <Content Include="Content\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
