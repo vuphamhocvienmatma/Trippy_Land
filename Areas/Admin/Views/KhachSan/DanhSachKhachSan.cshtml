@@ -31,7 +31,7 @@
 }
 
 <p>
-    @Html.ActionLink("Thêm mới khách sạn", "ThemKhachSan")
+    @Html.ActionLink("Thêm mới khách sạn", "ThemKhachSan", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
 <table class="table table-bordered table-hover table-responsive" style="text-align:center">
     <tr>
@@ -84,8 +84,8 @@
                 @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
             </td>
             <td>
-                @Html.ActionLink("Sửa", "CapNhatKhachSan", new { id = item.Id }) |
-                @Html.ActionLink("Xóa", "XoaKhachSan", new { id = item.Id })
+                @Html.ActionLink("Sửa", "CapNhatKhachSan", new { id = item.Id }, new { @class = "lnkbuttonSua" })
+                @Html.ActionLink("Xóa", "XoaKhachSan", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
             </td>
         </tr>
     }
