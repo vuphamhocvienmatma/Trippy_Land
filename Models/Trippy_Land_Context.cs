@@ -12,6 +12,8 @@ namespace Trippy_Land.Models
         {
         }
 
+
+        public DbSet<ChuDeBaiVietVeDiaDiem> ChuDeBaiVietVeDiaDiems { get; set; }
         public DbSet<BaiVietVeDiaDiem> BaiVietVeDiaDiems { get; set; }
         public DbSet<DiaDiem> DiaDiems { get; set; }
         public DbSet<KhachSan> KhachSans { get; set; }

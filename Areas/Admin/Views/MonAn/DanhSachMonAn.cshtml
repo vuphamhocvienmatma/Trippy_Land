@@ -30,7 +30,7 @@
     </fieldset>
 }
 <p>
-    @Html.ActionLink("Thêm mới", "ThemMonAn")
+    @Html.ActionLink("Thêm mới", "ThemMonAn", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
 <table class="table table-bordered table-hover table-responsive" style="text-align:center">
     <tr>
@@ -86,8 +86,8 @@
                 @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
             </td>
             <td>
-                @Html.ActionLink("Sửa", "CapNhatMonAn", new { id = item.Id }) |
-                @Html.ActionLink("Xóa", "XoaMonAn", new { id = item.Id })
+                @Html.ActionLink("Sửa", "CapNhatMonAn", new { id = item.Id }, new { @class = "lnkbuttonSua" })
+                @Html.ActionLink("Xóa", "XoaMonAn", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
             </td>
         </tr>
     }

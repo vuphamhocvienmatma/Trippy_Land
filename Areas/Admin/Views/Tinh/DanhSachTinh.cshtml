@@ -4,6 +4,14 @@
     ViewBag.Title = "Danh sách địa phương";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <style>
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
 @using (Html.BeginForm("DanhSachTinh", "Tinh", FormMethod.Post))
 {
     <h2>Quản lý thông tin các tỉnh</h2>
@@ -24,20 +32,20 @@
     </fieldset>
 }
 <p>
-    @Html.ActionLink("Thêm mới", "ThemMoiTinh")
+    @Html.ActionLink("Thêm mới", "ThemMoiTinh", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
-<table class="table table-bordered table-hover table-responsive table-sm" style="text-align:center">
+<table class="table table-bordered table-hover table-responsive table-sm" style="text-align:center" width="10000px">
     <tr>
-        <th style="width: 200px;">
+        <th style="width: 300px;">
             @Html.DisplayNameFor(model => model.PictureId)
         </th>
-        <th style="width: 150px;">
+        <th style="width: auto;">
             @Html.DisplayNameFor(model => model.TenTinh)
         </th>
-        <th style="width: 200px;">
+        <th style="width: 600px;">
             @Html.DisplayNameFor(model => model.ChiTiet)
         </th>s
-        <th style="width: 120px;">
+        <th style="width: auto;">
             Nghiệp vụ xử lý
         </th>
     </tr>
@@ -54,8 +62,8 @@
                 @Html.DisplayFor(modelItem => item.ChiTiet)
             </td>
             <td>
-                @Html.ActionLink("Cập nhật", "CapNhatTinh", new { id = item.Id }) |
-                @Html.ActionLink("Xóa", "XoaTinh", new { id = item.Id })
+                @Html.ActionLink("Cập nhật", "CapNhatTinh", new { id = item.Id }, new { @class = "lnkbuttonSua" })
+                @Html.ActionLink("Xóa", "XoaTinh", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
             </td>
         </tr>
     }

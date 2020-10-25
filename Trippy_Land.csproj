@@ -134,10 +134,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaiVietVeDiaDiemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChuDeBaiVietController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachSanController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonAnController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,9 +175,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\approved.png" />
+    <Content Include="Content\Image\BaiViet\kinh-nghiem-di-bien-My-Khe.jpg" />
     <Content Include="Content\Image\DiaDiem\Linh-Ung.jpg" />
     <Content Include="Content\Image\DiaDiem\my-khe.jpg" />
     <Content Include="Content\Image\DiaDiem\Sa-pa.jpg" />
+    <Content Include="Content\Image\Icon\delete.png" />
+    <Content Include="Content\Image\Icon\edit.gif" />
     <Content Include="Content\Image\KhachSan\fu_DN.jpg" />
     <Content Include="Content\Image\KhachSan\Hn_Deawoo.jpg" />
     <Content Include="Content\Image\KhachSan\inter_DN.jpg" />
@@ -211,6 +219,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuDe\DanhSachChuDe.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuDe\ThemMoiChuDe.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuDe\CapNhatChuDe.cshtml" />
+    <Content Include="Areas\Admin\Views\BaiVietVeDiaDiem\DanhSachBaiViet.cshtml" />
+    <Content Include="Areas\Admin\Views\BaiVietVeDiaDiem\ThemMoiBaiViet.cshtml" />
+    <Content Include="Areas\Admin\Views\BaiVietVeDiaDiem\CapNhatBaiViet.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -531,11 +545,11 @@
     <Content Include="Areas\Admin\Views\DiaDiem\DanhSachDiaDiem.cshtml" />
     <Content Include="Areas\Admin\Views\DiaDiem\ThemDiaDiem.cshtml" />
     <Content Include="Areas\Admin\Views\DiaDiem\CapNhatDiaDiem.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
