@@ -11,6 +11,34 @@ namespace Trippy_Land.Controllers
 {
     public class LoginController : Controller
     {
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(User objUser)
+        {
+            if (ModelState.IsValid)
+            {
+                var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
+                if (check == null)
+                {
+                    objUser.MatKhau = GetSHA256(objUser.MatKhau);
+                    DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
+                    DataProvider.Entities.Users.Add(objUser);
+                    DataProvider.Entities.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ViewBag.error = "Tài khoản đã tồn tại";
+                    return View();
+                }
+            }
+            return View();
+        }
 
         // GET: Login
         public ActionResult Login()

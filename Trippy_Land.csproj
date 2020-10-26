@@ -143,7 +143,6 @@
     <Compile Include="Areas\Admin\Controllers\MonAnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +235,7 @@
     <Content Include="Login_Theme\fonts\montserrat\OFL.txt" />
     <Content Include="Login_Theme\images\bg-01.jpg" />
     <Content Include="Login_Theme\images\icons\favicon.ico" />
+    <Content Include="Login_Theme\images\pexels-oliver-sjöström-1020016.jpg" />
     <Content Include="Login_Theme\js\main.js" />
     <Content Include="Login_Theme\vendor\animate\animate.css" />
     <Content Include="Login_Theme\vendor\animsition\css\animsition.css" />
@@ -867,6 +867,7 @@
     <Content Include="Views\Home\_Intro.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_IntroQuotes.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
