@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Trippy_Land.Models
 {
@@ -24,7 +25,10 @@ namespace Trippy_Land.Models
         [Display(Name = "Tóm tắt bài viết")]
         public string TomTatBaiViet { get; set; }
 
-        [Column(TypeName = "NVARCHAR")]
+        [AllowHtml]
+        [UIHint("tinymce_jquery_full")]
+        [Column(TypeName = "NVARCHAR(MAX)")]
+        [MaxLength]
         [Display(Name = "Nội dung bài viết")]
         public string NoiDungBaiViet { get; set; }
 
