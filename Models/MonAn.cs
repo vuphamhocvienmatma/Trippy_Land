@@ -26,22 +26,19 @@ namespace Trippy_Land.Models
         [StringLength(500)]
         public string PictureId { get; set; }
 
-        [UIHint("tinymce_jquery_full"), AllowHtml]
+  
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Chi tiết")]
         public string ChiTiet { get; set; }
 
-        [UIHint("tinymce_jquery_full"), AllowHtml]
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Lịch sử món ăn")]
         public string LichSuaMonAn { get; set; }
 
-        [UIHint("tinymce_jquery_full"), AllowHtml]
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Nguyên liệu")]
         public string NguyenLieu { get; set; }
 
-        [UIHint("tinymce_jquery_full"), AllowHtml]
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Cách làm")]
         public string CachLam { get; set; }
