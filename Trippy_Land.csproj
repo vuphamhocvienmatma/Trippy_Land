@@ -749,7 +749,7 @@
     <Content Include="Areas\Admin\Views\DiaDiem\ThemDiaDiem.cshtml" />
     <Content Include="Areas\Admin\Views\DiaDiem\CapNhatDiaDiem.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
-    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Login\_Login.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Trippy_Land_Theme\css\.DS_Store" />
@@ -856,7 +856,12 @@
     <Content Include="Trippy_Land_Theme\scss\bootstrap\_utilities.scss" />
     <Content Include="Trippy_Land_Theme\scss\bootstrap\_variables.scss" />
     <Content Include="Trippy_Land_Theme\scss\style.scss" />
-    <Content Include="Views\Shared\_Home.cshtml" />
+    <Content Include="Views\Home\_Home.cshtml" />
+    <Content Include="Views\Home\_Goal.cshtml" />
+    <Content Include="Views\Home\_Navigation.cshtml" />
+    <Content Include="Views\Home\_Intro.cshtml" />
+    <Content Include="Views\Home\_Footer.cshtml" />
+    <Content Include="Views\Home\_IntroQuotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

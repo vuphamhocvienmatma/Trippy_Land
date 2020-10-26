@@ -4,131 +4,26 @@
     <title>Trippy Land</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/animate.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/magnific-popup.css">
-
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/jquery.timepicker.css">
-
-
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/flaticon.css">
     <link rel="stylesheet" href="~/Trippy_Land_Theme/css/style.css">
 </head>
 <body>
     @RenderBody()
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">The Trippy Land<span>To live like a king</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+    @Html.Partial("_Navigation")
+    @Html.Partial("_Intro")
+    @Html.Partial("_IntroQuotes")
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About us</a></li>
-                    <li class="nav-item"><a href="~/Login/Login" class="nav-link">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- END nav -->
-
-    <div class="hero-wrap js-fullheight" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_5.jpg")');">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
-                <div class="col-md-7 ftco-animate">
-                    <span class="subheading">Welcome to The Trippy Land</span>
-                    <h1 class="mb-4">Let us take you to trip you'll never forget</h1>
-                    <p class="caps">Traveling – it leaves you speechless, then turns you into a storyteller..</p>
-                </div>
-                <a href="~/Content/Video/Let's Take a Trip - -30 - Expedia.mp4" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
-                        <span class="fa fa-play"></span>
-                    </a>
-                @*<video controls="controls" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
-                    <source src="~/Content/Video/Let's%20Take%20a%20Trip%20-%20-30%20-%20Expedia.mp4" type="video/mp4" />
-                    <span class="fa fa-play"></span>
-                </video>*@
-            </div>
-        </div>
-    </div>
-    <section class="ftco-section services-section">
-        <div class="container">
-            <div class="row d-flex">
-                <div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate d-flex align-items-center">
-                    <div class="w-100">
-                        <span class="subheading">Welcome to The Trippy Land</span>
-                        <h2 class="mb-4">Xách ba lô lên và đi nào</h2>
-                        <p>
-                            Trong mỗi con người chúng ta, có người dành cả tuổi thanh xuân
-                            của mình để gầy dựng lên sự nghiệp của riêng mình.
-                            Có người dành cả tuổi trẻ của mình cho việc ăn uống và
-                            suy nghĩ cách để giảm cân, lấy lại vóc dáng.
-                            Và cuối cùng là có những người
-                            dành cả tuổi xuân tươi trẻ của mình để đi du lịch
-                            khắp thế giới, để được trải nghiệm, học thêm nhiều điều mới lạ.
-                        </p>
-                        <p>
-                            Đi không chỉ để trở về tay trắng, đi để túi tiền vơi đi, tim đầy nắng,
-                            tâm hồn rộng mở và đón nhận những câu chuyện mới, bài học mới của cuộc đời.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-                            <div class="services services-1 color-1 d-block img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/services-1.jpg")');">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-paragliding"></span></div>
-                                <div class="media-body">
-                                    <h3 class="heading mb-3">Hoạt động</h3>
-                                    <p>Chúng tôi luôn đưa đến cho bạn những hoạt động làm bạn quẩy hết mình</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-                            <div class="services services-1 color-2 d-block img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/services-2.jpg")');">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                                <div class="media-body">
-                                    <h3 class="heading mb-3">Sắp xếp chuyến đi</h3>
-                                    <p>Chúng tôi luôn cố gắng tạo cho cho bạn lịch trình tốt nhất</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-                            <div class="services services-1 color-3 d-block img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/services-3.jpg")');">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-tour-guide"></span></div>
-                                <div class="media-body">
-                                    <h3 class="heading mb-3">Kinh nghiệm</h3>
-                                    <p>Chúng tôi luôn chia sẻ kinh nghiệm khi đi du lịch và lời khuyên của những người đã từng đi<p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-                            <div class="services services-1 color-4 d-block img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/services-4.jpg")');">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-map"></span></div>
-                                <div class="media-body">
-                                    <h3 class="heading mb-3">Điểm đến</h3>
-                                    <p>Chúng tôi luôn gợi ý cho bạn những địa điểm du lịch nổi tiếng nhất hiện nay<p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="ftco-section img ftco-select-destination" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_3.jpg")');">
+    <section class="ftco-section img ftco-select-destination" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_3.jpg")');">
         <div class="container">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 heading-section text-center ftco-animate">
@@ -143,7 +38,7 @@
                     <div class="carousel-destination owl-carousel ftco-animate">
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-1.jpg")');">
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-1.jpg")');">
                                     <div class="text">
                                         <h3>Philippines</h3>
                                         <span>8 Tours</span>
@@ -153,7 +48,7 @@
                         </div>
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-2.jpg")');">
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-2.jpg")');">
                                     <div class="text">
                                         <h3>Canada</h3>
                                         <span>2 Tours</span>
@@ -163,7 +58,7 @@
                         </div>
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-3.jpg")');">
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-3.jpg")');">
                                     <div class="text">
                                         <h3>Thailand</h3>
                                         <span>5 Tours</span>
@@ -173,7 +68,7 @@
                         </div>
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-4.jpg")');">
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-4.jpg")');">
                                     <div class="text">
                                         <h3>Autralia</h3>
                                         <span>5 Tours</span>
@@ -183,7 +78,7 @@
                         </div>
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-5.jpg")');">
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/place-5.jpg")');">
                                     <div class="text">
                                         <h3>Greece</h3>
                                         <span>7 Tours</span>
@@ -196,7 +91,8 @@
             </div>
         </div>
     </section>
-    <section class="ftco-section ftco-about img" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_4.jpg")');">
+
+    <section class="ftco-section ftco-about img" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_4.jpg")');">
         <div class="overlay">
         </div>
         <div class="container py-md-5">
@@ -235,7 +131,7 @@
         </div>
     </section>
 
-    <section class="ftco-section testimony-section bg-bottom" style="        background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_1.jpg")');">
+    <section class="ftco-section testimony-section bg-bottom" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_1.jpg")');">
         <div class="overlay">
         </div>
         <div class="container">
@@ -447,80 +343,10 @@
             </div>
         </div>
     </section>
+    @Html.Partial("_Footer")
 
-    <footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/bg_3.jpg")');">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md pt-5">
-                    <div class="ftco-footer-widget pt-md-5 mb-4">
-                        <h2 class="ftco-heading-2">Đôi điều về chúng tôi</h2>
-                        <p>Chúng tôi là những con người luôn cố gắng chia sẻ niềm đam mê du lịch đến với mọi người</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-                            <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md pt-5 border-left">
-                    <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Infromation</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
-                            <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
-                            <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
-                            <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
-                            <li><a href="#" class="py-2 d-block">Call Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md pt-5 border-left">
-                    <div class="ftco-footer-widget pt-md-5 mb-4">
-                        <h2 class="ftco-heading-2">Experience</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Adventure</a></li>
-                            <li><a href="#" class="py-2 d-block">Hotel and Restaurant</a></li>
-                            <li><a href="#" class="py-2 d-block">Beach</a></li>
-                            <li><a href="#" class="py-2 d-block">Nature</a></li>
-                            <li><a href="#" class="py-2 d-block">Camping</a></li>
-                            <li><a href="#" class="py-2 d-block">Party</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md pt-5 border-left">
-                    <div class="ftco-footer-widget pt-md-5 mb-4">
-                        <h2 class="ftco-heading-2">Liên hệ</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon fa fa-map-marker"></span><span class="text">Thanh Xuan District, Ha Noi City, Viet Nam</span></li>
-                                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+849886880704</span></a></li>
-                                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">Travel♥Lover@gmail.com</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    <p>
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                        This website is made with love of travelling</a>
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                    </p>
-                    </br>
-                    <p>
-                        <script>document.write(new Date().getFullYear());</script>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
-
-
     <script src="~/Trippy_Land_Theme/js/jquery.min.js"></script>
     <script src="~/Trippy_Land_Theme/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="~/Trippy_Land_Theme/js/popper.min.js"></script>
