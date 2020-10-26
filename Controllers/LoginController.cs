@@ -1,23 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Models;
 
 namespace Trippy_Land.Controllers
 {
     public class LoginController : Controller
     {
+
         // GET: Login
         public ActionResult Login()
         {
             return View();
         }
-
-
+        /// <summary>
+        /// Đăng nhập với mật khẩu đã được băm qua SHA 256
+        /// </summary>
+        /// <param name="objUser"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User objUser)
+        {
+            string HashPassword = GetSHA256(objUser.MatKhau);
+            if (ModelState.IsValid)
+            {
+                var obj = DataProvider.Entities.Users
+                    .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+                if (obj != null)
+                {                 
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View();
+        }
         public ActionResult Logout()
         {
             return View();
         }
+
+        /// <summary>
+        /// Chuyển đổi một chuỗi về MD5
+        /// </summary>
+        /// <param name="str">Chuỗi cần băm</param>
+        /// <returns></returns>
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
+        }
+
+        /// <summary>
+        /// Chuyển đổi một chuỗi về SHA256
+        /// </summary>
+        /// <param name="clearText">Bản rõ cần băm</param>
+        /// <returns></returns>
+        public static string GetSHA256(string clearText)
+        {
+            SHA256CryptoServiceProvider sHA256 = new SHA256CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(clearText);
+            byte[] targetData = sHA256.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
+        }
+
     }
 }

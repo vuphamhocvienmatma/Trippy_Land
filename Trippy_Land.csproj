@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\MonAnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,6 +158,10 @@
     <Compile Include="Migrations\202010250859038_PNV012.cs" />
     <Compile Include="Migrations\202010250859038_PNV012.designer.cs">
       <DependentUpon>202010250859038_PNV012.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010260814219_PNV013.cs" />
+    <Compile Include="Migrations\202010260814219_PNV013.designer.cs">
+      <DependentUpon>202010260814219_PNV013.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
@@ -866,6 +871,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -884,6 +890,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010250859038_PNV012.resx">
       <DependentUpon>202010250859038_PNV012.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010260814219_PNV013.resx">
+      <DependentUpon>202010260814219_PNV013.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

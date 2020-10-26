@@ -1,4 +1,38 @@
-﻿@{
+﻿@model Trippy_Land.Models.User
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Login/_Login.cshtml";
 }
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "login100-form validate-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <span class="login100-form-title p-b-34">
+                    Chill with us
+                </span>
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-10" data-validate="Type user name">
+                    @Html.TextBoxFor(m => m.TenDangNhap, new { @class = "input100", placeholder = "User name" })
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-10" data-validate="Type password">
+                    @Html.PasswordFor(m => m.MatKhau, new { @class = "input100", placeholder = "Password" })                 
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="container-login100-form-btn p-t-10 p-b-40">                 
+                    <input type="submit" value="Sign in" class="login100-form-btn" />
+                </div>
+                <div class="w-full text-center p-t-100 p-b-40">
+                    <a href="#" class="txt3">
+                        Sign Up
+                    </a>
+                </div>             
+            }
+            <div class="login100-more" style="background-image: url('@Url.Content("~/Login_Theme/images/bg-01.jpg")');">
+            </div>
+        </div>
+    </div>
+</div>
