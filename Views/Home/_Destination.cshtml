@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Trippy_Land.Models.Tinh>
+<div class="container container-2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="carousel-destination owl-carousel ftco-animate">
+                @foreach (var d in Model)
+                {
+                    <div class="item">
+                        <div class="project-destination">
+                            <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">
+                                <div class="text">
+                                    <h3>@d.TenTinh</h3>
+                                    <span>Welcome</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -68,7 +68,8 @@ namespace Trippy_Land.Controllers
         }
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear(); //remove session 
+            return RedirectToAction("Login", "Login");
         }
 
         /// <summary>
