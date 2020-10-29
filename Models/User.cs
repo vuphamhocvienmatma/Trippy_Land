@@ -29,8 +29,7 @@ namespace Trippy_Land.Models
 
         [Column(TypeName = "NVARCHAR")]
         [StringLength(50)]
-        [Display(Name = "Tên người dùng")]
-        [Required(ErrorMessage = "Yêu cầu nhập tên người dùng")]
+        [Display(Name = "Tên người dùng")]      
         public string TenNguoiDung { get; set; }
 
         [Display(Name = "Số điện thoại")]
