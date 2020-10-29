@@ -875,6 +875,11 @@
     <Content Include="Views\Home\_Destination.cshtml" />
     <Content Include="Views\Home\_AskForQuote.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\_About.cshtml" />
+    <Content Include="Views\Home\_VideoAboveAboutUs.cshtml" />
+    <Content Include="Views\Home\_TakeYourDestination.cshtml" />
+    <Content Include="Views\Home\_TouristFeedBack.cshtml" />
+    <Content Include="Views\Home\_OurBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
