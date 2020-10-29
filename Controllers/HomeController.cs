@@ -11,14 +11,13 @@ namespace Trippy_Land.Controllers
     {
         public ActionResult Index()
         {
-            IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
-            //tìm kiếm theo từ khóa
-            //if (!string.IsNullOrEmpty(tuKhoa))
-            //{
-            //    lstTinh = lstTinh.Where(c => c.TenTinh.Contains(tuKhoa));
-            //}
+            IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;           
             return View(lstTinh);         
-        }      
-       
+        }
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+
     }
 }

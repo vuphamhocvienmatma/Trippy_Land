@@ -44,7 +44,10 @@
         </th>
         <th style="width: 600px;">
             @Html.DisplayNameFor(model => model.ChiTiet)
-        </th>s
+        </th>
+        <th style="width: auto;">
+            @Html.DisplayNameFor(model => model.TomTat)
+        </th>
         <th style="width: auto;">
             Nghiệp vụ xử lý
         </th>
@@ -60,6 +63,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ChiTiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TomTat)
             </td>
             <td>
                 @Html.ActionLink("Cập nhật", "CapNhatTinh", new { id = item.Id }, new { @class = "lnkbuttonSua" })
