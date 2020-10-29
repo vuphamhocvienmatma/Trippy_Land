@@ -352,6 +352,7 @@
     <Content Include="Areas\Admin\Views\UserRole\ThemMoiUserRole.cshtml" />
     <Content Include="Areas\Admin\Views\User\DanhSachUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\ThemMoiUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\CapNhatUser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

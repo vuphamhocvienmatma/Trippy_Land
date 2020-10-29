@@ -73,6 +73,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiUser(User objuser, HttpPostedFileBase fUpload)
         {
+            HienThiDanhSachUserRole();
             if (ModelState.IsValid)
             {
                 //Xử lý upload file
@@ -95,5 +96,49 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
             return RedirectToAction("DanhSachUser");
         }
+
+
+
+        public ActionResult CapNhatUser(int Id)
+        {
+            HienThiDanhSachUserRole();
+            User objUser = DataProvider.Entities.Users.Where(c => c.Id == Id).Single<User>();
+            return View(objUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CapNhatUser(int Id, User objUser, HttpPostedFileBase fUpload)
+        {
+            HienThiDanhSachUserRole();
+            var objOld_User = DataProvider.Entities.Users.Find(Id);
+            string img_Name = "";
+            if (objUser.MatKhau != null)
+            {
+                objUser.MatKhau = GetSHA256(objUser.MatKhau);
+            }
+            //Xử lý upload file
+            if (fUpload != null &&
+                fUpload.ContentLength > 0)
+            {
+                //Upload
+                fUpload.SaveAs(Server.MapPath("~/Content/image/User/" + fUpload.FileName));
+                //Lưu vào db
+                objUser.PictureId = fUpload.FileName;
+                img_Name = fUpload.FileName;
+            }
+            if (objOld_User != null)
+            {
+                if (string.IsNullOrEmpty(img_Name))
+                {
+                    objUser.PictureId = objOld_User.PictureId;
+                }              
+                DataProvider.Entities.Entry(objOld_User).CurrentValues.SetValues(objUser);
+                //Lưu thay đổi
+                DataProvider.Entities.SaveChanges();
+            }         
+            return RedirectToAction("DanhSachUser");
+        }
+
     }
 }
