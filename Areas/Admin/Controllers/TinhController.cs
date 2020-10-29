@@ -50,6 +50,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                     //Lưu vào db
                     objTinh.PictureId = fUpload.FileName;
                 }
+                
                 //thêm vào database
                 DataProvider.Entities.Tinhs.Add(objTinh);
                 //Lưu thay đổi

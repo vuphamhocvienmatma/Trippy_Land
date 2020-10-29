@@ -27,6 +27,7 @@ namespace Trippy_Land.Controllers
                 {
                     objUser.MatKhau = GetSHA256(objUser.MatKhau);
                     DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
+                    objUser.UserRoleId = 2;
                     DataProvider.Entities.Users.Add(objUser);
                     DataProvider.Entities.SaveChanges();
                     return RedirectToAction("Login");

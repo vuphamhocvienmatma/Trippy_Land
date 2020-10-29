@@ -7,13 +7,13 @@ namespace Trippy_Land.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class PNV012 : IMigrationMetadata
+    public sealed partial class PNV : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PNV012));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PNV));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010250859038_PNV012"; }
+            get { return "202010290733151_PNV"; }
         }
         
         string IMigrationMetadata.Source
