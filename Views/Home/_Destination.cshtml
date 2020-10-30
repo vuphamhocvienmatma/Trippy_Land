@@ -21,7 +21,7 @@
 
     .lnkbuttonrestaurants {
         /* change the image path as per your design */
-        background: url(../../Content/Image/DestinationIcon/hotel-resize.png) no-repeat top right;
+        background: url(../../Content/Image/DestinationIcon/restaurant-resize.png) no-repeat top right;
         display: block; /*change width and height as per your need*/
         width: 55px;
         height: 55px; /* hides the link text */
@@ -29,11 +29,15 @@
     }
     .dropbtn {
         /* change the image path as per your design */
-        background: url(../../Content/Image/DestinationIcon/landscape.png) no-repeat top right;
+        background: url(../../Content/Image/DestinationIcon/landscape.png) no-repeat top left;
         display: block; /*change width and height as per your need*/
-        width: 36px;
-        height: 36px; /* hides the link text */
+        width: 270px;
+        height: 125px; /* hides the link text */
         text-indent: -9999px;
+        opacity: 0;
+    }
+    .opacity {
+        opacity: 0;
     }
 
     .dropdown {
@@ -45,55 +49,52 @@
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 64px;
+        min-width: 55px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-            .dropdown-content a:hover {
-                background-color: #215ec5;
-            }
+    .dropdown-content a:hover {
+        background-color: #215ec5;
+    }
 
     .dropdown:hover .dropdown-content {
         display: block;
     }
 
     .dropdown:hover .dropbtn {
-        background-color: #227fcc;
+        background-color: #DCF1FF;
     }
 </style>
-
 <div class="container container-2">
     <div class="row">
         <div class="col-md-12">
             <div class="carousel-destination owl-carousel ftco-animate">
                 @foreach (var d in Model)
                 {
-                <div class="item">
-                    <div class="dropdown">
-                        <button class="dropbtn"></button>
-                        <div class="dropdown-content">
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonHoTel" })
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonlocation" })
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonrestaurants" })
-                        </div>
-                    </div>
-                    <div class="project-destination">
-
-                        <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">
+                <div class="item">                                   
+                    <div class="project-destination">                      
+                        <div class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">                         
                             <div class="text">
                                 <h3>@d.TenTinh</h3>
                                 <span>@d.TomTat</span>
+                                <div class="dropdown" style="text-align:right">
+                                    <button class="dropbtn" style="text-align:right"></button>
+                                    <div class="dropdown-content">
+                                        @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonHoTel" })
+                                        @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonlocation" })
+                                        @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonrestaurants" })
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-
+                        </div>
                     </div>
                 </div>
                 }

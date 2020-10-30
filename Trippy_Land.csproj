@@ -186,6 +186,7 @@
     <Content Include="Content\Image\DestinationIcon\landscape.png" />
     <Content Include="Content\Image\DestinationIcon\location-resize.png" />
     <Content Include="Content\Image\DestinationIcon\hotel-resize.png" />
+    <Content Include="Content\Image\DestinationIcon\restaurant-resize.png" />
     <Content Include="Content\Image\DiaDiem\Linh-Ung.jpg" />
     <Content Include="Content\Image\DiaDiem\my-khe.jpg" />
     <Content Include="Content\Image\DiaDiem\Sa-pa.jpg" />
