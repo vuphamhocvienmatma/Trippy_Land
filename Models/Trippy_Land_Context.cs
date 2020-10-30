@@ -20,6 +20,7 @@ namespace Trippy_Land.Models
         public DbSet<MonAn> MonAns { get; set; }
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<DanhGia> DanhGias { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace Trippy_Land.Controllers
                 {
                     objUser.MatKhau = GetSHA256(objUser.MatKhau);
                     DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
+                    objUser.UserRoleId = 2;
                     DataProvider.Entities.Users.Add(objUser);
                     DataProvider.Entities.SaveChanges();
                     return RedirectToAction("Login");
@@ -60,8 +61,13 @@ namespace Trippy_Land.Controllers
                 var obj = DataProvider.Entities.Users
                     .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
                 if (obj != null)
-                {                 
+                {
+                  
                     return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
                 }
             }
             return View();
