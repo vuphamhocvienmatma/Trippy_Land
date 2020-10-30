@@ -18,7 +18,7 @@ namespace Trippy_Land.Controllers
         {
             return View();
         }
-
+       
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
         /// </summary>
