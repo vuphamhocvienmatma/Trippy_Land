@@ -1,37 +1,128 @@
 ﻿@model IEnumerable<Trippy_Land.Models.Tinh>
+<style>
+    .lnkbuttonHoTel {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/hotel-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+
+    .lnkbuttonlocation {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/location-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+
+    .lnkbuttonrestaurants {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/hotel-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+
+
+    .lnkbuttonHoTelLe {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/hotel-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+
+    .lnkbuttonlocationLe {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/location-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+
+    .lnkbuttonrestaurantsLe {
+        /* change the image path as per your design */
+        background: url(../../Content/Image/DestinationIcon/hotel-resize.png) no-repeat top right;
+        display: inline-block; /*change width and height as per your need*/
+        width: 65px;
+        height: 65px; /* hides the link text */
+        text-indent: -9999px;
+    }
+</style>
 <div class="container container-2">
     <div class="row">
         <div class="col-md-12">
             <div class="carousel-destination owl-carousel ftco-animate">
+                @{
+                    int i = 0;
+                }
                 @foreach (var d in Model)
                 {
-                    <div class="item">
-                        <div class="project-destination">
+                    @*Nếu là số chẵn*@
+                    if (i % 2 == 0)
+                    {
+                        <div class="item">
 
-                            <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">
-                                <div class="text">
-                                    <h3>@d.TenTinh</h3>
+                            <div class="project-destination">
 
-                                    <span>@d.TomTat</span>
-                                </div>
-                            </a>
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                            @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">
+                                    <div class="text">
+                                        <h3>@d.TenTinh</h3>
+                                        <span>@d.TomTat</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonHoTel" })
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonlocation" })
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonrestaurants" })
+                            </div>
                         </div>
-                    </div>
+                    }
+                    @*Nếu là số lẻ*@
+                    if (i % 2 != 0)
+                    {
+                        <div class="item">
+
+                            <div class="project-destination">
+
+                                <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/Tinh/"+ d.PictureId)');">
+                                    <div class="text">
+                                        <h3>@d.TenTinh</h3>
+                                        <span>@d.TomTat</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                @Html.ActionLink("Hotel", "GetHotelByProvinceId", new { Id = d.Id })
+                            </div>
+                        </div>
+                    }
+                    i = i + 1;
                 }
             </div>
         </div>

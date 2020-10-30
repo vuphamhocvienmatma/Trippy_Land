@@ -182,6 +182,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Image\approved.png" />
     <Content Include="Content\Image\BaiViet\kinh-nghiem-di-bien-My-Khe.jpg" />
+    <Content Include="Content\Image\DestinationIcon\location-resize.png" />
+    <Content Include="Content\Image\DestinationIcon\hotel-resize.png" />
     <Content Include="Content\Image\DiaDiem\Linh-Ung.jpg" />
     <Content Include="Content\Image\DiaDiem\my-khe.jpg" />
     <Content Include="Content\Image\DiaDiem\Sa-pa.jpg" />
