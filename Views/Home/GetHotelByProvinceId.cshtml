@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Trippy_Land.Models.KhachSan>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetHotelByProvinceId</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tinh.TenTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKhachSan)
+            </th>
+            
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachSan)
+            </td>            
+        </tr>
+    }  
+    </table>
+</body>
+</html>
