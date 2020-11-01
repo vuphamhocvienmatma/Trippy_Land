@@ -19,7 +19,7 @@
         text-indent: -9999px;
     }
 
-    .lnkbuttonrestaurants {
+    .lnkbuttonFood {
         /* change the image path as per your design */
         background: url(../../Content/Image/DestinationIcon/restaurant-resize.png) no-repeat top right;
         display: block; /*change width and height as per your need*/
@@ -29,20 +29,18 @@
     }
     .dropbtn {
         /* change the image path as per your design */
-        background: url(../../Content/Image/DestinationIcon/landscape.png) no-repeat top left;
         display: block; /*change width and height as per your need*/
         width: 270px;
         height: 125px; /* hides the link text */
-        text-indent: -9999px;
         opacity: 0;
+        text-decoration: none;
     }
-    .opacity {
-        opacity: 0;
-    }
+  
 
     .dropdown {
         position: relative;
-        display: inline-block;
+        display: inline-block;     
+        transition: all .5s ease;
     }
 
     .dropdown-content {
@@ -52,6 +50,7 @@
         min-width: 55px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        transition: all .5s ease;
     }
 
     .dropdown-content a {
@@ -61,9 +60,12 @@
         display: block;
     }
 
-    .dropdown-content a:hover {
-        background-color: #215ec5;
-    }
+        .dropdown-content a:hover {
+            background-color: #215ec5;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all .5s ease;
+        }
 
     .dropdown:hover .dropdown-content {
         display: block;
@@ -89,8 +91,8 @@
                                     <button class="dropbtn" style="text-align:right"></button>
                                     <div class="dropdown-content">
                                         @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonHoTel" })
-                                        @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonlocation" })
-                                        @Html.ActionLink(".", "GetHotelByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonrestaurants" })
+                                        @Html.ActionLink(".", "GetLocationByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonlocation" })
+                                        @Html.ActionLink(".", "GetFoodByProvinceId", new { Id = d.Id }, new { @class = "lnkbuttonFood" })
                                     </div>
                                 </div>
                             </div>

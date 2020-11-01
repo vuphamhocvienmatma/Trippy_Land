@@ -1,37 +1,32 @@
-﻿@model IEnumerable<Trippy_Land.Models.KhachSan>
-
+﻿@model IEnumerable<Trippy_Land.Models.DiaDiem>
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>GetHotelByProvinceId</title>
+    <title>GetLocationByProvinceId</title>
 </head>
 <body>
-  
+   
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Tinh.TenTinh)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TenKhachSan)
+                @Html.DisplayNameFor(model => model.TenDiaDiem)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PictureId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChiTiet)
+                @Html.DisplayNameFor(model => model.HoatDongChinh)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LichSuKhachSan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiaDiemChiTiet)
+                @Html.DisplayNameFor(model => model.KinhNghiem)
             </th>
             <th></th>
         </tr>
@@ -42,22 +37,20 @@
                 @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenKhachSan)
+                @Html.DisplayFor(modelItem => item.TenDiaDiem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PictureId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ChiTiet)
+                @Html.DisplayFor(modelItem => item.HoatDongChinh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LichSuKhachSan)
+                @Html.DisplayFor(modelItem => item.KinhNghiem)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaDiemChiTiet)
-            </td>         
+           
         </tr>
-    }   
+    }
     </table>
 </body>
 </html>

@@ -33,8 +33,18 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 lstBaiViet = lstBaiViet.Where(c => c.TenBaiViet.Contains(tuKhoa));
             }
+            //Tìm kiếm theo địa điểm
+            if (idDiaDiem.HasValue)
+            {
+                lstBaiViet = lstBaiViet.Where(b => b.idDiaDiem == idDiaDiem.Value);
+            }
+            //Tìm kiếm theo chủ đề
+            if (idChuDe.HasValue)
+            {
+                lstBaiViet = lstBaiViet.Where(b => b.IdChude == idChuDe.Value);
+            }          
             return View(lstBaiViet);
-            
+           
         }
 
         //public ActionResult ThemMoiBaiViet()

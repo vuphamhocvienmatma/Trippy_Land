@@ -5,8 +5,38 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DanhSachBaiViet</h2>
-
+@using (Html.BeginForm("DanhSachBaiViet", "BaiVietVeDiaDiem", FormMethod.Post))
+{
+    <h2>Quản lý bài viết</h2>
+    <fieldset>
+        <legend>Nhập thông tin tìm kiếm</legend>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:10%;">Từ khóa:</td>
+                <td style="width:20%;">
+                    @Html.TextBox("tuKhoa", null,
+                   new { @class = "form-control" })
+                </td>
+                
+                <td style="width:10%;">Địa điểm:</td>
+                <td style="width:25%;">
+                    @*Hiển thị địa điểm*@
+                    @Html.DropDownList("idDiaDiem", (SelectList)ViewBag.DiaDiem,
+                   "---Địa điểm---", new { @class = "form-control" })
+                </td>
+                <td style="width:10%;">Chủ đề:</td>
+                <td style="width:25%;">
+                    @*Hiển thị danh sách chủ đề*@
+                    @Html.DropDownList("idChuDe", (SelectList)ViewBag.ChuDe,
+                   "---Chủ đề---", new { @class = "form-control" })
+                </td>
+                <td>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" style="margin: 7.5px 0; text-align:right" ; />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
 <p>
     @Html.ActionLink("Thêm mới", "ThemMoiBaiViet", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>

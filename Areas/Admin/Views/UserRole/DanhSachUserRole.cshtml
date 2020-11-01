@@ -23,12 +23,12 @@
         text-indent: -9999px;
     }
 </style>
-<h2>Danh sách User Role</h2>
+<h2>Danh sách loại khách hàng</h2>
 
 <p>
     @Html.ActionLink("Thêm mới", "ThemMoiUserRole",routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-responsive" style="text-align:center">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.TenRole)

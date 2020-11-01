@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Trippy_Land.Models.KhachSan>
+﻿@model IEnumerable<Trippy_Land.Models.MonAn>
 
 @{
     Layout = null;
@@ -9,17 +9,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>GetHotelByProvinceId</title>
+    <title>GetFoodByProvinceId</title>
 </head>
 <body>
-  
+   
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Tinh.TenTinh)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TenKhachSan)
+                @Html.DisplayNameFor(model => model.TenMonAn)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PictureId)
@@ -28,10 +28,13 @@
                 @Html.DisplayNameFor(model => model.ChiTiet)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LichSuKhachSan)
+                @Html.DisplayNameFor(model => model.LichSuaMonAn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiaDiemChiTiet)
+                @Html.DisplayNameFor(model => model.NguyenLieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CachLam)
             </th>
             <th></th>
         </tr>
@@ -42,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.Tinh.TenTinh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenKhachSan)
+                @Html.DisplayFor(modelItem => item.TenMonAn)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PictureId)
@@ -51,13 +54,18 @@
                 @Html.DisplayFor(modelItem => item.ChiTiet)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LichSuKhachSan)
+                @Html.DisplayFor(modelItem => item.LichSuaMonAn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DiaDiemChiTiet)
-            </td>         
+                @Html.DisplayFor(modelItem => item.NguyenLieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CachLam)
+            </td>
+            
         </tr>
-    }   
+    }
+    
     </table>
 </body>
 </html>

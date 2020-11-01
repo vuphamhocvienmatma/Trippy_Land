@@ -884,11 +884,12 @@
     <Content Include="Views\Home\_TouristFeedBack.cshtml" />
     <Content Include="Views\Home\_OurBlog.cshtml" />
     <Content Include="Views\Home\GetHotelByProvinceId.cshtml" />
+    <Content Include="Views\Home\GetFoodByProvinceId.cshtml" />
+    <Content Include="Views\Home\GetLocationByProvinceId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Authorize\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>

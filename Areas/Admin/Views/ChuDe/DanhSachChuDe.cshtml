@@ -5,35 +5,18 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-@*<head>
-    <style>
-        .lnkbuttonXoa {
-            /* change the image path as per your design */
-            background: url(../../../../Content/Image/Icon/delete.png) no-repeat top left;
-            display: block; /*change width and height as per your need*/
-            width: 20px;
-            height: 20px; /* hides the link text */
-            text-indent: -9999px;
-        }
-        .lnkbuttonThemMoi {
-            /* change the image path as per your design */
-            background: url(../../../../Content/Image/Icon/edit.gif) no-repeat top left;
-            display: block; /*change width and height as per your need*/
-            width: 20px;
-            height: 20px; /* hides the link text */
-            text-indent: -9999px;
-        }
-    </style>
-</head>*@
+@
 <p>
     @Html.ActionLink("Thêm mới chủ đề", "ThemMoiChuDe", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-responsive" style="text-align:center">
     <tr>
-        <th>
+        <th >
             @Html.DisplayNameFor(model => model.TenChuDe)
         </th>
-        <th>Nghiệp vụ xử lý</th>
+        <th >
+        Nghiệp vụ xử lý
+        </th>
     </tr>
 
     @foreach (var item in Model)
