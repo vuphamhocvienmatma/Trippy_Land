@@ -42,16 +42,17 @@
         <th style="width: 150px;">
             @Html.DisplayNameFor(model => model.TenKhachSan)
         </th>
-
         <th style="width: 250px;">
             @Html.DisplayNameFor(model => model.ChiTiet)
         </th>
-        @*<th style="width: 200px;">
-                @Html.DisplayNameFor(model => model.LichSuKhachSan)
-            </th>*@
         <th style="width: 100px;">
             @Html.DisplayNameFor(model => model.DiaDiemChiTiet)
         </th>
+
+        <th style="width: 100px;">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+
         <th style="width: 100px;">
             @Html.DisplayNameFor(model => model.Tinh.TenTinh)
         </th>
@@ -74,11 +75,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ChiTiet)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.LichSuKhachSan)
-                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.DiaDiemChiTiet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tinh.TenTinh)

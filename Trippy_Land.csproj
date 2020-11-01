@@ -157,6 +157,10 @@
     <Compile Include="Migrations\202010290733151_PNV.designer.cs">
       <DependentUpon>202010290733151_PNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011010805360_PNV1.cs" />
+    <Compile Include="Migrations\202011010805360_PNV1.designer.cs">
+      <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
@@ -705,6 +709,7 @@
     <Content Include="Trippy_Land_Theme\images\hotel-resto-7.jpg" />
     <Content Include="Trippy_Land_Theme\images\hotel-resto-8.jpg" />
     <Content Include="Trippy_Land_Theme\images\hotel-resto-9.jpg" />
+    <Content Include="Trippy_Land_Theme\images\hotel_room-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_3.jpg" />
@@ -716,6 +721,7 @@
     <Content Include="Trippy_Land_Theme\images\person_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_3.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_4.jpg" />
+    <Content Include="Trippy_Land_Theme\images\pexels-nerfee-mirandilla-3186654.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-1.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-2.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-3.jpg" />
@@ -886,10 +892,11 @@
     <Content Include="Views\Home\GetHotelByProvinceId.cshtml" />
     <Content Include="Views\Home\GetFoodByProvinceId.cshtml" />
     <Content Include="Views\Home\GetLocationByProvinceId.cshtml" />
+    <Content Include="Views\Home\_Head.cshtml" />
+    <Content Include="Views\Home\_Loader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
@@ -903,6 +910,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010290733151_PNV.resx">
       <DependentUpon>202010290733151_PNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011010805360_PNV1.resx">
+      <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

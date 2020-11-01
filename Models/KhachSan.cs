@@ -26,7 +26,7 @@ namespace Trippy_Land.Models
         public string PictureId { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
-        [Display(Name = "Chi tiết")]
+        [Display(Name = "Mô tả")]
         public string ChiTiet { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
@@ -36,6 +36,9 @@ namespace Trippy_Land.Models
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Địa điểm chi tiết")]
         public string DiaDiemChiTiet { get; set; }
+
+        [Display(Name = "Giá tiền")]
+        public int Price { get; set; }
 
         [Display(Name = "Tỉnh")]
         public int idTinh { get; set; }
