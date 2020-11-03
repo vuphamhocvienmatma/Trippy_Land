@@ -64,6 +64,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             HienThiDanhSachChuDe();
             if (ModelState.IsValid)
             {
+                objBaiViet.DataCreated = DateTime.Now;
                 //Xử lý upload file
                 if (fUpload != null &&
                     fUpload.ContentLength > 0)
@@ -134,6 +135,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 if (string.IsNullOrEmpty(img_Name))
                 {
+                    objBaiViet.DataCreated = objOld_BaiViet.DataCreated;
                     objBaiViet.PictureId = objOld_BaiViet.PictureId;
                 }
                 DataProvider.Entities.Entry(objOld_BaiViet).CurrentValues.SetValues(objBaiViet);

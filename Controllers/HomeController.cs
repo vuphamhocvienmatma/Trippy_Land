@@ -18,7 +18,19 @@ namespace Trippy_Land.Controllers
         {
             return View();
         }
-       
+
+
+        public ActionResult Blog()
+        {
+            List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
+            return View(lstBaiViet);
+        }
+
+        public ActionResult BlogDetail()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
         /// </summary>

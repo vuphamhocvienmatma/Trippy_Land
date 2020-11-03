@@ -42,6 +42,11 @@ namespace Trippy_Land.Models
         [Display(Name = "Đã duyệt")]
         public bool DaDuyet { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Thời gian viết bài")]
+        public DateTime DataCreated { get; set; }
+
         [ForeignKey("idDiaDiem")]
         public virtual DiaDiem DiaDiem { get; set; }
 

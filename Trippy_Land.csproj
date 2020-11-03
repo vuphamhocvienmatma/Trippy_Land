@@ -165,6 +165,10 @@
     <Compile Include="Migrations\202011030749428_PNV2.designer.cs">
       <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011030852399_PNV3.cs" />
+    <Compile Include="Migrations\202011030852399_PNV3.designer.cs">
+      <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
@@ -894,12 +898,13 @@
     <Content Include="Views\Home\_VideoAboveAboutUs.cshtml" />
     <Content Include="Views\Home\_TakeYourDestination.cshtml" />
     <Content Include="Views\Home\_TouristFeedBack.cshtml" />
-    <Content Include="Views\Home\_OurBlog.cshtml" />
     <Content Include="Views\Home\GetHotelByProvinceId.cshtml" />
     <Content Include="Views\Home\GetFoodByProvinceId.cshtml" />
     <Content Include="Views\Home\GetLocationByProvinceId.cshtml" />
     <Content Include="Views\Home\_Head.cshtml" />
     <Content Include="Views\Home\_Loader.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\_OurBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -922,6 +927,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030749428_PNV2.resx">
       <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030852399_PNV3.resx">
+      <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

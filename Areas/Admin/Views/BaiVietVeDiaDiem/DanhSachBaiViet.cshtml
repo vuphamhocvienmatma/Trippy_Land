@@ -17,7 +17,7 @@
                     @Html.TextBox("tuKhoa", null,
                    new { @class = "form-control" })
                 </td>
-                
+
                 <td style="width:10%;">Địa điểm:</td>
                 <td style="width:25%;">
                     @*Hiển thị địa điểm*@
@@ -51,14 +51,14 @@
         <th style="width: 500px;">
             @Html.DisplayNameFor(model => model.TomTatBaiViet)
         </th>
-        @*<th style="        width: 400px;">
-                @Html.DisplayNameFor(model => model.NoiDungBaiViet)
-            </th>*@
+
 
         <th style="        width: 50px;">
             @Html.DisplayNameFor(model => model.DaDuyet)
         </th>
-
+        <th style="        width: 50px;">
+            @Html.DisplayNameFor(model => model.DataCreated)
+        </th>
         <th style="        width: 50px;">
             @Html.DisplayNameFor(model => model.ChuDeBaiVietVeDiaDiem.TenChuDe)
         </th>
@@ -91,6 +91,9 @@
                 {
                     <img src="~/Content/Image/approved.png" />
                 }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCreated)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ChuDeBaiVietVeDiaDiem.TenChuDe)
