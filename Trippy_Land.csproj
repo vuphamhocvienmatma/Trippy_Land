@@ -161,6 +161,10 @@
     <Compile Include="Migrations\202011010805360_PNV1.designer.cs">
       <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011030749428_PNV2.cs" />
+    <Compile Include="Migrations\202011030749428_PNV2.designer.cs">
+      <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
@@ -683,6 +687,7 @@
     <Content Include="Trippy_Land_Theme\fonts\flaticon\font\Flaticon.svg" />
     <Content Include="Trippy_Land_Theme\images\about-1.jpg" />
     <Content Include="Trippy_Land_Theme\images\about.jpg" />
+    <Content Include="Trippy_Land_Theme\images\beautiful_moraine_lake_sunrise-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_3.jpg" />
@@ -717,6 +722,7 @@
     <Content Include="Trippy_Land_Theme\images\image_5.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_6.jpg" />
     <Content Include="Trippy_Land_Theme\images\loc.png" />
+    <Content Include="Trippy_Land_Theme\images\maroon_bells_morning-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_3.jpg" />
@@ -913,6 +919,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011010805360_PNV1.resx">
       <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030749428_PNV2.resx">
+      <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

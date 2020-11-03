@@ -35,6 +35,11 @@ namespace Trippy_Land.Models
         [Required(ErrorMessage = "Yêu cầu nhập kinh nghiệm đi")]
         public string KinhNghiem { get; set; }
 
+
+        [Column(TypeName = "NVARCHAR")]
+        [Display(Name = "Tiêu đề")]
+        [Required(ErrorMessage = "Yêu cầu nhập kinh nghiệm")]
+        public string TieuDe { get; set; }
         public virtual ICollection<BaiVietVeDiaDiem> BaiVietVeDiaDiem { get; set; }
 
         [Display(Name = "Tỉnh")]
