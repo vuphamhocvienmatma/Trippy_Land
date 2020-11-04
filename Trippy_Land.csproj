@@ -727,6 +727,7 @@
     <Content Include="Trippy_Land_Theme\images\image_6.jpg" />
     <Content Include="Trippy_Land_Theme\images\loc.png" />
     <Content Include="Trippy_Land_Theme\images\maroon_bells_morning-wallpaper-1920x1080.jpg" />
+    <Content Include="Trippy_Land_Theme\images\nordic_landscape-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_3.jpg" />
@@ -905,6 +906,7 @@
     <Content Include="Views\Home\_Loader.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\_OurBlog.cshtml" />
+    <Content Include="Views\Home\BlogDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
