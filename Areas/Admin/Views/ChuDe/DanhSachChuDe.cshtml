@@ -4,12 +4,10 @@
     ViewBag.Title = "Danh sách chủ đề";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-@
 <p>
     @Html.ActionLink("Thêm mới chủ đề", "ThemMoiChuDe", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </p>
-<table class="table table-bordered table-hover table-responsive" style="text-align:center">
+<table class="table table-bordered table-hover table-responsive" style="width:50%">
     <tr>
         <th >
             @Html.DisplayNameFor(model => model.TenChuDe)
