@@ -157,6 +157,18 @@
     <Compile Include="Migrations\202010290733151_PNV.designer.cs">
       <DependentUpon>202010290733151_PNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011010805360_PNV1.cs" />
+    <Compile Include="Migrations\202011010805360_PNV1.designer.cs">
+      <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011030749428_PNV2.cs" />
+    <Compile Include="Migrations\202011030749428_PNV2.designer.cs">
+      <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011030852399_PNV3.cs" />
+    <Compile Include="Migrations\202011030852399_PNV3.designer.cs">
+      <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
@@ -182,8 +194,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Image\approved.png" />
     <Content Include="Content\Image\BaiViet\kinh-nghiem-di-bien-My-Khe.jpg" />
+    <Content Include="Content\Image\DestinationIcon\drop-down.png" />
+    <Content Include="Content\Image\DestinationIcon\landscape.png" />
     <Content Include="Content\Image\DestinationIcon\location-resize.png" />
     <Content Include="Content\Image\DestinationIcon\hotel-resize.png" />
+    <Content Include="Content\Image\DestinationIcon\restaurant-resize.png" />
     <Content Include="Content\Image\DiaDiem\Linh-Ung.jpg" />
     <Content Include="Content\Image\DiaDiem\my-khe.jpg" />
     <Content Include="Content\Image\DiaDiem\Sa-pa.jpg" />
@@ -676,6 +691,7 @@
     <Content Include="Trippy_Land_Theme\fonts\flaticon\font\Flaticon.svg" />
     <Content Include="Trippy_Land_Theme\images\about-1.jpg" />
     <Content Include="Trippy_Land_Theme\images\about.jpg" />
+    <Content Include="Trippy_Land_Theme\images\beautiful_moraine_lake_sunrise-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\bg_3.jpg" />
@@ -702,6 +718,7 @@
     <Content Include="Trippy_Land_Theme\images\hotel-resto-7.jpg" />
     <Content Include="Trippy_Land_Theme\images\hotel-resto-8.jpg" />
     <Content Include="Trippy_Land_Theme\images\hotel-resto-9.jpg" />
+    <Content Include="Trippy_Land_Theme\images\hotel_room-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_3.jpg" />
@@ -709,10 +726,13 @@
     <Content Include="Trippy_Land_Theme\images\image_5.jpg" />
     <Content Include="Trippy_Land_Theme\images\image_6.jpg" />
     <Content Include="Trippy_Land_Theme\images\loc.png" />
+    <Content Include="Trippy_Land_Theme\images\maroon_bells_morning-wallpaper-1920x1080.jpg" />
+    <Content Include="Trippy_Land_Theme\images\nordic_landscape-wallpaper-1920x1080.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_1.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_2.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_3.jpg" />
     <Content Include="Trippy_Land_Theme\images\person_4.jpg" />
+    <Content Include="Trippy_Land_Theme\images\pexels-nerfee-mirandilla-3186654.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-1.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-2.jpg" />
     <Content Include="Trippy_Land_Theme\images\place-3.jpg" />
@@ -879,13 +899,17 @@
     <Content Include="Views\Home\_VideoAboveAboutUs.cshtml" />
     <Content Include="Views\Home\_TakeYourDestination.cshtml" />
     <Content Include="Views\Home\_TouristFeedBack.cshtml" />
-    <Content Include="Views\Home\_OurBlog.cshtml" />
     <Content Include="Views\Home\GetHotelByProvinceId.cshtml" />
+    <Content Include="Views\Home\GetFoodByProvinceId.cshtml" />
+    <Content Include="Views\Home\GetLocationByProvinceId.cshtml" />
+    <Content Include="Views\Home\_Head.cshtml" />
+    <Content Include="Views\Home\_Loader.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\_OurBlog.cshtml" />
+    <Content Include="Views\Home\BlogDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Authorize\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
@@ -899,6 +923,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010290733151_PNV.resx">
       <DependentUpon>202010290733151_PNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011010805360_PNV1.resx">
+      <DependentUpon>202011010805360_PNV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030749428_PNV2.resx">
+      <DependentUpon>202011030749428_PNV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030852399_PNV3.resx">
+      <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

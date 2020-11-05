@@ -38,10 +38,21 @@ namespace Trippy_Land.Areas.Admin.Controllers
             ViewBag.UserRole = new SelectList(lstUserRole, "Id", "TenRole", idUserRole.HasValue ? idUserRole.Value : 0);
         }
 
-        public ActionResult DanhSachUser()
+        public ActionResult DanhSachUser(string tuKhoa, int? idUserRole)
         {
+
             HienThiDanhSachUserRole();
             IQueryable<User>lstUser = DataProvider.Entities.Users;
+            //tìm kiếm theo từ khóa
+            if (!string.IsNullOrEmpty(tuKhoa))
+            {
+                lstUser = lstUser.Where(c => c.TenDangNhap.Contains(tuKhoa) || c.TenNguoiDung.Contains(tuKhoa) || c.PhoneNumber.ToString().Contains(tuKhoa));
+            }
+            //Tìm kiếm theo loại khách hàng
+            if (idUserRole.HasValue)
+            {
+                lstUser = lstUser.Where(b => b.UserRoleId == idUserRole.Value);
+            }
             return View(lstUser);
         }
 

@@ -36,11 +36,11 @@ namespace Trippy_Land.Models
         public string LichSuaMonAn { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
-        [Display(Name = "Nguyên liệu")]
+        [Display(Name = "Thởi điểm ăn")]
         public string NguyenLieu { get; set; }
 
         [Column(TypeName = "NVARCHAR")]
-        [Display(Name = "Cách làm")]
+        [Display(Name = "Nơi thưởng thức")]
         public string CachLam { get; set; }
 
         [Display(Name = "Tỉnh, thành")]

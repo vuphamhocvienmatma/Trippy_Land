@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Trippy_Land.Models.MonAn>
+
+<!DOCTYPE html>
+<html>
+@Html.Partial("_Head")
+<body>
+    @Html.Partial("_Navigation")
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/pexels-nerfee-mirandilla-3186654.jpg")');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="~/Home/Index">Home <i class="fa fa-chevron-right"></i></a></span> <span>Food <i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Food</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                @foreach (var h in Model)
+                {
+                    <div class="col-md-4 ftco-animate">
+                        <div class="project-wrap hotel">
+                            <div class="img" style="background-image: url('@Url.Content("~/Content/Image/MonAn/"+ h.PictureId)');">
+                                <span class="price">Ăn @h.NguyenLieu</span>
+                            </div>
+                            <div class="text p-4">
+                                <span class="days">@h.ChiTiet</span>
+                                <h3><a href="#">@h.TenMonAn</a></h3>
+                                <p class="location"><span class="fa fa-fire"></span> @h.CachLam</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- loader -->
+    @Html.Partial("_Loader")
+    @Html.Partial("_AskForQuote")
+    @Html.Partial("_Footer")
+</body>
+</html>
