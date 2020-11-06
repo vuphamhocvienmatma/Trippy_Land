@@ -19,6 +19,10 @@ namespace Trippy_Land.Controllers
             return View();
         }
 
+        public ActionResult GetAllChuDe()
+        {
+            return View();
+        }
 
         public ActionResult Blog()
         {
@@ -26,9 +30,10 @@ namespace Trippy_Land.Controllers
             return View(lstBaiViet);
         }
 
-        public ActionResult BlogDetail()
+        public ActionResult BlogDetail(int? Id)
         {
-            return View();
+            BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
+            return View(ObjbaiVietVeDiaDiem);
         }
 
         /// <summary>

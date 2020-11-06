@@ -36,7 +36,10 @@
                             </div>
                             <h3 class="heading"><a href="#">@item.TenBaiViet</a></h3>
                             <p>@item.TomTatBaiViet.</p>
-                            <p><a href="#" class="btn btn-primary">Chi tiết</a></p>
+                            <p>
+                                @Html.ActionLink("Chi tiết", "BlogDetail", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                                @*<a href="#" class="btn btn-primary">Chi tiết</a>*@
+                            </p>
                         </div>
                     </div>
                 </div>
