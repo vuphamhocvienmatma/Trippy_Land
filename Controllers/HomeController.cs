@@ -35,7 +35,7 @@ namespace Trippy_Land.Controllers
             BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
             return View(ObjbaiVietVeDiaDiem);
         }
-
+        
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
         /// </summary>

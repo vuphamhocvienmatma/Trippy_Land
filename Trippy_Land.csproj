@@ -142,6 +142,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaiVietVeDiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DanhGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachSanController.cs" />
@@ -169,9 +170,18 @@
     <Compile Include="Migrations\202011030852399_PNV3.designer.cs">
       <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011090148215_PNV4.cs" />
+    <Compile Include="Migrations\202011090148215_PNV4.designer.cs">
+      <DependentUpon>202011090148215_PNV4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011090204117_PNV5.cs" />
+    <Compile Include="Migrations\202011090204117_PNV5.designer.cs">
+      <DependentUpon>202011090204117_PNV5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
+    <Compile Include="Models\DanhGiaBaiViet.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DataProvider.cs" />
@@ -376,6 +386,8 @@
     <Content Include="Areas\Admin\Views\User\DanhSachUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\ThemMoiUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\CapNhatUser.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhGia\DanhSachDanhGia.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhGia\ThemMoiDanhGia.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -932,6 +944,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030852399_PNV3.resx">
       <DependentUpon>202011030852399_PNV3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011090148215_PNV4.resx">
+      <DependentUpon>202011090148215_PNV4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011090204117_PNV5.resx">
+      <DependentUpon>202011090204117_PNV5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

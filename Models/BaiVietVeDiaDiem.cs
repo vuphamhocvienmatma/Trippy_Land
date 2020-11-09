@@ -55,5 +55,8 @@ namespace Trippy_Land.Models
 
         [ForeignKey("IdChude")]
         public virtual ChuDeBaiVietVeDiaDiem ChuDeBaiVietVeDiaDiem { get; set; }
+
+
+        public virtual ICollection<DanhGiaBaiViet> DanhGiaBaiViet { get; set; }
     }
 }
