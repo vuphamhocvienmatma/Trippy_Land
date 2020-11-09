@@ -112,5 +112,12 @@ namespace Trippy_Land.Controllers
             }
             return View(lstDanhSachDiaDiem.ToList().ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult NotFound()
+        {
+            Response.StatusCode = 404;
+
+            return View();
+        }
     }
 }
