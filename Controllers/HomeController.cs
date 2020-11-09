@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
-
+using PagedList;
 namespace Trippy_Land.Controllers
 {
     public class HomeController : Controller
@@ -24,10 +24,13 @@ namespace Trippy_Land.Controllers
             return View();
         }
 
-        public ActionResult Blog()
+        public ActionResult Blog(int? page, string sortOrder)
         {
+            ViewBag.CurrentSort = sortOrder;
             List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
-            return View(lstBaiViet);
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult BlogDetail(int? Id)

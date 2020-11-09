@@ -1,8 +1,21 @@
-﻿@model IEnumerable<Trippy_Land.Models.BaiVietVeDiaDiem>
+﻿@model PagedList.IPagedList<Trippy_Land.Models.BaiVietVeDiaDiem>
+@using PagedList.Mvc;
+
 <!DOCTYPE html>
 <html lang="en">
+
 @Html.Partial("_Head")
 <body>
+    <style>
+        div.relative {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1%;
+            font-size: xx-large;
+            
+        }
+    </style>
     @Html.Partial("_Navigation")
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/nordic_landscape-wallpaper-1920x1080.jpg")');">
         <div class="overlay"></div>
@@ -20,33 +33,39 @@
             <div class="row d-flex">
                 @foreach (var item in Model)
                 {
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('@Url.Content("~/Content/Image/BaiViet/" + item.PictureId)');">
-                        </a>
-                        <div class="text">
-                            <div class="d-flex align-items-center mb-4 topp">
-                                <div class="one">
-                                    <span class="day">@item.DataCreated.Day</span>
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end">
+                            <a href="blog-single.html" class="block-20" style="background-image: url('@Url.Content("~/Content/Image/BaiViet/" + item.PictureId)');">
+                            </a>
+                            <div class="text">
+                                <div class="d-flex align-items-center mb-4 topp">
+                                    <div class="one">
+                                        <span class="day">@item.DataCreated.Day</span>
+                                    </div>
+                                    <div class="two">
+                                        <span class="yr">@item.DataCreated.Year</span>
+                                        <span class="mos">@item.DataCreated.Month</span>
+                                    </div>
                                 </div>
-                                <div class="two">
-                                    <span class="yr">@item.DataCreated.Year</span>
-                                    <span class="mos">@item.DataCreated.Month</span>
-                                </div>
+                                <h3 class="heading"><a href="#">@item.TenBaiViet</a></h3>
+                                <p>@item.TomTatBaiViet.</p>
+                                <p>
+                                    @Html.ActionLink("Chi tiết", "BlogDetail", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                                    @*<a href="#" class="btn btn-primary">Chi tiết</a>*@
+                                </p>
                             </div>
-                            <h3 class="heading"><a href="#">@item.TenBaiViet</a></h3>
-                            <p>@item.TomTatBaiViet.</p>
-                            <p>
-                                @Html.ActionLink("Chi tiết", "BlogDetail", new { Id = item.Id }, new { @class = "btn btn-primary" })
-                                @*<a href="#" class="btn btn-primary">Chi tiết</a>*@
-                            </p>
                         </div>
                     </div>
-                </div>
                 }
             </div>
         </div>
     </section>
+    <div class="relative">
+        <strong>
+            @Html.PagedListPager(Model, page => Url.Action("Blog",
+     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </strong>
+    </div>
     @* Không cần sửa *@
     @Html.Partial("_AskForQuote")
     @Html.Partial("_Footer")
