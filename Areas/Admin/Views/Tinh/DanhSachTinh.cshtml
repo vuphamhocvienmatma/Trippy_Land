@@ -4,14 +4,7 @@
     ViewBag.Title = "Danh sách địa phương";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<head>
-    <style>
-        table.center {
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
-</head>
+
 @using (Html.BeginForm("DanhSachTinh", "Tinh", FormMethod.Post))
 {
     <h2>Quản lý thông tin các tỉnh</h2>

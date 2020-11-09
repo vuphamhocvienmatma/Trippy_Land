@@ -36,6 +36,6 @@ namespace Trippy_Land.Models
         public virtual ICollection<DiaDiem> DiaDiem { get; set; }
         public virtual ICollection<KhachSan> KhachSan { get; set; }
         public virtual ICollection<MonAn> MonAn { get; set; }
-        public virtual ICollection<DanhGia> DanhGia { get; set; }
+        
     }
 }

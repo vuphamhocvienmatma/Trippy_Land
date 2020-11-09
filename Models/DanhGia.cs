@@ -19,16 +19,15 @@ namespace Trippy_Land.Models
         [Display(Name = "Nội dung đánh giá")]
         public string NoiDungDanhGia { get; set; }
 
-        [Display(Name = "Tỉnh")]
-        public int idTinh { get; set; }
 
-        [ForeignKey("idTinh")]
-        public virtual Tinh Tinh { get; set; }
-
-        [Display(Name = "Tên người dùng")]
+        //Nối đến bảng User
+        [Display(Name = "Người viết")]
         public int idUser { get; set; }
 
         [ForeignKey("idUser")]
         public virtual User User { get; set; }
+
+        //Nối đến bảng đánh giá bài viết
+        public virtual ICollection<DanhGiaBaiViet> DanhGiaBaiViet { get; set; }
     }
 }

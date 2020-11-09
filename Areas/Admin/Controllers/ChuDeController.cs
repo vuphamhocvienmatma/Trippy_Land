@@ -47,7 +47,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult XoaChuDe(int Id)
         {
-            //Lấy đối tượng tỉnh
+            //Lấy đối tượng chủ đề
             ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
             if (objChuDe != null)
             {

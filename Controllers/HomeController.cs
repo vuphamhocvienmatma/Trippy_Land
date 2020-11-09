@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
-
+using PagedList;
 namespace Trippy_Land.Controllers
 {
     public class HomeController : Controller
@@ -19,18 +19,26 @@ namespace Trippy_Land.Controllers
             return View();
         }
 
-
-        public ActionResult Blog()
-        {
-            List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
-            return View(lstBaiViet);
-        }
-
-        public ActionResult BlogDetail()
+        public ActionResult GetAllChuDe()
         {
             return View();
         }
 
+        public ActionResult Blog(int? page, string sortOrder)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult BlogDetail(int? Id)
+        {
+            BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
+            return View(ObjbaiVietVeDiaDiem);
+        }
+        
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
         /// </summary>
