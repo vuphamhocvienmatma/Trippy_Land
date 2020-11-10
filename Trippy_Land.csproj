@@ -778,6 +778,8 @@
     <Content Include="Trippy_Land_Theme\js\popper.min.js" />
     <Content Include="Trippy_Land_Theme\js\range.js" />
     <Content Include="Trippy_Land_Theme\js\scrollax.min.js" />
+    <Content Include="Views\Shared\css\style.css" />
+    <Content Include="Views\Shared\img\bg.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -927,9 +929,9 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\_OurBlog.cshtml" />
     <Content Include="Views\Home\BlogDetail.cshtml" />
-    <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\ErrorPage\Error.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\BlogbyLoacationId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

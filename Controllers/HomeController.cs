@@ -92,7 +92,7 @@ namespace Trippy_Land.Controllers
             {
                 lstDanhSachMonAn = lstDanhSachMonAn.Where(b => b.idTinh == Id.Value);
             }
-            return View(lstDanhSachMonAn.ToList().ToPagedList(pageNumber, pageSize));          
+            return View(lstDanhSachMonAn.ToList().ToPagedList(pageNumber, pageSize));       
         }
 
         /// <summary>
@@ -113,11 +113,6 @@ namespace Trippy_Land.Controllers
             return View(lstDanhSachDiaDiem.ToList().ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult NotFound()
-        {
-            Response.StatusCode = 404;
-
-            return View();
-        }
+       
     }
 }
