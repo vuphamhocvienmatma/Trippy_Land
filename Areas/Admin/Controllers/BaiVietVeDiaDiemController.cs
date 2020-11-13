@@ -23,7 +23,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             ViewBag.ChuDe = new SelectList(lstChuDe, "Id", "TenChuDe", idChuDe.HasValue ? idChuDe.Value : 0);
         }
 
-        public ActionResult DanhSachBaiViet(string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
+        public ActionResult DanhSachBaiViet(DateTime? date,string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
         {
             HienThiDanhSachDiaDiem();
             HienThiDanhSachChuDe();
@@ -42,29 +42,37 @@ namespace Trippy_Land.Areas.Admin.Controllers
             if (idChuDe.HasValue)
             {
                 lstBaiViet = lstBaiViet.Where(b => b.IdChude == idChuDe.Value);
-            }          
-            return View(lstBaiViet);
-           
+            }
+            if (date.HasValue)
+            {
+                lstBaiViet = lstBaiViet.Where(b => b.DataCreated.Day == date.Value.Day 
+                && b.DataCreated.Month == date.Value.Month
+                && b.DataCreated.Year == date.Value.Year);
+            }
+            return View(lstBaiViet);         
         }
 
-        //public ActionResult ThemMoiBaiViet()
-        //{
-        //    HienThiDanhSachDiaDiem();
-        //    HienThiDanhSachChuDe();
-        //    return View(new BaiVietVeDiaDiem());
-        //}
+        public ActionResult ThemMoiBaiViet()
+        {
+            HienThiDanhSachDiaDiem();
+            HienThiDanhSachChuDe();
+            return View(new BaiVietVeDiaDiem());
+        }
 
         /// <summary>
         /// Hàm thêm mới bài viết
         /// </summary>
         /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ThemMoiBaiViet(BaiVietVeDiaDiem objBaiViet, HttpPostedFileBase fUpload, int? idDiaDiem = null, int? idChuDe = null)
         {
             HienThiDanhSachDiaDiem();
             HienThiDanhSachChuDe();
             if (ModelState.IsValid)
             {
-                objBaiViet.DataCreated = DateTime.Now;
+             
+                objBaiViet.DataCreated = DateTime.Now;                
                 //Xử lý upload file
                 if (fUpload != null &&
                     fUpload.ContentLength > 0)
@@ -79,7 +87,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return View(new BaiVietVeDiaDiem());
+            return RedirectToAction("DanhSachBaiViet");
         }
 
         /// <summary>

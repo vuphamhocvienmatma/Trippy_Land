@@ -4,6 +4,16 @@
     ViewBag.Title = "DanhSachBaiViet";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        var date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        $('#datepicker').val('');
+    });
+</script>
 
 @using (Html.BeginForm("DanhSachBaiViet", "BaiVietVeDiaDiem", FormMethod.Post))
 {
@@ -13,18 +23,28 @@
         <table style="width:100%;">
             <tr>
                 <td style="width:10%;">Từ khóa:</td>
-                <td style="width:20%;">
+                <td style="width:25%;">
                     @Html.TextBox("tuKhoa", null,
                    new { @class = "form-control" })
                 </td>
-
-                <td style="width:10%;">Địa điểm:</td>
+                <td></td>
+                <td></td>
+                <td style="width:10%;">Date:</td>
                 <td style="width:25%;">
+                    @Html.TextBox("date", null,
+                   new { @id = "datepicker", @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:10%;">Địa điểm:</td>
+                <td style="        width: 25%;">
                     @*Hiển thị địa điểm*@
                     @Html.DropDownList("idDiaDiem", (SelectList)ViewBag.DiaDiem,
                    "---Địa điểm---", new { @class = "form-control" })
                 </td>
-                <td style="width:10%;">Chủ đề:</td>
+                <td></td>
+                <td></td>
+                <td style="        width: 10%;">Chủ đề:</td>
                 <td style="width:25%;">
                     @*Hiển thị danh sách chủ đề*@
                     @Html.DropDownList("idChuDe", (SelectList)ViewBag.ChuDe,
@@ -36,6 +56,7 @@
             </tr>
         </table>
     </fieldset>
+
 }
 <p>
     @Html.ActionLink("Thêm mới", "ThemMoiBaiViet", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
@@ -84,8 +105,8 @@
                     @Html.DisplayFor(modelItem => item.TomTatBaiViet)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.NoiDungBaiViet)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.NoiDungBaiViet)
+                    </td>*@
                 <td>
                     @if (item.DaDuyet.Equals(true))
                     {
