@@ -1,9 +1,23 @@
-﻿@model IEnumerable<Trippy_Land.Models.KhachSan>
-
+﻿@model PagedList.IPagedList<Trippy_Land.Models.KhachSan>
+@using PagedList.Mvc;
 <!DOCTYPE html>
 <html>
 @Html.Partial("_Head")
 <body>
+    <style>
+        div.relative {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1%;
+            font-size: xx-large;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+            div.relative:hover {
+            }
+    </style>
     @Html.Partial("_Navigation")
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/hotel_room-wallpaper-1920x1080.jpg")');">
         <div class="overlay"></div>
@@ -37,6 +51,12 @@
             </div>
         </div>
     </section>
+    <div class="relative">
+        <strong>
+            @Html.PagedListPager(Model, page => Url.Action("GetHotelByProvinceId",
+     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </strong>
+    </div>
     <!-- loader -->
     @Html.Partial("_Loader")
     @Html.Partial("_AskForQuote")

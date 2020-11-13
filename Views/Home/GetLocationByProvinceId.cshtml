@@ -1,8 +1,23 @@
-﻿@model IEnumerable<Trippy_Land.Models.DiaDiem>
+﻿@model PagedList.IPagedList<Trippy_Land.Models.DiaDiem>
+@using PagedList.Mvc;
 <!DOCTYPE html>
 <html>
 @Html.Partial("_Head")
 <body>
+    <style>
+        div.relative {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1%;
+            font-size: xx-large;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+            div.relative:hover {
+            }
+    </style>
     @Html.Partial("_Navigation")
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('@Url.Content("~/Trippy_Land_Theme/images/maroon_bells_morning-wallpaper-1920x1080.jpg")');">
         <div class="overlay"></div>
@@ -20,23 +35,32 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                <div class="col-md-4 ftco-animate">
-                    <div class="project-wrap">
-                        <a href="#" class="img" style="background-image: url('@Url.Content("~/Content/Image/DiaDiem/" + item.PictureId)');">
-                            <span class="price">
-                            @item.TieuDe</span>
-                        </a>
-                        <div class="text p-4">
-                            <span class="days">@item.HoatDongChinh</span>
-                            <h3><a href="#">@item.TenDiaDiem</a></h3>
-                            <p class="location"><span class="fa fa-archive"></span> @item.KinhNghiem</p>                           
+                    <div class="col-md-4 ftco-animate">
+                        <div class="project-wrap">
+                            <div class="img" style="background-image: url('@Url.Content("~/Content/Image/DiaDiem/" + item.PictureId)');">
+                                <span class="price">
+                                    @item.TieuDe
+                                </span>
+                            </div>
+
+                            <div class="text p-4">
+                                <span class="days">@item.HoatDongChinh</span>
+                                <h3><a href="#">@item.TenDiaDiem</a></h3>
+                                <p class="location"><span class="fa fa-archive"></span> @item.KinhNghiem</p>
+                                <center>@Html.ActionLink("Blog về địa điểm", "BlogbyLoacationId", new { Id = item.Id })</center>
+                            </div>
                         </div>
                     </div>
-                </div>
                 }
             </div>
         </div>
     </section>
+    <div class="relative">
+        <strong>
+            @Html.PagedListPager(Model, page => Url.Action("Blog",
+     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </strong>
+    </div>
     <!-- loader -->
     @Html.Partial("_Loader")
     @Html.Partial("_AskForQuote")
