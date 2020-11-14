@@ -23,7 +23,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return View(ex);
+                return RedirectToAction("Return", "ErrorPage");
             }
             
         }
@@ -47,7 +47,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return View(ex);
+                return RedirectToAction("Return", "ErrorPage");
             }
             
         }
@@ -78,7 +78,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return View(ex);
+                return RedirectToAction("Return", "ErrorPage");
             }              
         }
     }

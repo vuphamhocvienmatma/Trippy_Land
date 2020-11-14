@@ -16,7 +16,17 @@ namespace Trippy_Land.Controllers
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult SignUp()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+           
         }
 
         [HttpPost]
@@ -49,8 +59,8 @@ namespace Trippy_Land.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex);
-                return View(ex);
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
             }
         }
 
@@ -91,7 +101,7 @@ namespace Trippy_Land.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return View(ex);
+                return RedirectToAction("Return", "ErrorPage");
             }        
         }
         public ActionResult Logout()

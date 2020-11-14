@@ -16,15 +16,14 @@ namespace Trippy_Land.Areas.Admin.Controllers
         {
             try
             {
-                logger.Info("Have an access to admin page");
+                logger.Info("Have an access to Admin page");
                 return View();
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
                 return View(ex);               
-            }
-           
+            }          
         }
     }
 }
