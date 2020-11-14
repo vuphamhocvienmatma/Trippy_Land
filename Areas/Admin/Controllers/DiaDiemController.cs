@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,42 +10,73 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class DiaDiemController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: DiaDiem
         public ActionResult DanhSachDiaDiem(string tuKhoa, int? idTinh)
         {
-            HienThiDanhSachTinh();
-            IQueryable<DiaDiem> lstDiaDiem = DataProvider.Entities.DiaDiems;
-            //tìm kiếm theo từ khóa
-            if (!string.IsNullOrEmpty(tuKhoa))
+            try
             {
-                lstDiaDiem = lstDiaDiem.Where(c => c.TenDiaDiem.Contains(tuKhoa) || c.HoatDongChinh.Contains(tuKhoa));
+                HienThiDanhSachTinh();
+                IQueryable<DiaDiem> lstDiaDiem = DataProvider.Entities.DiaDiems;
+                //tìm kiếm theo từ khóa
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    lstDiaDiem = lstDiaDiem.Where(c => c.TenDiaDiem.Contains(tuKhoa) || c.HoatDongChinh.Contains(tuKhoa));
+                }
+                //Tìm kiếm theo loại khách hàng
+                if (idTinh.HasValue)
+                {
+                    lstDiaDiem = lstDiaDiem.Where(b => b.idTinh == idTinh.Value);
+                }
+                logger.Info("Have an access to Admin page: Location");
+                return View(lstDiaDiem);
             }
-            //Tìm kiếm theo loại khách hàng
-            if (idTinh.HasValue)
+            catch (Exception ex)
             {
-                lstDiaDiem = lstDiaDiem.Where(b => b.idTinh == idTinh.Value);
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
             }
-            return View(lstDiaDiem);
+          
         }
 
         public ActionResult XoaDiaDiem(int Id)
         {
-            //Lấy đối tượng địa điểm
-            DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
-            if (objDiaDiem != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.DiaDiems.Remove(objDiaDiem);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
+                if (objDiaDiem != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.DiaDiems.Remove(objDiaDiem);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Delete a Location: " + objDiaDiem.TenDiaDiem);
+                }
+                return RedirectToAction("DanhSachDiaDiem");
             }
-            return RedirectToAction("DanhSachDiaDiem");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+            //Lấy đối tượng địa điểm
+         
         }
 
         public ActionResult ThemDiaDiem()
         {
-            HienThiDanhSachTinh();
-            return View(new DiaDiem());
+            try
+            {
+                HienThiDanhSachTinh();
+                return View(new DiaDiem());
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         /// <summary>
@@ -55,61 +87,90 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemDiaDiem(DiaDiem objDiaDiem, HttpPostedFileBase fUpload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //Xử lý upload file
-                if (fUpload != null &&
-                    fUpload.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/DiaDiem/" + fUpload.FileName));
-                    //Lưu vào db
-                    objDiaDiem.PictureId = fUpload.FileName;
+                    //Xử lý upload file
+                    if (fUpload != null &&
+                        fUpload.ContentLength > 0)
+                    {
+                        //Upload
+                        fUpload.SaveAs(Server.MapPath("~/Content/Image/DiaDiem/" + fUpload.FileName));
+                        //Lưu vào db
+                        objDiaDiem.PictureId = fUpload.FileName;
+                    }
+                    //thêm vào database
+                    DataProvider.Entities.DiaDiems.Add(objDiaDiem);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Add a Location: " + objDiaDiem.TenDiaDiem);
                 }
-                //thêm vào database
-                DataProvider.Entities.DiaDiems.Add(objDiaDiem);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                return RedirectToAction("DanhSachDiaDiem");
             }
-            return RedirectToAction("DanhSachDiaDiem");
+            catch (Exception ex)
+            {               
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+                
+            }           
         }
 
         public ActionResult CapNhatDiaDiem(int Id)
         {
-            HienThiDanhSachTinh();
-            DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Where(c => c.Id == Id).Single<DiaDiem>();
+            try
+            {
+                HienThiDanhSachTinh();
+                DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Where(c => c.Id == Id).Single<DiaDiem>();
 
-            return View(objDiaDiem);
+                return View(objDiaDiem);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+          
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatDiaDiem(int Id, DiaDiem objDiaDiem, HttpPostedFileBase fUpload)
         {
-            HienThiDanhSachTinh();
-            var objOld_DiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
-            string img_Name = "";
-            //Xử lý upload file
-            if (fUpload != null &&
-                fUpload.ContentLength > 0)
+            try
             {
-                //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/image/DiaDiem/" + fUpload.FileName));
-                //Lưu vào db
-                objDiaDiem.PictureId = fUpload.FileName;
-                img_Name = fUpload.FileName;
-            }
-            if (objOld_DiaDiem != null)
-            {
-                if (string.IsNullOrEmpty(img_Name))
+                HienThiDanhSachTinh();
+                var objOld_DiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
+                string img_Name = "";
+                //Xử lý upload file
+                if (fUpload != null &&
+                    fUpload.ContentLength > 0)
                 {
-                    objDiaDiem.PictureId = objOld_DiaDiem.PictureId;
+                    //Upload
+                    fUpload.SaveAs(Server.MapPath("~/Content/image/DiaDiem/" + fUpload.FileName));
+                    //Lưu vào db
+                    objDiaDiem.PictureId = fUpload.FileName;
+                    img_Name = fUpload.FileName;
                 }
-                DataProvider.Entities.Entry(objOld_DiaDiem).CurrentValues.SetValues(objDiaDiem);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                if (objOld_DiaDiem != null)
+                {
+                    if (string.IsNullOrEmpty(img_Name))
+                    {
+                        objDiaDiem.PictureId = objOld_DiaDiem.PictureId;
+                    }
+                    DataProvider.Entities.Entry(objOld_DiaDiem).CurrentValues.SetValues(objDiaDiem);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Update a Location: " + objDiaDiem.TenDiaDiem);
+                }
+                return RedirectToAction("DanhSachDiaDiem");
             }
-            return RedirectToAction("DanhSachDiaDiem");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         public void HienThiDanhSachTinh(int? idTinh = null)

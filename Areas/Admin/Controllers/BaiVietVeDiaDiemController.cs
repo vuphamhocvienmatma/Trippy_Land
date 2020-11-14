@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class BaiVietVeDiaDiemController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public void HienThiDanhSachDiaDiem(int? idDiaDiem = null)
         {
             List<DiaDiem> lstDiaDiem = DataProvider.Entities.DiaDiems.ToList();
@@ -25,38 +28,57 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         public ActionResult DanhSachBaiViet(DateTime? date,string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
         {
-            HienThiDanhSachDiaDiem();
-            HienThiDanhSachChuDe();
-            IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;
-            //tìm kiếm theo từ khóa
-            if (!string.IsNullOrEmpty(tuKhoa))
+            try
             {
-                lstBaiViet = lstBaiViet.Where(c => c.TenBaiViet.Contains(tuKhoa));
+                HienThiDanhSachDiaDiem();
+                HienThiDanhSachChuDe();
+                IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;
+                //tìm kiếm theo từ khóa
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    lstBaiViet = lstBaiViet.Where(c => c.TenBaiViet.Contains(tuKhoa));
+                }
+                //Tìm kiếm theo địa điểm
+                if (idDiaDiem.HasValue)
+                {
+                    lstBaiViet = lstBaiViet.Where(b => b.idDiaDiem == idDiaDiem.Value);
+                }
+                //Tìm kiếm theo chủ đề
+                if (idChuDe.HasValue)
+                {
+                    lstBaiViet = lstBaiViet.Where(b => b.IdChude == idChuDe.Value);
+                }
+                if (date.HasValue)
+                {
+                    lstBaiViet = lstBaiViet.Where(b => b.DataCreated.Day == date.Value.Day
+                    && b.DataCreated.Month == date.Value.Month
+                    && b.DataCreated.Year == date.Value.Year);
+                }
+                logger.Info("Have an access to Admin page: Blog");
+                return View(lstBaiViet);
             }
-            //Tìm kiếm theo địa điểm
-            if (idDiaDiem.HasValue)
+            catch (Exception ex)
             {
-                lstBaiViet = lstBaiViet.Where(b => b.idDiaDiem == idDiaDiem.Value);
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
             }
-            //Tìm kiếm theo chủ đề
-            if (idChuDe.HasValue)
-            {
-                lstBaiViet = lstBaiViet.Where(b => b.IdChude == idChuDe.Value);
-            }
-            if (date.HasValue)
-            {
-                lstBaiViet = lstBaiViet.Where(b => b.DataCreated.Day == date.Value.Day 
-                && b.DataCreated.Month == date.Value.Month
-                && b.DataCreated.Year == date.Value.Year);
-            }
-            return View(lstBaiViet);         
+               
         }
 
         public ActionResult ThemMoiBaiViet()
         {
-            HienThiDanhSachDiaDiem();
-            HienThiDanhSachChuDe();
-            return View(new BaiVietVeDiaDiem());
+            try
+            {
+                HienThiDanhSachDiaDiem();
+                HienThiDanhSachChuDe();
+                return View(new BaiVietVeDiaDiem());
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+         
         }
 
         /// <summary>
@@ -67,27 +89,37 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiBaiViet(BaiVietVeDiaDiem objBaiViet, HttpPostedFileBase fUpload, int? idDiaDiem = null, int? idChuDe = null)
         {
-            HienThiDanhSachDiaDiem();
-            HienThiDanhSachChuDe();
-            if (ModelState.IsValid)
+            try
             {
-             
-                objBaiViet.DataCreated = DateTime.Now;                
-                //Xử lý upload file
-                if (fUpload != null &&
-                    fUpload.ContentLength > 0)
+                HienThiDanhSachDiaDiem();
+                HienThiDanhSachChuDe();
+                if (ModelState.IsValid)
                 {
-                    //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/BaiViet/" + fUpload.FileName));
-                    //Lưu vào db
-                    objBaiViet.PictureId = fUpload.FileName;
+
+                    objBaiViet.DataCreated = DateTime.Now;
+                    //Xử lý upload file
+                    if (fUpload != null &&
+                        fUpload.ContentLength > 0)
+                    {
+                        //Upload
+                        fUpload.SaveAs(Server.MapPath("~/Content/Image/BaiViet/" + fUpload.FileName));
+                        //Lưu vào db
+                        objBaiViet.PictureId = fUpload.FileName;
+                    }
+                    //thêm vào database
+                    DataProvider.Entities.BaiVietVeDiaDiems.Add(objBaiViet);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Add a Blog " + objBaiViet.TenBaiViet);
                 }
-                //thêm vào database
-                DataProvider.Entities.BaiVietVeDiaDiems.Add(objBaiViet);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                return RedirectToAction("DanhSachBaiViet");
             }
-            return RedirectToAction("DanhSachBaiViet");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+         
         }
 
         /// <summary>
@@ -96,25 +128,44 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult XoaBaiViet(int Id)
         {
-            //Lấy đối tượng
-            BaiVietVeDiaDiem objBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Find(Id);
-            if (objBaiViet != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.BaiVietVeDiaDiems.Remove(objBaiViet);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                BaiVietVeDiaDiem objBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Find(Id);
+                if (objBaiViet != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.BaiVietVeDiaDiems.Remove(objBaiViet);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Delete a Blog " + objBaiViet.TenBaiViet);
+                }
+                return RedirectToAction("DanhSachBaiViet");
             }
-            return RedirectToAction("DanhSachBaiViet");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+            //Lấy đối tượng
+         
         }
 
 
         public ActionResult CapNhatBaiViet(int Id)
         {
-            HienThiDanhSachDiaDiem();
-            HienThiDanhSachChuDe();
-            BaiVietVeDiaDiem objBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Where(c => c.Id == Id).Single();
-            return View(objBaiViet);
+            try
+            {
+                HienThiDanhSachDiaDiem();
+                HienThiDanhSachChuDe();
+                BaiVietVeDiaDiem objBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Where(c => c.Id == Id).Single();
+                return View(objBaiViet);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         /// <summary>
@@ -127,31 +178,40 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatBaiViet(int Id, BaiVietVeDiaDiem objBaiViet, HttpPostedFileBase fUpload)
         {
-            var objOld_BaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Find(Id);
-            string img_Name = "";
-            //Xử lý upload file
-            if (fUpload != null &&
-                fUpload.ContentLength > 0)
+            try
             {
-                //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/Image/BaiViet/" + fUpload.FileName));
-                //Lưu vào db
-                objBaiViet.PictureId = fUpload.FileName;
-                img_Name = fUpload.FileName;
-            }
-            if (objOld_BaiViet != null)
-            {
-                if (string.IsNullOrEmpty(img_Name))
+                var objOld_BaiViet = DataProvider.Entities.BaiVietVeDiaDiems.Find(Id);
+                string img_Name = "";
+                //Xử lý upload file
+                if (fUpload != null &&
+                    fUpload.ContentLength > 0)
                 {
-                    objBaiViet.DataCreated = objOld_BaiViet.DataCreated;
-                    objBaiViet.PictureId = objOld_BaiViet.PictureId;
+                    //Upload
+                    fUpload.SaveAs(Server.MapPath("~/Content/Image/BaiViet/" + fUpload.FileName));
+                    //Lưu vào db
+                    objBaiViet.PictureId = fUpload.FileName;
+                    img_Name = fUpload.FileName;
                 }
-                DataProvider.Entities.Entry(objOld_BaiViet).CurrentValues.SetValues(objBaiViet);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                if (objOld_BaiViet != null)
+                {
+                    if (string.IsNullOrEmpty(img_Name))
+                    {
+                        objBaiViet.DataCreated = objOld_BaiViet.DataCreated;
+                        objBaiViet.PictureId = objOld_BaiViet.PictureId;
+                    }
+                    DataProvider.Entities.Entry(objOld_BaiViet).CurrentValues.SetValues(objBaiViet);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                logger.Info("Update a Blog " + objBaiViet.TenBaiViet);
+                return RedirectToAction("DanhSachBaiViet");
             }
-
-            return RedirectToAction("DanhSachBaiViet");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
     }
 }

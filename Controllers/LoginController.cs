@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,34 +12,56 @@ namespace Trippy_Land.Controllers
 {
     public class LoginController : Controller
     {
+        private static readonly ILog logger = 
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult SignUp()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+           
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SignUp(User objUser)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
-                if (check == null)
+                if (ModelState.IsValid)
                 {
-                    objUser.MatKhau = GetSHA256(objUser.MatKhau);
-                    DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
-                    objUser.UserRoleId = 2;
-                    DataProvider.Entities.Users.Add(objUser);
-                    DataProvider.Entities.SaveChanges();
-                    return RedirectToAction("Login");
+                    var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
+                    if (check == null)
+                    {
+                        objUser.MatKhau = GetSHA256(objUser.MatKhau);
+                        DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
+                        objUser.UserRoleId = 2;
+                        DataProvider.Entities.Users.Add(objUser);
+                        DataProvider.Entities.SaveChanges();
+                        logger.Info("Have a new sign up!");
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        ViewBag.error = "Tài khoản đã tồn tại";
+                        logger.Info("Have a error when anonymous sign up!" + ViewBag.error);
+                        return View();
+                    }
                 }
-                else
-                {
-                    ViewBag.error = "Tài khoản đã tồn tại";
-                    return View();
-                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
         }
 
         // GET: Login
@@ -55,26 +78,36 @@ namespace Trippy_Land.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
         {
-            string HashPassword = GetSHA256(objUser.MatKhau);
-            if (ModelState.IsValid)
+            try
             {
-                var obj = DataProvider.Entities.Users
-                    .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
-                if (obj != null)
+                string HashPassword = GetSHA256(objUser.MatKhau);
+                if (ModelState.IsValid)
                 {
-                  
-                    return RedirectToAction("Index", "Home");
+                    var obj = DataProvider.Entities.Users
+                        .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
+                        logger.Info("Have a error when user sign in!" + "Wrong password or username");
+                    }
                 }
-                else
-                {
-                    ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
-                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }        
         }
         public ActionResult Logout()
         {
             Session.Clear(); //remove session 
+            logger.Info("User Logout!");
             return RedirectToAction("Login", "Login");
         }
 

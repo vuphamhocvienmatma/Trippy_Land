@@ -5,15 +5,29 @@ using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 using PagedList;
+using log4net;
 namespace Trippy_Land.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ActionResult Index()
         {
-            IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;           
-            return View(lstTinh);         
+            try
+            {
+                IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
+                logger.Info("Have an access the website");
+               
+                return View(lstTinh);              
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }         
         }
+    
         public ActionResult AboutUs()
         {
             return View();
@@ -26,17 +40,35 @@ namespace Trippy_Land.Controllers
 
         public ActionResult Blog(int? page, string sortOrder)
         {
-            ViewBag.CurrentSort = sortOrder;
-            List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                logger.Info("Have an access to the blog");
+                return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }         
         }
 
         public ActionResult BlogDetail(int? Id)
         {
-            BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
-            return View(ObjbaiVietVeDiaDiem);
+            try
+            {
+                BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
+                return View(ObjbaiVietVeDiaDiem);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+            
         }
 
         /// <summary>
@@ -48,16 +80,26 @@ namespace Trippy_Land.Controllers
         /// <returns></returns>
         public ActionResult BlogbyLoacationId(int? page, string sortOrder,int? Id)
         {
-            ViewBag.CurrentSort = sortOrder;
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;
-            
-            if (Id.HasValue)
+            try
             {
-                lstBaiViet = lstBaiViet.Where(b => b.idDiaDiem == Id.Value);
-            }         
-            return View(lstBaiViet.ToList().ToPagedList(pageNumber, pageSize));
+                ViewBag.CurrentSort = sortOrder;
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;
+
+                if (Id.HasValue)
+                {
+                    lstBaiViet = lstBaiViet.Where(b => b.idDiaDiem == Id.Value);
+                }
+                return View(lstBaiViet.ToList().ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+           
         }
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
@@ -66,15 +108,24 @@ namespace Trippy_Land.Controllers
         /// <returns></returns>
         public ActionResult GetHotelByProvinceId(int? page, string sortOrder, int? Id)
         {
-            ViewBag.CurrentSort = sortOrder;
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            IQueryable<KhachSan> lstDanhSachKhachSan = DataProvider.Entities.KhachSans;
-            if (Id.HasValue)
+            try
             {
-                lstDanhSachKhachSan = lstDanhSachKhachSan.Where(b => b.idTinh == Id.Value);
+                ViewBag.CurrentSort = sortOrder;
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                IQueryable<KhachSan> lstDanhSachKhachSan = DataProvider.Entities.KhachSans;
+                if (Id.HasValue)
+                {
+                    lstDanhSachKhachSan = lstDanhSachKhachSan.Where(b => b.idTinh == Id.Value);
+                }
+                return View(lstDanhSachKhachSan.ToList().ToPagedList(pageNumber, pageSize));
             }
-            return View(lstDanhSachKhachSan.ToList().ToPagedList(pageNumber, pageSize));
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+           
         }
 
         /// <summary>
@@ -84,15 +135,25 @@ namespace Trippy_Land.Controllers
         /// <returns></returns>
         public ActionResult GetFoodByProvinceId(int? page, string sortOrder, int? Id)
         {
-            ViewBag.CurrentSort = sortOrder;
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            IQueryable<MonAn> lstDanhSachMonAn = DataProvider.Entities.MonAns;
-            if (Id.HasValue)
+            try
             {
-                lstDanhSachMonAn = lstDanhSachMonAn.Where(b => b.idTinh == Id.Value);
+                ViewBag.CurrentSort = sortOrder;
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                IQueryable<MonAn> lstDanhSachMonAn = DataProvider.Entities.MonAns;
+                if (Id.HasValue)
+                {
+                    lstDanhSachMonAn = lstDanhSachMonAn.Where(b => b.idTinh == Id.Value);
+                }
+                return View(lstDanhSachMonAn.ToList().ToPagedList(pageNumber, pageSize));
             }
-            return View(lstDanhSachMonAn.ToList().ToPagedList(pageNumber, pageSize));       
+            catch (Exception ex)
+            {
+
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+            
         }
 
         /// <summary>
@@ -102,15 +163,24 @@ namespace Trippy_Land.Controllers
         /// <returns></returns>
         public ActionResult GetLocationByProvinceId(int? page, string sortOrder, int? Id)
         {
-            ViewBag.CurrentSort = sortOrder;
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            IQueryable<DiaDiem> lstDanhSachDiaDiem = DataProvider.Entities.DiaDiems;
-            if (Id.HasValue)
+            try
             {
-                lstDanhSachDiaDiem = lstDanhSachDiaDiem.Where(b => b.idTinh == Id.Value);
+                ViewBag.CurrentSort = sortOrder;
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                IQueryable<DiaDiem> lstDanhSachDiaDiem = DataProvider.Entities.DiaDiems;
+                if (Id.HasValue)
+                {
+                    lstDanhSachDiaDiem = lstDanhSachDiaDiem.Where(b => b.idTinh == Id.Value);
+                }
+                return View(lstDanhSachDiaDiem.ToList().ToPagedList(pageNumber, pageSize));
             }
-            return View(lstDanhSachDiaDiem.ToList().ToPagedList(pageNumber, pageSize));
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+         
         }
 
        

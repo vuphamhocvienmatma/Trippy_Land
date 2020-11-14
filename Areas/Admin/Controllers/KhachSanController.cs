@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,41 +10,72 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class KhachSanController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult DanhSachKhachSan(string tuKhoa, int? idTinh)
         {
-            HienThiDanhSachTinh();
-            IQueryable<KhachSan> lstDanhSachKhachSan = DataProvider.Entities.KhachSans;
-            //tìm kiếm theo từ khóa
-            if (!string.IsNullOrEmpty(tuKhoa))
+            try
             {
-                lstDanhSachKhachSan = lstDanhSachKhachSan.Where(c => c.TenKhachSan.Contains(tuKhoa) || c.DiaDiemChiTiet.Contains(tuKhoa));
+                HienThiDanhSachTinh();
+                IQueryable<KhachSan> lstDanhSachKhachSan = DataProvider.Entities.KhachSans;
+                //tìm kiếm theo từ khóa
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    lstDanhSachKhachSan = lstDanhSachKhachSan.Where(c => c.TenKhachSan.Contains(tuKhoa) || c.DiaDiemChiTiet.Contains(tuKhoa));
+                }
+                //Tìm kiếm theo loại khách hàng
+                if (idTinh.HasValue)
+                {
+                    lstDanhSachKhachSan = lstDanhSachKhachSan.Where(b => b.idTinh == idTinh.Value);
+                }
+                logger.Info("Have an access to Admin page: Hotel");
+                return View(lstDanhSachKhachSan);
             }
-            //Tìm kiếm theo loại khách hàng
-            if (idTinh.HasValue)
+            catch (Exception ex)
             {
-                lstDanhSachKhachSan = lstDanhSachKhachSan.Where(b => b.idTinh == idTinh.Value);
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
             }
-            return View(lstDanhSachKhachSan);
+          
         }
 
         public ActionResult XoaKhachSan(int Id)
         {
-            //Lấy đối tượng khách sạn
-            KhachSan objKhachSan = DataProvider.Entities.KhachSans.Find(Id);
-            if (objKhachSan != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.KhachSans.Remove(objKhachSan);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                //Lấy đối tượng khách sạn
+                KhachSan objKhachSan = DataProvider.Entities.KhachSans.Find(Id);
+                if (objKhachSan != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.KhachSans.Remove(objKhachSan);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Delete a hotel: " + objKhachSan.TenKhachSan);
+
+                }
+                return RedirectToAction("DanhSachKhachSan");
             }
-            return RedirectToAction("DanhSachKhachSan");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+         
         }
 
         public ActionResult ThemKhachSan()
         {
-            HienThiDanhSachTinh();
-            return View(new KhachSan());
+            try
+            {
+                HienThiDanhSachTinh();
+                return View(new KhachSan());
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }          
         }
 
         /// <summary>
@@ -54,61 +86,88 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemKhachSan(KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //Xử lý upload file
-                if (fUpload != null &&
-                    fUpload.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/KhachSan/" + fUpload.FileName));
-                    //Lưu vào db
-                    objKhachSan.PictureId = fUpload.FileName;
+                    //Xử lý upload file
+                    if (fUpload != null &&
+                        fUpload.ContentLength > 0)
+                    {
+                        //Upload
+                        fUpload.SaveAs(Server.MapPath("~/Content/Image/KhachSan/" + fUpload.FileName));
+                        //Lưu vào db
+                        objKhachSan.PictureId = fUpload.FileName;
+                    }
+                    //thêm vào database
+                    DataProvider.Entities.KhachSans.Add(objKhachSan);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Add a Hotel: " + objKhachSan.TenKhachSan);
                 }
-                //thêm vào database
-                DataProvider.Entities.KhachSans.Add(objKhachSan);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                return RedirectToAction("DanhSachKhachSan");
             }
-            return RedirectToAction("DanhSachKhachSan");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         public ActionResult CapNhatKhachSan(int Id)
         {
-            HienThiDanhSachTinh();
-            KhachSan objKhachSan = DataProvider.Entities.KhachSans.Where(c => c.Id == Id).Single<KhachSan>();
-
-            return View(objKhachSan);
+            try
+            {
+                HienThiDanhSachTinh();
+                KhachSan objKhachSan = DataProvider.Entities.KhachSans.Where(c => c.Id == Id).Single<KhachSan>();
+                return View(objKhachSan);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }        
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatKhachSan(int Id, KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
-            HienThiDanhSachTinh();
-            var objOld_KhachSan = DataProvider.Entities.KhachSans.Find(Id);
-            string img_Name = "";
-            //Xử lý upload file
-            if (fUpload != null &&
-                fUpload.ContentLength > 0)
+            try
             {
-                //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/image/KhachSan/" + fUpload.FileName));
-                //Lưu vào db
-                objKhachSan.PictureId = fUpload.FileName;
-                img_Name = fUpload.FileName;
-            }
-            if (objOld_KhachSan != null)
-            {
-                if (string.IsNullOrEmpty(img_Name))
+                HienThiDanhSachTinh();
+                var objOld_KhachSan = DataProvider.Entities.KhachSans.Find(Id);
+                string img_Name = "";
+                //Xử lý upload file
+                if (fUpload != null &&
+                    fUpload.ContentLength > 0)
                 {
-                    objKhachSan.PictureId = objOld_KhachSan.PictureId;
+                    //Upload
+                    fUpload.SaveAs(Server.MapPath("~/Content/image/KhachSan/" + fUpload.FileName));
+                    //Lưu vào db
+                    objKhachSan.PictureId = fUpload.FileName;
+                    img_Name = fUpload.FileName;
                 }
-                DataProvider.Entities.Entry(objOld_KhachSan).CurrentValues.SetValues(objKhachSan);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                if (objOld_KhachSan != null)
+                {
+                    if (string.IsNullOrEmpty(img_Name))
+                    {
+                        objKhachSan.PictureId = objOld_KhachSan.PictureId;
+                    }
+                    DataProvider.Entities.Entry(objOld_KhachSan).CurrentValues.SetValues(objKhachSan);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Update a hotel: " + objKhachSan.TenKhachSan);
+                }
+                return RedirectToAction("DanhSachKhachSan");
             }
-            return RedirectToAction("DanhSachKhachSan");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         public void HienThiDanhSachTinh(int? idTinh = null)

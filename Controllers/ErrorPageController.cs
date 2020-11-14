@@ -14,5 +14,10 @@ namespace Trippy_Land.Controllers
             ViewBag.StatusCode = statusCode + " Error";
             return View();
         }
+
+        public ActionResult Return()
+        {
+            return View();
+        }
     }
 }

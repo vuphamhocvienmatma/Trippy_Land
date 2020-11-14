@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,24 +10,44 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class TinhController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// Hàm hiển thị danh sách toàn bộ các tỉnh
         /// </summary>
         /// <returns></returns>
         public ActionResult DanhSachTinh(string tuKhoa)
         {
-            IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
-            //tìm kiếm theo từ khóa
-            if (!string.IsNullOrEmpty(tuKhoa))
+            try
             {
-                lstTinh = lstTinh.Where(c => c.TenTinh.Contains(tuKhoa));
+                IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
+                //tìm kiếm theo từ khóa
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    lstTinh = lstTinh.Where(c => c.TenTinh.Contains(tuKhoa));
+                }
+                logger.Info("Have an access to Admin page: Province");
+                return View(lstTinh);
             }
-            return View(lstTinh);
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+         
         }
 
         public ActionResult ThemMoiTinh()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }           
         }
 
         /// <summary>
@@ -39,30 +60,49 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiTinh(Tinh objTinh, HttpPostedFileBase fUpload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //Xử lý upload file
-                if (fUpload != null &&
-                    fUpload.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/Tinh/" + fUpload.FileName));
-                    //Lưu vào db
-                    objTinh.PictureId = fUpload.FileName;
+                    //Xử lý upload file
+                    if (fUpload != null &&
+                        fUpload.ContentLength > 0)
+                    {
+                        //Upload
+                        fUpload.SaveAs(Server.MapPath("~/Content/Image/Tinh/" + fUpload.FileName));
+                        //Lưu vào db
+                        objTinh.PictureId = fUpload.FileName;
+                    }
+
+                    //thêm vào database
+                    DataProvider.Entities.Tinhs.Add(objTinh);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Add a Province: " + objTinh.TenTinh);
                 }
-                
-                //thêm vào database
-                DataProvider.Entities.Tinhs.Add(objTinh);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                return RedirectToAction("DanhSachTinh");
             }
-            return RedirectToAction("DanhSachTinh");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }          
         }
 
         public ActionResult CapNhatTinh(int Id)
         {
-            Tinh objTinh = DataProvider.Entities.Tinhs.Where(c => c.Id == Id).Single();
-            return View(objTinh);
+            try
+            {
+                Tinh objTinh = DataProvider.Entities.Tinhs.Where(c => c.Id == Id).Single();
+                logger.Info("Update a Province: " + objTinh.TenTinh);
+                return View(objTinh);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+            
         }
 
         /// <summary>
@@ -75,30 +115,40 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatTinh(int Id, Tinh objTinh, HttpPostedFileBase fUpload)
         {
-            var objOld_Tinh = DataProvider.Entities.Tinhs.Find(Id);
-            string img_Name = "";
-            //Xử lý upload file
-            if (fUpload != null &&
-                fUpload.ContentLength > 0)
+            try
             {
-                //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/Image/Tinh/" + fUpload.FileName));
-                //Lưu vào db
-                objTinh.PictureId = fUpload.FileName;
-                img_Name = fUpload.FileName;
-            }
-            if (objOld_Tinh != null)
-            {
-                if (string.IsNullOrEmpty(img_Name))
+                var objOld_Tinh = DataProvider.Entities.Tinhs.Find(Id);
+                string img_Name = "";
+                //Xử lý upload file
+                if (fUpload != null &&
+                    fUpload.ContentLength > 0)
                 {
-                    objTinh.PictureId = objOld_Tinh.PictureId;
+                    //Upload
+                    fUpload.SaveAs(Server.MapPath("~/Content/Image/Tinh/" + fUpload.FileName));
+                    //Lưu vào db
+                    objTinh.PictureId = fUpload.FileName;
+                    img_Name = fUpload.FileName;
                 }
-                DataProvider.Entities.Entry(objOld_Tinh).CurrentValues.SetValues(objTinh);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
-            }
+                if (objOld_Tinh != null)
+                {
+                    if (string.IsNullOrEmpty(img_Name))
+                    {
+                        objTinh.PictureId = objOld_Tinh.PictureId;
+                    }
+                    DataProvider.Entities.Entry(objOld_Tinh).CurrentValues.SetValues(objTinh);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Update a Province: " + objTinh.TenTinh);
+                }
 
-            return RedirectToAction("DanhSachTinh");
+                return RedirectToAction("DanhSachTinh");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         /// <summary>
@@ -107,16 +157,26 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult XoaTinh(int Id)
         {
-            //Lấy đối tượng tỉnh
-            Tinh objTinh = DataProvider.Entities.Tinhs.Find(Id);
-            if (objTinh != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.Tinhs.Remove(objTinh);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                //Lấy đối tượng tỉnh
+                Tinh objTinh = DataProvider.Entities.Tinhs.Find(Id);
+                if (objTinh != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.Tinhs.Remove(objTinh);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                logger.Info("Delete a Province: " + objTinh.TenTinh);
+                return RedirectToAction("DanhSachTinh");
             }
-            return RedirectToAction("DanhSachTinh");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+         
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,25 +10,46 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class UserRoleController : Controller
     {
-        
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult DanhSachUserRole()
         {
-            IQueryable<UserRole> lstUserRole = DataProvider.Entities.UserRoles;
-            return View(lstUserRole);
+            try
+            {
+                IQueryable<UserRole> lstUserRole = DataProvider.Entities.UserRoles;
+                logger.Info("Have an access to UserRole Page!");
+                return View(lstUserRole);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+            
         }
 
         public ActionResult XoaUserRole(int Id)
         {
-            //Lấy đối tượng tỉnh
-            UserRole objUserRole = DataProvider.Entities.UserRoles.Find(Id);
-            if (objUserRole != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.UserRoles.Remove(objUserRole);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                //Lấy đối tượng tỉnh
+                UserRole objUserRole = DataProvider.Entities.UserRoles.Find(Id);
+                if (objUserRole != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.UserRoles.Remove(objUserRole);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                logger.Info("Delete an UserRole");
+                return RedirectToAction("DanhSachUserRole");
             }
-            return RedirectToAction("DanhSachUserRole");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+            
         }
 
         public ActionResult ThemMoiUserRole()
@@ -44,12 +66,20 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiUserRole(UserRole objUserRole)
-        {          
-                //thêm vào database
+        {
+            try
+            {
                 DataProvider.Entities.UserRoles.Add(objUserRole);
                 //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();           
-            return RedirectToAction("DanhSachUserRole");
+                DataProvider.Entities.SaveChanges();
+                logger.Info("Add an UserRole");
+                return RedirectToAction("DanhSachUserRole");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }              
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class DanhGiaController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public void HienThiDanhSachUser(int? idUser = null)
         {
             List<User> lstuser = DataProvider.Entities.Users.ToList();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -9,8 +10,11 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    
     public class UserController : Controller
-    {      
+    {
+        private static readonly ILog logger =
+             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>        
         /// Chuyển đổi một chuỗi về SHA256
         /// </summary>
@@ -40,34 +44,54 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         public ActionResult DanhSachUser(string tuKhoa, int? idUserRole)
         {
+            try
+            {
+                HienThiDanhSachUserRole();
+                IQueryable<User> lstUser = DataProvider.Entities.Users;
+                //tìm kiếm theo từ khóa
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    lstUser = lstUser.Where(c => c.TenDangNhap.Contains(tuKhoa) || c.TenNguoiDung.Contains(tuKhoa) || c.PhoneNumber.ToString().Contains(tuKhoa));
+                }
+                //Tìm kiếm theo loại khách hàng
+                if (idUserRole.HasValue)
+                {
+                    lstUser = lstUser.Where(b => b.UserRoleId == idUserRole.Value);
+                }
+                logger.Info("Have an access to User Page");
+                return View(lstUser);
+            }
+            catch (Exception ex)
+            {
 
-            HienThiDanhSachUserRole();
-            IQueryable<User>lstUser = DataProvider.Entities.Users;
-            //tìm kiếm theo từ khóa
-            if (!string.IsNullOrEmpty(tuKhoa))
-            {
-                lstUser = lstUser.Where(c => c.TenDangNhap.Contains(tuKhoa) || c.TenNguoiDung.Contains(tuKhoa) || c.PhoneNumber.ToString().Contains(tuKhoa));
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
             }
-            //Tìm kiếm theo loại khách hàng
-            if (idUserRole.HasValue)
-            {
-                lstUser = lstUser.Where(b => b.UserRoleId == idUserRole.Value);
-            }
-            return View(lstUser);
+            
         }
 
         public ActionResult XoaUser(int Id)
         {
-            //Lấy đối tượng người dùng
-            User objUser = DataProvider.Entities.Users.Find(Id);
-            if (objUser != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.Users.Remove(objUser);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                //Lấy đối tượng người dùng
+                User objUser = DataProvider.Entities.Users.Find(Id);
+                if (objUser != null)
+                {
+                    logger.Info("Delete User" + objUser.TenDangNhap);
+                    //Xóa
+                    DataProvider.Entities.Users.Remove(objUser);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }             
+                return RedirectToAction("DanhSachUser");
             }
-            return RedirectToAction("DanhSachUser");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+          
         }
 
         public ActionResult ThemMoiUser()
@@ -84,28 +108,38 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiUser(User objuser, HttpPostedFileBase fUpload)
         {
-            HienThiDanhSachUserRole();
-            if (ModelState.IsValid)
+            try
             {
-                //Xử lý upload file
-                if (fUpload != null &&
-                    fUpload.ContentLength > 0)
+                HienThiDanhSachUserRole();
+                if (ModelState.IsValid)
                 {
-                    //Upload
-                    fUpload.SaveAs(Server.MapPath("~/Content/Image/User/" + fUpload.FileName));
-                    //Lưu vào db
-                    objuser.PictureId = fUpload.FileName;
+                    //Xử lý upload file
+                    if (fUpload != null &&
+                        fUpload.ContentLength > 0)
+                    {
+                        //Upload
+                        fUpload.SaveAs(Server.MapPath("~/Content/Image/User/" + fUpload.FileName));
+                        //Lưu vào db
+                        objuser.PictureId = fUpload.FileName;
+                    }
+                    if (objuser.MatKhau != null)
+                    {
+                        objuser.MatKhau = GetSHA256(objuser.MatKhau);
+                    }
+                    //thêm vào database
+                    DataProvider.Entities.Users.Add(objuser);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Add an User" + objuser.TenDangNhap);
                 }
-                if(objuser.MatKhau != null)
-                {
-                    objuser.MatKhau = GetSHA256(objuser.MatKhau);
-                }    
-                //thêm vào database
-                DataProvider.Entities.Users.Add(objuser);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+
+                return RedirectToAction("DanhSachUser");
             }
-            return RedirectToAction("DanhSachUser");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }          
         }
 
 
@@ -121,34 +155,44 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatUser(int Id, User objUser, HttpPostedFileBase fUpload)
         {
-            HienThiDanhSachUserRole();
-            var objOld_User = DataProvider.Entities.Users.Find(Id);
-            string img_Name = "";
-            if (objUser.MatKhau != null)
+            try
             {
-                objUser.MatKhau = GetSHA256(objUser.MatKhau);
-            }
-            //Xử lý upload file
-            if (fUpload != null &&
-                fUpload.ContentLength > 0)
-            {
-                //Upload
-                fUpload.SaveAs(Server.MapPath("~/Content/image/User/" + fUpload.FileName));
-                //Lưu vào db
-                objUser.PictureId = fUpload.FileName;
-                img_Name = fUpload.FileName;
-            }
-            if (objOld_User != null)
-            {
-                if (string.IsNullOrEmpty(img_Name))
+                HienThiDanhSachUserRole();
+                var objOld_User = DataProvider.Entities.Users.Find(Id);
+                string img_Name = "";
+                if (objUser.MatKhau != null)
                 {
-                    objUser.PictureId = objOld_User.PictureId;
-                }              
-                DataProvider.Entities.Entry(objOld_User).CurrentValues.SetValues(objUser);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
-            }         
-            return RedirectToAction("DanhSachUser");
+                    objUser.MatKhau = GetSHA256(objUser.MatKhau);
+                }
+                //Xử lý upload file
+                if (fUpload != null &&
+                    fUpload.ContentLength > 0)
+                {
+                    //Upload
+                    fUpload.SaveAs(Server.MapPath("~/Content/image/User/" + fUpload.FileName));
+                    //Lưu vào db
+                    objUser.PictureId = fUpload.FileName;
+                    img_Name = fUpload.FileName;
+                }
+                if (objOld_User != null)
+                {
+                    if (string.IsNullOrEmpty(img_Name))
+                    {
+                        objUser.PictureId = objOld_User.PictureId;
+                    }
+                    DataProvider.Entities.Entry(objOld_User).CurrentValues.SetValues(objUser);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                    logger.Info("Update an User" + objUser.TenDangNhap);
+                }
+                return RedirectToAction("DanhSachUser");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
+          
         }
 
     }
