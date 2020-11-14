@@ -57,7 +57,7 @@
     </section>
     <div class="relative">
         <strong>
-            @Html.PagedListPager(Model, page => Url.Action("Blog",
+            @Html.PagedListPager(Model, page => Url.Action("GetLocationByProvinceId",
      new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </strong>
     </div>
