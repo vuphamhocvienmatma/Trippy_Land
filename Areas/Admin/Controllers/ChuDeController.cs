@@ -9,6 +9,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class ChuDeController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult DanhSachChuDe()
         {
             var lstChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.ToList();

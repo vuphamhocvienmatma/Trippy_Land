@@ -9,6 +9,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class BaiVietVeDiaDiemController : Controller
     {
+        private static readonly ILog logger =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public void HienThiDanhSachDiaDiem(int? idDiaDiem = null)
         {
             List<DiaDiem> lstDiaDiem = DataProvider.Entities.DiaDiems.ToList();

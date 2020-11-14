@@ -68,23 +68,31 @@ namespace Trippy_Land.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
         {
-            string HashPassword = GetSHA256(objUser.MatKhau);
-            if (ModelState.IsValid)
+            try
             {
-                var obj = DataProvider.Entities.Users
-                    .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
-                if (obj != null)
+                string HashPassword = GetSHA256(objUser.MatKhau);
+                if (ModelState.IsValid)
                 {
-                    logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-                    return RedirectToAction("Index", "Home");
+                    var obj = DataProvider.Entities.Users
+                        .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
+                        logger.Info("Have a error when user sign in!" + "Wrong password or username");
+                    }
                 }
-                else
-                {
-                    ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
-                    logger.Info("Have a error when user sign in!" + "Wrong password or username");
-                }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return View(ex);
+            }        
         }
         public ActionResult Logout()
         {
