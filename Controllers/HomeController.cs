@@ -5,15 +5,28 @@ using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 using PagedList;
+using log4net;
 namespace Trippy_Land.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ActionResult Index()
         {
-            IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;           
-            return View(lstTinh);         
+            try
+            {
+                IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
+                logger.Info("Have an access the website");
+                return View(lstTinh);              
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return View(ex);
+            }         
         }
+    
         public ActionResult AboutUs()
         {
             return View();
@@ -26,11 +39,20 @@ namespace Trippy_Land.Controllers
 
         public ActionResult Blog(int? page, string sortOrder)
         {
-            ViewBag.CurrentSort = sortOrder;
-            List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                List<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems.ToList();
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                logger.Info("Have an access to the blog");
+                return View(lstBaiViet.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return View(ex);               
+            }         
         }
 
         public ActionResult BlogDetail(int? Id)
