@@ -1,8 +1,5 @@
 ﻿using log4net;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
@@ -21,7 +18,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         public ActionResult ThemMoiChuDe()
         {
-            return View();
+            return View(new ChuDeBaiVietVeDiaDiem());
         }
 
         /// <summary>
@@ -79,9 +76,9 @@ namespace Trippy_Land.Areas.Admin.Controllers
         public ActionResult CapNhatChuDe(int Id, ChuDeBaiVietVeDiaDiem objChuDe)
         {
             var objOld_ChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
-          
+
             if (objOld_ChuDe != null)
-            {              
+            {
                 DataProvider.Entities.Entry(objOld_ChuDe).CurrentValues.SetValues(objChuDe);
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();

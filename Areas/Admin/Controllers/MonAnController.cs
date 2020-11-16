@@ -36,7 +36,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         public ActionResult XoaMonAn(int Id)
@@ -60,7 +60,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         public ActionResult ThemMonAn()
@@ -74,7 +74,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }         
+            }
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         public ActionResult CapNhatMonAn(int Id)
@@ -126,7 +126,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }          
+            }
         }
 
         [HttpPost]
@@ -166,7 +166,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         public void HienThiDanhSachTinh(int? idTinh = null)

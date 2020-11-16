@@ -1,10 +1,8 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
@@ -12,7 +10,7 @@ namespace Trippy_Land.Controllers
 {
     public class LoginController : Controller
     {
-        private static readonly ILog logger = 
+        private static readonly ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult SignUp()
         {
@@ -26,7 +24,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-           
+
         }
 
         [HttpPost]
@@ -102,7 +100,7 @@ namespace Trippy_Land.Controllers
             {
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
-            }        
+            }
         }
         public ActionResult Logout()
         {

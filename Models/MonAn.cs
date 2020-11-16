@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trippy_Land.Models
@@ -26,7 +21,7 @@ namespace Trippy_Land.Models
         [StringLength(500)]
         public string PictureId { get; set; }
 
-  
+
         [Column(TypeName = "NVARCHAR")]
         [Display(Name = "Chi tiết")]
         public string ChiTiet { get; set; }

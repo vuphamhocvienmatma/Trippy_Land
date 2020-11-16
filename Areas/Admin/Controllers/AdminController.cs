@@ -1,8 +1,5 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -22,8 +19,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return View(ex);               
-            }          
+                return View(ex);
+            }
         }
     }
 }
