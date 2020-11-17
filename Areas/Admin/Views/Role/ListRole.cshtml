@@ -17,14 +17,14 @@
             if (ma.length == 0) {
                 ma = "0";
             }
-            var tencd = $("#TenRole").val();
+            var tenRole = $("#TenRole").val();
 
             var mota = $("#MoTa").val();
 
             //Xóa lỗi trước đó nếu có thông báo
             $("#error").text("");
 
-            if (tencd.length == 0) {
+            if (tenRole.length == 0) {
                 $("#error").text("Bạn cần phải nhập tên Role");
                 return;
             }
@@ -33,7 +33,7 @@
             var formData = new FormData();
 
             formData.append('Id', ma);
-            formData.append('TenRole', tencd);
+            formData.append('TenRole', tenRole);
             formData.append('MoTa', mota);
             //Gọi hàm post để đẩy dữ liệu lên server
             $.ajax({
@@ -43,7 +43,7 @@
                 url: "/Admin/Role/AddRole",
                 data: formData,
                 dataType: "json",
-                async: "false",
+                async: "true",
                 success: function (data) {
                     //debugger;
                     if (data != null) {
@@ -71,7 +71,7 @@
             url: "/Admin/Role/Remove",
             data: "{'id':'" + id + "'}",
             dataType: "json",
-            async: "false",
+            async: "true",
             success: function (data) {
                 //debugger;
                 if (data != null) {
@@ -91,7 +91,7 @@
             }
         });
 
-    }//End xoaChuDe
+    }
 
     //Xóa thông tin khi đóng form
     function XoaThongTinForm() {
@@ -150,10 +150,7 @@
             <div class="card-body">
                 <table class="table table-hover table-bordered" id="stdTable">
                     <thead>
-                        <tr>
-                            <th style="width:15%;">
-                                Mã quản lý
-                            </th>
+                        <tr>                           
                             <th style="width:35%;">
                                 Loại người dùng
                             </th>
@@ -166,10 +163,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
+                            <tr>                             
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TenRole)
                                 </td>
