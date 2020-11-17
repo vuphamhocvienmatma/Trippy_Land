@@ -1,0 +1,254 @@
+﻿@model IEnumerable<Trippy_Land.Models.UserRole>
+
+@{
+    ViewBag.Title = "ListRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("button.close").attr("style", "display:none;");
+
+        //Khi nhấn nút thực hiện
+        $("#btnThucHien").click(function () {
+
+            var ma = $("#Id").val();
+            if (ma.length == 0) {
+                ma = "0";
+            }
+            var tenRole = $("#TenRole").val();
+
+            var mota = $("#MoTa").val();
+
+            //Xóa lỗi trước đó nếu có thông báo
+            $("#error").text("");
+
+            if (tenRole.length == 0) {
+                $("#error").text("Bạn cần phải nhập tên Role");
+                return;
+            }
+
+            //Tạo đối tượng form data
+            var formData = new FormData();
+
+            formData.append('Id', ma);
+            formData.append('TenRole', tenRole);
+            formData.append('MoTa', mota);
+            //Gọi hàm post để đẩy dữ liệu lên server
+            $.ajax({
+                type: "POST",
+                contentType: false,
+                processData: false,
+                url: "/Admin/Role/AddRole",
+                data: formData,
+                dataType: "json",
+                async: "true",
+                success: function (data) {
+                    //debugger;
+                    if (data != null) {
+                        //alert(data);
+
+                        window.location.href = "/Admin/Role/ListRole";
+
+                    } // iff
+                    else
+                        alert('Có lỗi xảy ra trong quá trình thực hiện');
+                },
+                error: function (result, textStatus, errorThrown) {
+                    alert("Error:" + errorThrown + " - " + textStatus + " - " + result);
+                }
+            });
+        });
+    });
+
+    //Xóa thông tin chủ đề
+    function xoaRole() {
+        var id = $('#XoaId').val();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/Admin/Role/Remove",
+            data: "{'id':'" + id + "'}",
+            dataType: "json",
+            async: "true",
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+
+                    if (data !== "") {
+                        alert(data);
+                    }
+                    window.location.reload();
+
+                } // iff
+                else
+                    alert('Có lỗi xảy ra trong quá trình thực hiện');
+            },
+            error: function (result, textStatus, errorThrown) {
+                alert("Error:" + errorThrown + " - " + textStatus + " - " + result);
+                window.location.reload();
+            }
+        });
+
+    }
+
+    //Xóa thông tin khi đóng form
+    function XoaThongTinForm() {
+        $("#tieude").text("Thêm mới Role");
+
+        $("#TenRole").val("");
+
+        $("#Id").val("");
+
+        $("#MoTa").val("");
+
+        $("#error").text("");
+
+        $("#tieude").text("Thêm thông tin Role")
+    }
+
+    //Lấy thông tin chủ đề từ id
+    function GetRole(id) {
+        $("#tieude").text("Cập nhật Role");
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/Admin/Role/GetRole",
+            data: "{'id':'" + id + "'}",
+            dataType: "json",
+            success: function (data) {
+                $("#TenRole").val(data.TenRole);
+                $("#Id").val(data.Id);
+                $("#MoTa").val(data.MoTa);
+            },
+            error: function (result, textStatus, errorThrown) {
+                alert("Error: " + errorThrown + " - " +
+                    textStatus + " - " + result);
+            }
+        });
+    }
+
+    function hienThiXoa(id) {
+        $('#thongBaoModal').modal('toggle');
+        $('#XoaId').val(id);
+    }
+
+    function dongCuaSoXoa() {
+        $('#XoaId').val('');
+    }
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Danh sách loại người dùng</strong>
+                <div style="text-align:right;">
+                    <span data-toggle="modal" data-target="#themmoiRole" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Thêm mới</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-bordered" id="stdTable">
+                    <thead>
+                        <tr>                           
+                            <th style="width:35%;">
+                                Loại người dùng
+                            </th>
+                            <th style="width:35%;">
+                                Mô tả
+                            </th>
+                            <th style="width:100px;text-align:center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>                             
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenRole)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MoTa)
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-info size-icon" data-toggle="modal" data-target="#themmoiRole"
+                                       onclick="GetRole(@item.Id)">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a> 
+                                    &nbsp;
+                                    <a href="#" class="btn btn-danger size-icon" title="Xóa" onclick="hienThiXoa(@item.Id)">
+                                        <i class="far fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="thongBaoModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticModalLabel">Xóa loại người dùng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Bạn có chắc chắn muốn xóa loại người dùng?
+                </p>
+                <input type="hidden" id="XoaId" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="xoaRole()">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="dongCuaSoXoa()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Thiết kế form thêm mới chủ đề-->
+<div class="modal fade" id="themmoiRole" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="tieude">Thêm thông tin Role</span></h4>
+            </div>
+            <div class="modal-body" style="padding: 10px 10px;">
+                <div class="row">
+                    <div class="col-md-3">
+                        Tên Role<span style="color:red">(*)</span>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" id="TenRole" data-val="true" data-val-required="Bạn cần nhập loại" class="form-control"><span id="error" style="color:red;"></span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        Mô tả
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="5" id="MoTa" @*data-val="true"*@ @*data-val-required="Bạn cần nhập tên loại"*@ class="form-control"></textarea><span id="error" style="color:red;"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="margin: 0px; padding: 10px 10px;">
+                <input id="btnThucHien" type="button" class="btn btn-primary" value="Lưu lại" />
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Đóng giao diện hiện thời" onclick="XoaThongTinForm();">Đóng</button>
+                <br />
+                <input type="hidden" id="Id" name="Id" />
+            </div>
+        </div>
+
+    </div>
+</div>

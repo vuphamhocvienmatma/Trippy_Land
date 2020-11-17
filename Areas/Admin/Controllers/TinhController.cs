@@ -1,6 +1,5 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +7,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    [SessionCheckAdmin]
     public class TinhController : Controller
     {
         private static readonly ILog logger =
@@ -34,20 +34,20 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-         
+
         }
 
         public ActionResult ThemMoiTinh()
         {
             try
             {
-                return View();
+                return View(new Tinh());
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }           
+            }
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }          
+            }
         }
 
         public ActionResult CapNhatTinh(int Id)
@@ -102,7 +102,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-            
+
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-         
+
         }
     }
 }

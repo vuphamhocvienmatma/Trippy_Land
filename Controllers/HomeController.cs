@@ -1,36 +1,42 @@
-﻿using System;
+﻿using log4net;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
-using PagedList;
-using log4net;
 namespace Trippy_Land.Controllers
 {
     public class HomeController : Controller
     {
         private static readonly ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public ActionResult Index()
         {
             try
-            {
+            {               
                 IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
-                logger.Info("Have an access the website");
-               
-                return View(lstTinh);              
+                logger.Info("Have an access the website: Index");
+                return View(lstTinh);
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
-            }         
+            }
         }
-    
+
         public ActionResult AboutUs()
         {
-            return View();
+            try
+            {
+                logger.Info("Have an access the website: Aboutus");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return RedirectToAction("Return", "ErrorPage");
+            }
         }
 
         public ActionResult GetAllChuDe()
@@ -53,7 +59,7 @@ namespace Trippy_Land.Controllers
             {
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
-            }         
+            }
         }
 
         public ActionResult BlogDetail(int? Id)
@@ -68,7 +74,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-            
+
         }
 
         /// <summary>
@@ -78,7 +84,7 @@ namespace Trippy_Land.Controllers
         /// <param name="sortOrder"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public ActionResult BlogbyLoacationId(int? page, string sortOrder,int? Id)
+        public ActionResult BlogbyLoacationId(int? page, string sortOrder, int? Id)
         {
             try
             {
@@ -99,7 +105,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-           
+
         }
         /// <summary>
         /// Hàm lấy danh sách KS theo Id của tỉnh
@@ -125,7 +131,6 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-           
         }
 
         /// <summary>
@@ -149,11 +154,10 @@ namespace Trippy_Land.Controllers
             }
             catch (Exception ex)
             {
-
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-            
+
         }
 
         /// <summary>
@@ -180,9 +184,6 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-         
         }
-
-       
     }
 }

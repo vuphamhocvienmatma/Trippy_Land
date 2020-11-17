@@ -1,8 +1,6 @@
 ﻿using log4net;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
@@ -54,7 +52,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return RedirectToAction("DanhSachDanhGia");         
+            return RedirectToAction("DanhSachDanhGia");
         }
 
         //Xóa
@@ -70,7 +68,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 //Lưu thay đổi
                 DataProvider.Entities.SaveChanges();
             }
-            return RedirectToAction("DanhSachDanhGia");           
+            return RedirectToAction("DanhSachDanhGia");
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
@@ -12,7 +10,7 @@ namespace Trippy_Land.Controllers
 {
     public class LoginController : Controller
     {
-        private static readonly ILog logger = 
+        private static readonly ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult SignUp()
         {
@@ -26,7 +24,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-           
+
         }
 
         [HttpPost]
@@ -78,6 +76,7 @@ namespace Trippy_Land.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
         {
+            Session.Clear(); //remove session 
             try
             {
                 string HashPassword = GetSHA256(objUser.MatKhau);
@@ -88,7 +87,31 @@ namespace Trippy_Land.Controllers
                     if (obj != null)
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-                        return RedirectToAction("Index", "Home");
+                        //1-admin
+                        //2 -user
+                        //3-writter
+                        //4-SU          
+                       
+                        if(obj.UserRoleId == 1)
+                        {
+                            Session["Admin"] = "Admin";
+                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
+                        }
+                        if (obj.UserRoleId == 2)
+                        {
+                            Session["User"] = "User";
+                            return RedirectToAction("Index", "Home");
+                        }
+                        if (obj.UserRoleId == 3)
+                        {
+                            Session["Writter"] = "Writter";
+                            return RedirectToAction("DanhSachBaiViet", "BaiVietVeDiaDiem", new { area = "Admin" });
+                        }
+                        if (obj.UserRoleId == 4)
+                        {
+                            Session["SU"] = "Super User";
+                            return RedirectToAction("DanhSachUser", "User", new { area = "Admin" });
+                        }                                          
                     }
                     else
                     {
@@ -102,7 +125,7 @@ namespace Trippy_Land.Controllers
             {
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
-            }        
+            }
         }
         public ActionResult Logout()
         {

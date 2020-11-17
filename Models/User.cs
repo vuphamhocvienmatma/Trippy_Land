@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -29,7 +26,7 @@ namespace Trippy_Land.Models
 
         [Column(TypeName = "NVARCHAR")]
         [StringLength(50)]
-        [Display(Name = "Tên người dùng")]      
+        [Display(Name = "Tên người dùng")]
         public string TenNguoiDung { get; set; }
 
         [Display(Name = "Số điện thoại")]

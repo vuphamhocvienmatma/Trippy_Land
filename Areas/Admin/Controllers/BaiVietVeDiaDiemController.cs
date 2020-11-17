@@ -8,6 +8,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    [SessionCheckWritter]
     public class BaiVietVeDiaDiemController : Controller
     {
         private static readonly ILog logger =
@@ -26,7 +27,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             ViewBag.ChuDe = new SelectList(lstChuDe, "Id", "TenChuDe", idChuDe.HasValue ? idChuDe.Value : 0);
         }
 
-        public ActionResult DanhSachBaiViet(DateTime? date,string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
+        public ActionResult DanhSachBaiViet(DateTime? date, string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-               
+
         }
 
         public ActionResult ThemMoiBaiViet()
@@ -78,7 +79,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-         
+
         }
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-         
+
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return Redirect("~/ErrorPage/Return");
             }
             //Lấy đối tượng
-         
+
         }
 
 
@@ -165,7 +166,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         /// <summary>
@@ -211,7 +212,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
     }
 }

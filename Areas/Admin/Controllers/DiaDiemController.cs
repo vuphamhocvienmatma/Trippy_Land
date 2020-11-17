@@ -8,6 +8,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    [SessionCheckAdmin]
     public class DiaDiemController : Controller
     {
         private static readonly ILog logger =
@@ -37,7 +38,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         public ActionResult XoaDiaDiem(int Id)
@@ -61,7 +62,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return Redirect("~/ErrorPage/Return");
             }
             //Lấy đối tượng địa điểm
-         
+
         }
 
         public ActionResult ThemDiaDiem()
@@ -76,7 +77,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         /// <summary>
@@ -109,11 +110,11 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return RedirectToAction("DanhSachDiaDiem");
             }
             catch (Exception ex)
-            {               
+            {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-                
-            }           
+
+            }
         }
 
         public ActionResult CapNhatDiaDiem(int Id)
@@ -130,7 +131,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         [HttpPost]
@@ -170,7 +171,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         public void HienThiDanhSachTinh(int? idTinh = null)

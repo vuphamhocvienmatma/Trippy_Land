@@ -148,12 +148,15 @@
     <Compile Include="Areas\Admin\Controllers\BaiVietVeDiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhGiaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachSanController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonAnController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserRoleController.cs" />
+    <Compile Include="Areas\SessionCheckAdmin.cs" />
+    <Compile Include="Areas\SessionCheckSU.cs" />
+    <Compile Include="Areas\SessionCheckWritter.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -388,13 +391,12 @@
     <Content Include="Login_Theme\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Login_Theme\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Login_Theme\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Areas\Admin\Views\UserRole\DanhSachUserRole.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRole\ThemMoiUserRole.cshtml" />
     <Content Include="Areas\Admin\Views\User\DanhSachUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\ThemMoiUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\CapNhatUser.cshtml" />
     <Content Include="Areas\Admin\Views\DanhGia\DanhSachDanhGia.cshtml" />
     <Content Include="Areas\Admin\Views\DanhGia\ThemMoiDanhGia.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\ListRole.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -777,6 +779,7 @@
     <Content Include="Trippy_Land_Theme\js\popper.min.js" />
     <Content Include="Trippy_Land_Theme\js\range.js" />
     <Content Include="Trippy_Land_Theme\js\scrollax.min.js" />
+    <Content Include="Views\ErrorPage\emoji.png" />
     <Content Include="Views\ErrorPage\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -929,6 +932,7 @@
     <Content Include="Views\Home\BlogDetail.cshtml" />
     <Content Include="Views\Home\BlogbyLoacationId.cshtml" />
     <Content Include="Views\ErrorPage\Return.cshtml" />
+    <Content Include="Views\ErrorPage\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

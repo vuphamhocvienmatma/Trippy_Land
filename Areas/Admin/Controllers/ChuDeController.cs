@@ -1,27 +1,43 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    [SessionCheckWritter]
     public class ChuDeController : Controller
     {
         private static readonly ILog logger =
             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult DanhSachChuDe()
         {
-            var lstChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.ToList();
-
-            return View(lstChuDe);
+            try
+            {
+                var lstChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.ToList();
+                logger.Info("Have an access to admin page: Chude ");
+                return View(lstChuDe);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         public ActionResult ThemMoiChuDe()
         {
-            return View();
+            try
+            {
+                return View(new ChuDeBaiVietVeDiaDiem());
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }         
         }
 
         /// <summary>
@@ -34,14 +50,24 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiChuDe(ChuDeBaiVietVeDiaDiem objChuDe)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //thêm vào database
-                DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Add(objChuDe);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    //thêm vào database
+                    DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Add(objChuDe);
+                    logger.Info("Add Chude: " + objChuDe.TenChuDe);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                return RedirectToAction("DanhSachChuDe");
             }
-            return RedirectToAction("DanhSachChuDe");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
 
         /// <summary>
@@ -50,22 +76,41 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult XoaChuDe(int Id)
         {
-            //Lấy đối tượng chủ đề
-            ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
-            if (objChuDe != null)
+            try
             {
-                //Xóa
-                DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Remove(objChuDe);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+                ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
+                if (objChuDe != null)
+                {
+                    //Xóa
+                    DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Remove(objChuDe);
+                    logger.Info("Xóa 1 chủ đề: " + objChuDe.TenChuDe);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                return RedirectToAction("DanhSachChuDe");
             }
-            return RedirectToAction("DanhSachChuDe");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+            //Lấy đối tượng chủ đề
+          
         }
 
         public ActionResult CapNhatChuDe(int Id)
         {
-            ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Where(c => c.Id == Id).Single();
-            return View(objChuDe);
+            try
+            {
+                ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Where(c => c.Id == Id).Single();
+                return View(objChuDe);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+          
         }
 
         /// <summary>
@@ -78,15 +123,25 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CapNhatChuDe(int Id, ChuDeBaiVietVeDiaDiem objChuDe)
         {
-            var objOld_ChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
-          
-            if (objOld_ChuDe != null)
-            {              
-                DataProvider.Entities.Entry(objOld_ChuDe).CurrentValues.SetValues(objChuDe);
-                //Lưu thay đổi
-                DataProvider.Entities.SaveChanges();
+            try
+            {
+                var objOld_ChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
+
+                if (objOld_ChuDe != null)
+                {
+                    DataProvider.Entities.Entry(objOld_ChuDe).CurrentValues.SetValues(objChuDe);
+                    logger.Info("Update chủ đề: " + objChuDe.TenChuDe);
+                    //Lưu thay đổi
+                    DataProvider.Entities.SaveChanges();
+                }
+                return RedirectToAction("DanhSachChuDe");
             }
-            return RedirectToAction("DanhSachChuDe");
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+           
         }
     }
 }

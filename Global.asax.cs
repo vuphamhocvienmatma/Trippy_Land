@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Trippy_Land.Controllers;
 
 namespace Trippy_Land
 {
@@ -18,6 +14,8 @@ namespace Trippy_Land
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
 
             // Sets 404 HTTP exceptions to be handled via IIS (behavior is specified in the "httpErrors" section in the Web.config file)
             var error = Server.GetLastError();
@@ -27,6 +25,6 @@ namespace Trippy_Land
                 Response.StatusCode = 404;
             }
         }
-        
+
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Trippy_Land.Models
 {
@@ -36,6 +33,6 @@ namespace Trippy_Land.Models
         public virtual ICollection<DiaDiem> DiaDiem { get; set; }
         public virtual ICollection<KhachSan> KhachSan { get; set; }
         public virtual ICollection<MonAn> MonAn { get; set; }
-        
+
     }
 }

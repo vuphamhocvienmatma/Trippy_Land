@@ -10,7 +10,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    
+   [SessionCheckSU]
     public class UserController : Controller
     {
         private static readonly ILog logger =
@@ -65,9 +65,9 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
 
                 logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
+                return Redirect("~/ErrorPage/Return");
             }
-            
+
         }
 
         public ActionResult XoaUser(int Id)
@@ -83,15 +83,15 @@ namespace Trippy_Land.Areas.Admin.Controllers
                     DataProvider.Entities.Users.Remove(objUser);
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
-                }             
+                }
                 return RedirectToAction("DanhSachUser");
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
+                return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         public ActionResult ThemMoiUser()
@@ -138,8 +138,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
-            }          
+                return Redirect("~/ErrorPage/Return");
+            }
         }
 
 
@@ -190,9 +190,9 @@ namespace Trippy_Land.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
+                return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
     }
