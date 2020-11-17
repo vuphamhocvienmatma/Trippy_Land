@@ -8,6 +8,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
+    [SessionCheckSU]
     public class RoleController : Controller
     {
         private static readonly ILog logger =
@@ -46,6 +47,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                     if (isAdd)
                     {
+                        logger.Info("Add Role: " + ObjRole.TenRole);
                         DataProvider.Entities.UserRoles.Add(ObjRole);
                     }
                     DataProvider.Entities.SaveChanges();
@@ -106,6 +108,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 //}
                 if (objRole != null)
                 {
+                    logger.Info("Delete Role: " + objRole.TenRole);
                     DataProvider.Entities.UserRoles.Remove(objRole);
                     DataProvider.Entities.SaveChanges();
                     return Json("", JsonRequestBehavior.AllowGet);
@@ -118,7 +121,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Json("", JsonRequestBehavior.AllowGet);
             }
-
         }
     }
 }

@@ -154,7 +154,9 @@
     <Compile Include="Areas\Admin\Controllers\KhachSanController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonAnController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserProController.cs" />
+    <Compile Include="Areas\SessionCheckAdmin.cs" />
+    <Compile Include="Areas\SessionCheckSU.cs" />
+    <Compile Include="Areas\SessionCheckWritter.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -777,6 +779,7 @@
     <Content Include="Trippy_Land_Theme\js\popper.min.js" />
     <Content Include="Trippy_Land_Theme\js\range.js" />
     <Content Include="Trippy_Land_Theme\js\scrollax.min.js" />
+    <Content Include="Views\ErrorPage\emoji.png" />
     <Content Include="Views\ErrorPage\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -929,10 +932,10 @@
     <Content Include="Views\Home\BlogDetail.cshtml" />
     <Content Include="Views\Home\BlogbyLoacationId.cshtml" />
     <Content Include="Views\ErrorPage\Return.cshtml" />
+    <Content Include="Views\ErrorPage\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\UserPro\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>

@@ -76,6 +76,7 @@ namespace Trippy_Land.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
         {
+            Session.Clear(); //remove session 
             try
             {
                 string HashPassword = GetSHA256(objUser.MatKhau);
@@ -86,7 +87,31 @@ namespace Trippy_Land.Controllers
                     if (obj != null)
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-                        return RedirectToAction("Index", "Home");
+                        //1-admin
+                        //2 -user
+                        //3-writter
+                        //4-SU          
+                       
+                        if(obj.UserRoleId == 1)
+                        {
+                            Session["Admin"] = "Admin";
+                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
+                        }
+                        if (obj.UserRoleId == 2)
+                        {
+                            Session["User"] = "User";
+                            return RedirectToAction("Index", "Home");
+                        }
+                        if (obj.UserRoleId == 3)
+                        {
+                            Session["Writter"] = "Writter";
+                            return RedirectToAction("DanhSachBaiViet", "BaiVietVeDiaDiem", new { area = "Admin" });
+                        }
+                        if (obj.UserRoleId == 4)
+                        {
+                            Session["SU"] = "Super User";
+                            return RedirectToAction("DanhSachUser", "User", new { area = "Admin" });
+                        }                                          
                     }
                     else
                     {

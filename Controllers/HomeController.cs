@@ -13,10 +13,9 @@ namespace Trippy_Land.Controllers
         public ActionResult Index()
         {
             try
-            {
+            {               
                 IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
                 logger.Info("Have an access the website: Index");
-
                 return View(lstTinh);
             }
             catch (Exception ex)
@@ -185,7 +184,6 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-
         }
     }
 }
