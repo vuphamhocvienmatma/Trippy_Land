@@ -2,18 +2,12 @@
 <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
 <div>
     <div class="app-header__logo">
-
             @Session["Admin"]
             @Session["User"]
             @Session["Writter"]
             @Session["SU"]        
     </div>
 </div>
-<center>
-    <h3>
-       
-    </h3>
-</center>
-
-<a class="app-nav__item" href="~/login/logout" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg" style="text-align:left"></i> Logout</a>
-<a class="app-nav__item" href="~/login/login" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg" style="text-align:left"></i> Login</a>           
+<div style="float:right">
+    <a class="app-nav__item" href="~/login/logout" ><i class="fa fa-user fa-lg"></i> Logout</a>
+</div>

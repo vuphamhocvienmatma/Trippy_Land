@@ -91,8 +91,8 @@ namespace Trippy_Land.Controllers
                         //2 -user
                         //3-writter
                         //4-SU          
-                       
-                        if(obj.UserRoleId == 1)
+
+                        if (obj.UserRoleId == 1)
                         {
                             Session["Admin"] = "Admin";
                             return RedirectToAction("Index", "Admin", new { area = "Admin" });
@@ -111,7 +111,7 @@ namespace Trippy_Land.Controllers
                         {
                             Session["SU"] = "Super User";
                             return RedirectToAction("DanhSachUser", "User", new { area = "Admin" });
-                        }                                          
+                        }
                     }
                     else
                     {

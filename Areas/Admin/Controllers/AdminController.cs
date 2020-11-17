@@ -11,11 +11,11 @@ namespace Trippy_Land.Areas.Admin.Controllers
             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Admin/Admin
         public ActionResult Index()
-        {          
+        {
             try
             {
                 logger.Info("Have an access to Admin page");
-                return View();           
+                return View();
             }
             catch (Exception ex)
             {

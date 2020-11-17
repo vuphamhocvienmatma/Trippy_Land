@@ -24,7 +24,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         public ActionResult ThemMoiChuDe()
@@ -37,7 +37,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }         
+            }
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return Redirect("~/ErrorPage/Return");
             }
             //Lấy đối tượng chủ đề
-          
+
         }
 
         public ActionResult CapNhatChuDe(int Id)
@@ -110,7 +110,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-          
+
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-           
+
         }
     }
 }

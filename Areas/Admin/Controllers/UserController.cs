@@ -10,7 +10,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-   [SessionCheckSU]
+    [SessionCheckSU]
     public class UserController : Controller
     {
         private static readonly ILog logger =
@@ -67,7 +67,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-
         }
 
         public ActionResult XoaUser(int Id)
@@ -141,14 +140,20 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return Redirect("~/ErrorPage/Return");
             }
         }
-
-
-
         public ActionResult CapNhatUser(int Id)
         {
-            HienThiDanhSachUserRole();
-            User objUser = DataProvider.Entities.Users.Where(c => c.Id == Id).Single<User>();
-            return View(objUser);
+            try
+            {
+                HienThiDanhSachUserRole();
+                User objUser = DataProvider.Entities.Users.Where(c => c.Id == Id).Single<User>();
+                return View(objUser);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Redirect("~/ErrorPage/Return");
+            }
+
         }
 
         [HttpPost]
