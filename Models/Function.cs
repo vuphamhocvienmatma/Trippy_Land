@@ -29,14 +29,6 @@ namespace Trippy_Land.Models
         [Display(Name = "Tên form")]
         public string TenForm { get; set; }
 
-
-        [Display(Name = "Ngày tạo")]
-        public DateTime NgayTao { get; set; }
-
-        [Display(Name = "Số thứ tự")]
-        public int OrderNum { get; set; }
-
-
         public virtual ICollection<UserRoleAndFunction> UserRoleAndFunctions { get; set; }
     }
 }

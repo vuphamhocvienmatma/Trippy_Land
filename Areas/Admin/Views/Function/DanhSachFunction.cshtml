@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Trippy_Land.Models.Function>
+
+@{
+    ViewBag.Title = "DanhSachFunction";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách chức năng</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới chức năng", "ThemMoiFunction", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+</p>
+<table id="example" class="table table-striped table-bordered table-hover table-responsive" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width: 300px;">
+                @Html.DisplayNameFor(model => model.TenChucNang)
+            </th>
+
+            <th style="width: 300px;">
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th style="width: 200px;">
+                @Html.DisplayNameFor(model => model.TenForm)
+            </th>
+           
+            <th style="width: 200px;">
+                Nghiệp vụ xử lý
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenChucNang)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenForm)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Sửa", "CapNhatFunction", new { id = item.Id }, new { @class = "lnkbuttonSua" })
+                    @Html.ActionLink("Xóa", "XoaFunction", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

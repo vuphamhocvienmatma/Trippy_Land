@@ -58,6 +58,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    
                     //thêm vào database
                     DataProvider.Entities.Function.Add(objF);
                     logger.Info("Add Function: " + objF.TenChucNang);
@@ -135,8 +136,10 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                 if (objOld_F != null)
                 {
+                    
                     DataProvider.Entities.Entry(objOld_F).CurrentValues.SetValues(objF);
                     logger.Info("Update Function: " + objF.TenChucNang);
+                   
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
                 }

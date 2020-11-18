@@ -26,7 +26,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-
         }
         [CheckAuthorize(PermissionName = "ThemMoiChuDe")]
         public ActionResult ThemMoiChuDe()
