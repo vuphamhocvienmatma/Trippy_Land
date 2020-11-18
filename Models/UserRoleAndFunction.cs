@@ -11,12 +11,7 @@ namespace Trippy_Land.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public bool Xem { get; set; }
-        public bool Them { get; set; }
-        public bool Sua { get; set; }
-        public bool Xoa { get; set; }
-
+     
         //RoleId
         [Display(Name = "Role")]
         public int UserRoleId { get; set; }

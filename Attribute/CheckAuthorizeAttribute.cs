@@ -18,20 +18,24 @@ namespace Trippy_Land.Attribute
         {
             //lấy thông tin của người dùng rồi lưu vào Session 
             User session = (User)httpContext.Session["UserOnline"];
+            //if(session.IsSupper == true)
+            //    return true;
             if (session != null)
             {                             
                 //lấy chức năng 
                 Function ChucNang = DataProvider.Entities.Function.Where(o => o.TenForm == PermissionName).First<Function>();
                 if(ChucNang != null)
                 {
-                    List<UserRoleAndFunction> objroleandFunc = DataProvider.Entities.UserRoleAndFunctions.ToList();
+                    List<UserRoleAndFunction> objroleandFunc = 
+                        DataProvider.Entities.UserRoleAndFunctions.
+                        Where(o => o.UserRoleId == session.UserRoleId).ToList();
                     try
                     {
                         //phải bằng nhau
                         foreach (UserRoleAndFunction item in objroleandFunc)
                         {
                             if (item.UserRoleId != 0 && item.UserRoleId == session.UserRoleId
-                                && item.Function.TenForm == ChucNang.TenForm && item.Xem != false)
+                                && item.Function.TenForm == ChucNang.TenForm)
                                 return true;
                             else
                                 return false;                          
@@ -46,7 +50,6 @@ namespace Trippy_Land.Attribute
             }       
             return false;                   
         }
-
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new

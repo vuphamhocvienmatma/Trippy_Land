@@ -92,31 +92,7 @@ namespace Trippy_Land.Controllers
 
                         Session["UserOnline"] = obj;
                         Session.Timeout = 5;
-                        return RedirectToAction("DanhSachTinh", "Tinh", new { area = "Admin" });
-                        //1-admin
-                        //2 -user
-                        //3-writter
-                        //4-SU          
-                        //if (obj.UserRoleId == 1)
-                        //{
-                        //    Session["Admin"] = "Admin";
-                        //    return RedirectToAction("Index", "Admin", new { area = "Admin" });
-                        //}
-                        //if (obj.UserRoleId == 2)
-                        //{
-                        //    Session["User"] = "User";
-                        //    return RedirectToAction("Index", "Home");
-                        //}
-                        //if (obj.UserRoleId == 3)
-                        //{
-                        //    Session["Writter"] = "Writter";
-                        //    return RedirectToAction("DanhSachBaiViet", "BaiVietVeDiaDiem", new { area = "Admin" });
-                        //}
-                        //if (obj.UserRoleId == 4)
-                        //{
-                        //    Session["SU"] = "Super User";
-                        //    return RedirectToAction("DanhSachUser", "User", new { area = "Admin" });
-                        //}
+                        return RedirectToAction("Indx", "Admin", new { area = "Admin" });                    
                     }
                     else
                     {

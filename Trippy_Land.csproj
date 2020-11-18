@@ -169,6 +169,10 @@
     <Compile Include="Migrations\202011180355358_PNV1.Designer.cs">
       <DependentUpon>202011180355358_PNV1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011180826300_PNV2.cs" />
+    <Compile Include="Migrations\202011180826300_PNV2.Designer.cs">
+      <DependentUpon>202011180826300_PNV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
@@ -937,6 +941,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011180355358_PNV1.resx">
       <DependentUpon>202011180355358_PNV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011180826300_PNV2.resx">
+      <DependentUpon>202011180826300_PNV2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
