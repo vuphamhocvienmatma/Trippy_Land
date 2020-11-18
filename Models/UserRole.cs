@@ -22,6 +22,8 @@ namespace Trippy_Land.Models
         [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
 
+
+        public virtual ICollection<UserRoleAndFunction> UserRoleAndFunctions { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

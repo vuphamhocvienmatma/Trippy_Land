@@ -8,7 +8,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    [SessionCheckAdmin]
+  
     public class MonAnController : Controller
     {
         private static readonly ILog logger =

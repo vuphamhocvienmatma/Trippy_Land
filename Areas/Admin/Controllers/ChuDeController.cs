@@ -6,7 +6,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    [SessionCheckWritter]
+    
     public class ChuDeController : Controller
     {
         private static readonly ILog logger =
