@@ -160,6 +160,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm xóa một tỉnh
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "XoaTinh")]
         public ActionResult XoaTinh(int Id)
         {
             try

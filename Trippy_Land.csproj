@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\FunctionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleAndFuncController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiaDiemController.cs" />
@@ -394,6 +395,7 @@
     <Content Include="Areas\Admin\Views\Function\DanhSachFunction.cshtml" />
     <Content Include="Areas\Admin\Views\Function\ThemMoiFunction.cshtml" />
     <Content Include="Areas\Admin\Views\Function\CapNhatFunction.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleAndFunc\DanhSachRoleAndFunc.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
