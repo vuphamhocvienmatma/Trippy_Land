@@ -7,32 +7,34 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    
-    public class ChuDeController : Controller
+    public class FunctionController : Controller
     {
         private static readonly ILog logger =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        [CheckAuthorize(PermissionName = "DanhSachChuDe")]
-        public ActionResult DanhSachChuDe()
+           LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        // GET: Admin/Function
+        [CheckAuthorize(PermissionName = "DanhSachFunction")]
+        public ActionResult DanhSachFunction()
         {
             try
             {
-                var lstChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.ToList();
-                logger.Info("Have an access to admin page: Chude ");
-                return View(lstChuDe);
+                var lstF = DataProvider.Entities.Function.ToList();
+                logger.Info("Have an access to admin page: Function ");
+                return View(lstF);
             }
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
+
         }
-        [CheckAuthorize(PermissionName = "ThemMoiChuDe")]
-        public ActionResult ThemMoiChuDe()
+        [CheckAuthorize(PermissionName = "ThemMoiFunction")]
+        public ActionResult ThemMoiFunction()
         {
             try
             {
-                return View(new ChuDeBaiVietVeDiaDiem());
+                return View(new Function());
             }
             catch (Exception ex)
             {
@@ -49,20 +51,21 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CheckAuthorize(PermissionName = "ThemMoiChuDe")]
-        public ActionResult ThemMoiChuDe(ChuDeBaiVietVeDiaDiem objChuDe)
+        [CheckAuthorize(PermissionName = "ThemMoiFunction")]
+        public ActionResult ThemMoiFunction(Function objF)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    
                     //thêm vào database
-                    DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Add(objChuDe);
-                    logger.Info("Add Chude: " + objChuDe.TenChuDe);
+                    DataProvider.Entities.Function.Add(objF);
+                    logger.Info("Add Function: " + objF.TenChucNang);
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
                 }
-                return RedirectToAction("DanhSachChuDe");
+                return RedirectToAction("DanhSachFunction");
             }
             catch (Exception ex)
             {
@@ -76,21 +79,21 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm xóa một chủ đề
         /// </summary>
         /// <returns></returns>
-        [CheckAuthorize(PermissionName = "XoaChuDe")]
-        public ActionResult XoaChuDe(int Id)
+        [CheckAuthorize(PermissionName = "XoaFunction")]
+        public ActionResult XoaFunction(int Id)
         {
             try
             {
-                ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
-                if (objChuDe != null)
+                Function objCF = DataProvider.Entities.Function.Find(Id);
+                if (objCF != null)
                 {
                     //Xóa
-                    DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Remove(objChuDe);
-                    logger.Info("Xóa 1 chủ đề: " + objChuDe.TenChuDe);
+                    DataProvider.Entities.Function.Remove(objCF);
+                    logger.Info("Xóa 1 Function: " + objCF.TenChucNang);
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
                 }
-                return RedirectToAction("DanhSachChuDe");
+                return RedirectToAction("DanhSachFunction");
             }
             catch (Exception ex)
             {
@@ -100,13 +103,13 @@ namespace Trippy_Land.Areas.Admin.Controllers
             //Lấy đối tượng chủ đề
 
         }
-        [CheckAuthorize(PermissionName = "CapNhatChuDe")]
-        public ActionResult CapNhatChuDe(int Id)
+        [CheckAuthorize(PermissionName = "CapNhatFunction")]
+        public ActionResult CapNhatFunction(int Id)
         {
             try
             {
-                ChuDeBaiVietVeDiaDiem objChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Where(c => c.Id == Id).Single();
-                return View(objChuDe);
+                Function objCF = DataProvider.Entities.Function.Where(c => c.Id == Id).Single();
+                return View(objCF);
             }
             catch (Exception ex)
             {
@@ -117,28 +120,30 @@ namespace Trippy_Land.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Hàm cập nhật một chủ đề
+        /// Hàm cập nhật một chức năng
         /// </summary>
         /// <param name="objTinh"></param>
         /// <param name="fUpload"></param>
         /// <returns></returns>
         [HttpPost]
-        [CheckAuthorize(PermissionName = "CapNhatChuDe")]
+        [CheckAuthorize(PermissionName = "CapNhatFunction")]
         [ValidateAntiForgeryToken]
-        public ActionResult CapNhatChuDe(int Id, ChuDeBaiVietVeDiaDiem objChuDe)
+        public ActionResult CapNhatFunction(int Id, Function objF)
         {
             try
             {
-                var objOld_ChuDe = DataProvider.Entities.ChuDeBaiVietVeDiaDiems.Find(Id);
+                var objOld_F = DataProvider.Entities.Function.Find(Id);
 
-                if (objOld_ChuDe != null)
+                if (objOld_F != null)
                 {
-                    DataProvider.Entities.Entry(objOld_ChuDe).CurrentValues.SetValues(objChuDe);
-                    logger.Info("Update chủ đề: " + objChuDe.TenChuDe);
+                    
+                    DataProvider.Entities.Entry(objOld_F).CurrentValues.SetValues(objF);
+                    logger.Info("Update Function: " + objF.TenChucNang);
+                   
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
                 }
-                return RedirectToAction("DanhSachChuDe");
+                return RedirectToAction("DanhSachFunction");
             }
             catch (Exception ex)
             {

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    [SessionCheckWritter]
+    
     public class BaiVietVeDiaDiemController : Controller
     {
         private static readonly ILog logger =
@@ -26,7 +27,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
             ViewBag.ChuDe = new SelectList(lstChuDe, "Id", "TenChuDe", idChuDe.HasValue ? idChuDe.Value : 0);
         }
-
+        [CheckAuthorize(PermissionName = "DanhSachBaiViet")]
         public ActionResult DanhSachBaiViet(DateTime? date, string tuKhoa, int? idDiaDiem = null, int? idChuDe = null)
         {
             try
@@ -65,7 +66,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
 
         }
-
+        [CheckAuthorize(PermissionName = "ThemMoiBaiViet")]
         public ActionResult ThemMoiBaiViet()
         {
             try
@@ -87,6 +88,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [CheckAuthorize(PermissionName = "ThemMoiBaiViet")]
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiBaiViet(BaiVietVeDiaDiem objBaiViet, HttpPostedFileBase fUpload, int? idDiaDiem = null, int? idChuDe = null)
         {
@@ -127,6 +129,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm xóa một bài viết
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "XoaBaiViet")]
         public ActionResult XoaBaiViet(int Id)
         {
             try
@@ -151,7 +154,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         }
 
-
+        [CheckAuthorize(PermissionName = "CapNhatBaiViet")]
         public ActionResult CapNhatBaiViet(int Id)
         {
             try
@@ -177,6 +180,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "CapNhatBaiViet")]
         public ActionResult CapNhatBaiViet(int Id, BaiVietVeDiaDiem objBaiViet, HttpPostedFileBase fUpload)
         {
             try

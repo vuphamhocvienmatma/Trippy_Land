@@ -45,12 +45,18 @@ namespace Trippy_Land.Models
         [StringLength(500)]
         public string PictureId { get; set; }
 
+
+        [Display(Name = "Là quản trị viên")]
+        public bool IsSupper { get; set; }
+
         [Display(Name = "Role")]
         public int UserRoleId { get; set; }
 
         [ForeignKey("UserRoleId")]
         public virtual UserRole UserRole { get; set; }
 
+
+        public virtual ICollection<LogHeThong> LogHeThongs { get; set; }
         public virtual ICollection<DanhGia> DanhGia { get; set; }
     }
 }

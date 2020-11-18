@@ -3,11 +3,12 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    [SessionCheckAdmin]
+   
     public class TinhController : Controller
     {
         private static readonly ILog logger =
@@ -16,6 +17,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm hiển thị danh sách toàn bộ các tỉnh
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "DanhSachTinh")]
         public ActionResult DanhSachTinh(string tuKhoa)
         {
             try
@@ -37,6 +39,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         }
 
+        [CheckAuthorize(PermissionName = "ThemMoiTinh")]
         public ActionResult ThemMoiTinh()
         {
             try
@@ -58,6 +61,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "ThemMoiTinh")]
         public ActionResult ThemMoiTinh(Tinh objTinh, HttpPostedFileBase fUpload)
         {
             try
@@ -89,6 +93,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
         }
 
+        [CheckAuthorize(PermissionName = "CapNhatTinh")]
         public ActionResult CapNhatTinh(int Id)
         {
             try
@@ -102,7 +107,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-
         }
 
         /// <summary>
@@ -113,6 +117,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "CapNhatTinh")]
         public ActionResult CapNhatTinh(int Id, Tinh objTinh, HttpPostedFileBase fUpload)
         {
             try
@@ -155,6 +160,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm xóa một tỉnh
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "XoaTinh")]
         public ActionResult XoaTinh(int Id)
         {
             try
