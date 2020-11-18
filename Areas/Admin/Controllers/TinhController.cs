@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -16,6 +17,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm hiển thị danh sách toàn bộ các tỉnh
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "DanhSachTinh")]
         public ActionResult DanhSachTinh(string tuKhoa)
         {
             try
