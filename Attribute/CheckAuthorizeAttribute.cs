@@ -16,39 +16,40 @@ namespace Trippy_Land.Attribute
         public string PermissionName { get; set; }
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            //lấy thông tin của người dùng rồi lưu vào Session 
-            User session = (User)httpContext.Session["UserOnline"];
-            //if(session.IsSupper == true)
-            //    return true;
-            if (session != null)
-            {                             
-                //lấy chức năng 
-                Function ChucNang = DataProvider.Entities.Function.Where(o => o.TenForm == PermissionName).First<Function>();
-                if(ChucNang != null)
-                {
-                    List<UserRoleAndFunction> objroleandFunc = 
-                        DataProvider.Entities.UserRoleAndFunctions.
-                        Where(o => o.UserRoleId == session.UserRoleId).ToList();
-                    try
-                    {
-                        //phải bằng nhau
-                        foreach (UserRoleAndFunction item in objroleandFunc)
-                        {
-                            if (item.UserRoleId != 0 && item.UserRoleId == session.UserRoleId
-                                && item.Function.TenForm == ChucNang.TenForm)
-                                return true;
-                            else
-                                return false;                          
-                        }   
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error(ex.ToString());
-                        return false;
-                    }
-                }               
-            }       
-            return false;                   
+            ////lấy thông tin của người dùng rồi lưu vào Session 
+            //User session = (User)httpContext.Session["UserOnline"];
+          
+            //if (session != null)
+            //{
+            //    if (session.IsSupper == true)
+            //        return true;
+            //    //lấy chức năng 
+            //    Function ChucNang = DataProvider.Entities.Function.Where(o => o.TenForm == PermissionName).FirstOrDefault<Function>();
+            //    if(ChucNang != null)
+            //    {
+            //        List<UserRoleAndFunction> objroleandFunc = 
+            //            DataProvider.Entities.UserRoleAndFunctions.
+            //            Where(o => o.UserRoleId == session.UserRoleId).ToList();
+            //        try
+            //        {
+            //            //phải bằng nhau
+            //            foreach (UserRoleAndFunction item in objroleandFunc)
+            //            {
+            //                if (item.UserRoleId != 0 && item.UserRoleId == session.UserRoleId
+            //                    && item.Function.TenForm == ChucNang.TenForm)
+            //                    return true;
+            //                else
+            //                    return false;                          
+            //            }   
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            logger.Error(ex.ToString());
+            //            return false;
+            //        }
+            //    }               
+            //}       
+            return true;                   
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {

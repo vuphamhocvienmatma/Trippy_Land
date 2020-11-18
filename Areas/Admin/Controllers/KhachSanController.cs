@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -13,6 +14,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
     {
         private static readonly ILog logger =
             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        [CheckAuthorize(PermissionName = "DanhSachKhachSan")]
         public ActionResult DanhSachKhachSan(string tuKhoa, int? idTinh)
         {
             try
@@ -39,7 +42,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
 
         }
-
+        [CheckAuthorize(PermissionName = "XoaKhachSan")]
         public ActionResult XoaKhachSan(int Id)
         {
             try
@@ -64,7 +67,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
 
         }
-
+        [CheckAuthorize(PermissionName = "ThemKhachSan")]
         public ActionResult ThemKhachSan()
         {
             try
@@ -85,6 +88,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "ThemKhachSan")]
         public ActionResult ThemKhachSan(KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
             try
@@ -115,7 +119,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
 
         }
-
+        [CheckAuthorize(PermissionName = "CapNhatKhachSan")]
         public ActionResult CapNhatKhachSan(int Id)
         {
             try
@@ -133,6 +137,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "CapNhatKhachSan")]
         public ActionResult CapNhatKhachSan(int Id, KhachSan objKhachSan, HttpPostedFileBase fUpload)
         {
             try

@@ -87,12 +87,11 @@ namespace Trippy_Land.Controllers
                     if (obj != null)
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-                        Session["SessionId"] = obj.Id.ToString();
-                        Session["SessionHoten"] = obj.TenNguoiDung;
 
+                        Session["SessionTenUser"] = obj.TenDangNhap; 
                         Session["UserOnline"] = obj;
                         Session.Timeout = 5;
-                        return RedirectToAction("Indx", "Admin", new { area = "Admin" });                    
+                        return RedirectToAction("Index_Admin", "Admin", new { area = "Admin" });                    
                     }
                     else
                     {

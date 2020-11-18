@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -14,6 +15,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         private static readonly ILog logger =
             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: DiaDiem
+        [CheckAuthorize(PermissionName = "DanhSachDiaDiem")]
         public ActionResult DanhSachDiaDiem(string tuKhoa, int? idTinh)
         {
             try
@@ -40,11 +42,11 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
 
         }
-
+        [CheckAuthorize(PermissionName = "XoaDiaDiem")]
         public ActionResult XoaDiaDiem(int Id)
         {
             try
-            {
+            {   
                 DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
                 if (objDiaDiem != null)
                 {
@@ -64,7 +66,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             //Lấy đối tượng địa điểm
 
         }
-
+        [CheckAuthorize(PermissionName = "ThemDiaDiem")]
         public ActionResult ThemDiaDiem()
         {
             try
@@ -86,6 +88,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "ThemDiaDiem")]
         public ActionResult ThemDiaDiem(DiaDiem objDiaDiem, HttpPostedFileBase fUpload)
         {
             try
@@ -116,7 +119,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
             }
         }
-
+        [CheckAuthorize(PermissionName = "CapNhatDiaDiem")]
         public ActionResult CapNhatDiaDiem(int Id)
         {
             try
@@ -136,6 +139,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "CapNhatDiaDiem")]
         public ActionResult CapNhatDiaDiem(int Id, DiaDiem objDiaDiem, HttpPostedFileBase fUpload)
         {
             try

@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -42,6 +43,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             ViewBag.UserRole = new SelectList(lstUserRole, "Id", "TenRole", idUserRole.HasValue ? idUserRole.Value : 0);
         }
 
+        [CheckAuthorize(PermissionName = "DanhSachUser")]
         public ActionResult DanhSachUser(string tuKhoa, int? idUserRole)
         {
             try
@@ -69,6 +71,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }
         }
 
+        [CheckAuthorize(PermissionName = "XoaUser")]
         public ActionResult XoaUser(int Id)
         {
             try
@@ -93,6 +96,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         }
 
+        [CheckAuthorize(PermissionName = "ThemMoiUser")]
         public ActionResult ThemMoiUser()
         {
             HienThiDanhSachUserRole();
@@ -103,6 +107,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         /// Hàm thêm mới người dùng
         /// </summary>
         /// <returns></returns>
+        [CheckAuthorize(PermissionName = "ThemMoiUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ThemMoiUser(User objuser, HttpPostedFileBase fUpload)
@@ -140,6 +145,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 return Redirect("~/ErrorPage/Return");
             }
         }
+        [CheckAuthorize(PermissionName = "CapNhatUser")]
         public ActionResult CapNhatUser(int Id)
         {
             try
@@ -158,6 +164,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CheckAuthorize(PermissionName = "CapNhatUser")]
         public ActionResult CapNhatUser(int Id, User objUser, HttpPostedFileBase fUpload)
         {
             try

@@ -1,6 +1,7 @@
 ﻿using log4net;
 using System;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
@@ -10,7 +11,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
         private static readonly ILog logger =
             LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Admin/Admin
-        public ActionResult Index()
+        [CheckAuthorize(PermissionName = "Index_Admin")]
+        public ActionResult Index_Admin()
         {
             try
             {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
@@ -13,12 +14,14 @@ namespace Trippy_Land.Areas.Admin.Controllers
         private static readonly ILog logger =
            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Admin/Role
+        [CheckAuthorize(PermissionName = "ListRole")]
         public ActionResult ListRole()
         {
             List<UserRole> lstUserRole = DataProvider.Entities.UserRoles.ToList();
             return View(lstUserRole);
         }
-
+        
+        [CheckAuthorize(PermissionName = "AddRole")]
         public JsonResult AddRole(int Id, string TenRole, string MoTa)
         {
             try
@@ -94,6 +97,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        [CheckAuthorize(PermissionName = "Remove")]
         public JsonResult Remove(string Id)
         {
             try
