@@ -88,10 +88,10 @@ namespace Trippy_Land.Controllers
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
 
-                        Session["SessionTenUser"] = obj.TenDangNhap; 
+                        Session["SessionTenUser"] = obj.TenDangNhap;
                         Session["UserOnline"] = obj;
                         Session.Timeout = 5;
-                        return RedirectToAction("Index", "Home", new { area = "" });                    
+                        return RedirectToAction("Index", "Home", new { area = "" });
                     }
                     else
                     {

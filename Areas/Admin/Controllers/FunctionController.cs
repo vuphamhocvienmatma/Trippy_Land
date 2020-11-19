@@ -18,7 +18,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         {
             try
             {
-                var lstF = DataProvider.Entities.Function.ToList();
+                var lstF = DataProvider.Entities.Function.OrderBy(o => o.Id).ToList();
                 logger.Info("Have an access to admin page: Function ");
                 return View(lstF);
             }
@@ -58,7 +58,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
                     //thêm vào database
                     DataProvider.Entities.Function.Add(objF);
                     logger.Info("Add Function: " + objF.TenChucNang);
@@ -72,7 +71,6 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
             }
-
         }
 
         /// <summary>
@@ -136,10 +134,10 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                 if (objOld_F != null)
                 {
-                    
+
                     DataProvider.Entities.Entry(objOld_F).CurrentValues.SetValues(objF);
                     logger.Info("Update Function: " + objF.TenChucNang);
-                   
+
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
                 }

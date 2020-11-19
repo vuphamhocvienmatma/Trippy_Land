@@ -46,7 +46,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         public ActionResult XoaDiaDiem(int Id)
         {
             try
-            {   
+            {
                 DiaDiem objDiaDiem = DataProvider.Entities.DiaDiems.Find(Id);
                 if (objDiaDiem != null)
                 {

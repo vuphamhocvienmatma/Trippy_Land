@@ -1,9 +1,6 @@
 namespace Trippy_Land.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Trippy_Land.Models.Trippy_Land_Context>
     {

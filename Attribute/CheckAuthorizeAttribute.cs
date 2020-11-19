@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Attribute
@@ -24,7 +23,8 @@ namespace Trippy_Land.Attribute
                 if (session.IsSupper == true)
                     return true;
                 //lấy chức năng 
-                Function ChucNang = DataProvider.Entities.Function.Where(o => o.TenForm == PermissionName).FirstOrDefault<Function>();
+                Function ChucNang = DataProvider.Entities.Function.
+                    Where(o => o.TenForm == PermissionName).FirstOrDefault<Function>();
                 if (ChucNang != null)
                 {
                     List<UserRoleAndFunction> objroleandFunc =
@@ -47,16 +47,11 @@ namespace Trippy_Land.Attribute
                     }
                 }
             }
-            return false;                   
+            return false;
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-            {
-                action = "Login",
-                controller = "ErrorPage",
-                area = ""
-            }));
+            filterContext.Result = new RedirectResult("~/ErrorPage/Login");
         }
     }
 }
