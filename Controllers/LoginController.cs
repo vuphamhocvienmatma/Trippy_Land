@@ -91,7 +91,7 @@ namespace Trippy_Land.Controllers
                         Session["SessionTenUser"] = obj.TenDangNhap; 
                         Session["UserOnline"] = obj;
                         Session.Timeout = 5;
-                        return RedirectToAction("Index_Admin", "Admin", new { area = "Admin" });                    
+                        return RedirectToAction("Index", "Home", new { area = "" });                    
                     }
                     else
                     {

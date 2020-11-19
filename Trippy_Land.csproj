@@ -144,7 +144,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaiVietVeDiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhGiaController.cs" />
@@ -300,7 +299,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Areas\Admin\Views\Admin\Index_Admin.cshtml" />
     <Content Include="Areas\Admin\Views\ChuDe\DanhSachChuDe.cshtml" />
     <Content Include="Areas\Admin\Views\ChuDe\ThemMoiChuDe.cshtml" />
     <Content Include="Areas\Admin\Views\ChuDe\CapNhatChuDe.cshtml" />
@@ -396,6 +394,8 @@
     <Content Include="Areas\Admin\Views\Function\ThemMoiFunction.cshtml" />
     <Content Include="Areas\Admin\Views\Function\CapNhatFunction.cshtml" />
     <Content Include="Areas\Admin\Views\RoleAndFunc\DanhSachRoleAndFunc.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleAndFunc\AddRoleAndFunc.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleAndFunc\EditRoleAndFunc.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
