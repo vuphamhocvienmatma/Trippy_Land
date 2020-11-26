@@ -12,9 +12,10 @@ namespace Trippy_Land.Attribute
     {
         private static readonly ILog logger =
               LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public string PermissionName { get; set; }
+        public string PermissionName { get; set; }   
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            
             //lấy thông tin của người dùng rồi lưu vào Session
             User session = (User)httpContext.Session["UserOnline"];
 
@@ -53,5 +54,6 @@ namespace Trippy_Land.Attribute
         {
             filterContext.Result = new RedirectResult("~/ErrorPage/Login");
         }
+       
     }
 }
