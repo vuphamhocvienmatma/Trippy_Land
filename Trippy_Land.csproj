@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -920,7 +923,6 @@
     <Content Include="Views\Home\_About.cshtml" />
     <Content Include="Views\Home\_VideoAboveAboutUs.cshtml" />
     <Content Include="Views\Home\_TakeYourDestination.cshtml" />
-    <Content Include="Views\Home\_TouristFeedBack.cshtml" />
     <Content Include="Views\Home\GetHotelByProvinceId.cshtml" />
     <Content Include="Views\Home\GetFoodByProvinceId.cshtml" />
     <Content Include="Views\Home\GetLocationByProvinceId.cshtml" />
@@ -932,6 +934,7 @@
     <Content Include="Views\Home\BlogbyLoacationId.cshtml" />
     <Content Include="Views\ErrorPage\Return.cshtml" />
     <Content Include="Views\ErrorPage\Login.cshtml" />
+    <Content Include="Views\Home\_Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

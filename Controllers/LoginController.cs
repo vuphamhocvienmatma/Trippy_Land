@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 using Trippy_Land.Models;
+using CaptchaMvc.HtmlHelpers;
 
 namespace Trippy_Land.Controllers
 {
@@ -33,6 +34,11 @@ namespace Trippy_Land.Controllers
         {
             try
             {
+                // Code for validating the Captcha  
+                if (!this.IsCaptchaValid(""))
+                {
+                    ViewBag.ErrMessage = "Mã Captcha sai";
+                }
                 if (ModelState.IsValid)
                 {
                     var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
@@ -79,6 +85,11 @@ namespace Trippy_Land.Controllers
             Session.Clear(); //remove session 
             try
             {
+                // Code for validating the Captcha  
+                if (!this.IsCaptchaValid(""))
+                {
+                    ViewBag.ErrMessage = "Mã Captcha sai";
+                }
                 string HashPassword = GetSHA256(objUser.MatKhau);
                 if (ModelState.IsValid)
                 {

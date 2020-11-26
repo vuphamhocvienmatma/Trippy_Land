@@ -34,7 +34,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 HienThiDanhSachDiaDiem();
                 HienThiDanhSachChuDe();
-                IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;
+                IQueryable<BaiVietVeDiaDiem> lstBaiViet = DataProvider.Entities.BaiVietVeDiaDiems;               
                 //tìm kiếm theo từ khóa
                 if (!string.IsNullOrEmpty(tuKhoa))
                 {

@@ -3,11 +3,27 @@
     ViewBag.Title = "SignUp";
     Layout = "~/Views/Login/_Login.cshtml";
 }
-
+@using CaptchaMvc.HtmlHelpers
+<style type="text/css">  
+    input[name='CaptchaInputText'] {
+        width: 250px !important;      
+        
+    }
+    CaptchaImage {
+        width: 200px !important;
+        text-align:center;
+    }
+</style>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            @using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { @class = "login100-form validate-form" }))
+            @using (Html.BeginForm("SignUp", "Login", FormMethod.Post,
+                new
+                {
+                    @class = "login100-form validate-form",
+                    enctype = "multipart/form-data",
+                    id = "Captcha"
+                }))
             {
                 @Html.AntiForgeryToken()
                 <span class="login100-form-title p-b-34">
@@ -36,11 +52,16 @@
                 <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-10" data-validate="Type password">
                     @Html.TextBoxFor(m => m.GioiTinh, new { @class = "input100", placeholder = "Male/Female" })
                     <span class="focus-input100"></span>
+                </div>               
+                <div class="m-b-10" style="width: 40%;">
+                    @Html.Captcha("Refresh", "Hãy nhập mã Captcha ", 4, "Bắt buộc nhập mã Captcha", true)
                 </div>
                 <div class="container-login100-form-btn p-t-10 p-b-40">
                     <input type="submit" value=" Sign Up" class="login100-form-btn" />
                 </div>
-                @ViewBag.error
+                <p>@ViewBag.error</p>
+                <p>@ViewBag.ErrMessage</p>
+
                 <div class="w-full text-center p-t-100 p-b-40">
                     <a href="~/Login/Login" class="txt3">
                         Return

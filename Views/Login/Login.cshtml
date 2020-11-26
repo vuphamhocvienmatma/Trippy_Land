@@ -3,10 +3,27 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Login/_Login.cshtml";
 }
+@using CaptchaMvc.HtmlHelpers
+<style type="text/css">
+    input[name='CaptchaInputText'] {
+        width: 250px !important;
+    }
+
+    CaptchaImage {
+        width: 200px !important;
+        text-align: center;
+    }
+</style>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "login100-form validate-form" }))
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new
+            {
+                @class = "login100-form validate-form",
+                enctype = "multipart/form-data",
+                id = "Captcha"
+
+            }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -19,22 +36,26 @@
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-10" data-validate="Type password">
-                    @Html.PasswordFor(m => m.MatKhau, new { @class = "input100", placeholder = "Password" })                 
+                    @Html.PasswordFor(m => m.MatKhau, new { @class = "input100", placeholder = "Password" })
                     <span class="focus-input100"></span>
                 </div>
-                <div class="container-login100-form-btn p-t-10 p-b-40">                 
+                <div class="m-b-10 rs2-wrap-input100" style="width: 40%;">
+                    @Html.Captcha("Refresh", "Hãy nhập mã Captcha ", 4, "Bắt buộc nhập mã Captcha", true)
+                </div>
+                <div class="container-login100-form-btn p-t-10 p-b-40">
                     <input type="submit" value="Sign in" class="login100-form-btn" />
                 </div>
                 <br />
-                @ViewBag.Error;
+                <p>@ViewBag.Error</p>
+                <p>@ViewBag.ErrMessage</p>
                 <div class="w-full text-center p-t-100 p-b-40">
                     <a href="~/Login/SignUp" class="txt3">
                         Sign Up
                     </a>
-                </div>             
+                </div>
             }
-        <div class="login100-more" style="background-image: url('@Url.Content("~/Login_Theme/images/bg-01.jpg")');">
-        </div>
+            <div class="login100-more" style="background-image: url('@Url.Content("~/Login_Theme/images/bg-01.jpg")');">
+            </div>
         </div>
     </div>
 </div>
