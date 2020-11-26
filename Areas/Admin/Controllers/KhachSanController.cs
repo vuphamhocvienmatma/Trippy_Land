@@ -9,7 +9,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    
+
     public class KhachSanController : Controller
     {
         private static readonly ILog logger =

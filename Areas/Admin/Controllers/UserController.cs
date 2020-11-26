@@ -11,7 +11,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-    
+
     public class UserController : Controller
     {
         private static readonly ILog logger =

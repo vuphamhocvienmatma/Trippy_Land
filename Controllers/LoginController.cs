@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 using Trippy_Land.Models;
+using CaptchaMvc.HtmlHelpers;
 
 namespace Trippy_Land.Controllers
 {
@@ -26,13 +27,17 @@ namespace Trippy_Land.Controllers
             }
 
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SignUp(User objUser)
         {
             try
             {
+                // Code for validating the Captcha  
+                if (this.IsCaptchaValid(""))
+                {
+                    ViewBag.ErrMessage = "Mã Captcha sai";
+                }
                 if (ModelState.IsValid)
                 {
                     var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
@@ -65,7 +70,8 @@ namespace Trippy_Land.Controllers
         // GET: Login
         public ActionResult Login()
         {
-            return View();
+            
+            return View();          
         }
         /// <summary>
         /// Đăng nhập với mật khẩu đã được băm qua SHA 256
@@ -79,19 +85,25 @@ namespace Trippy_Land.Controllers
             Session.Clear(); //remove session 
             try
             {
+                // Code for validating the Captcha  
+                if (this.IsCaptchaValid(""))
+                {
+                    ViewBag.ErrMessage = "Mã Captcha sai";
+                }
                 string HashPassword = GetSHA256(objUser.MatKhau);
                 if (ModelState.IsValid)
                 {
                     var obj = DataProvider.Entities.Users
-                        .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+                        .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) 
+                        && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
                     if (obj != null)
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
 
-                        Session["SessionTenUser"] = obj.TenDangNhap; 
+                        Session["SessionTenUser"] = obj.TenDangNhap;
                         Session["UserOnline"] = obj;
                         Session.Timeout = 5;
-                        return RedirectToAction("Index", "Home", new { area = "" });                    
+                        return RedirectToAction("Index", "Home", new { area = "" });                       
                     }
                     else
                     {

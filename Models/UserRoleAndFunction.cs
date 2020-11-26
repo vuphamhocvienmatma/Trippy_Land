@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Trippy_Land.Models
 {
@@ -11,7 +7,7 @@ namespace Trippy_Land.Models
     {
         [Key]
         public int Id { get; set; }
-     
+
         //RoleId
         [Display(Name = "Role")]
         public int UserRoleId { get; set; }

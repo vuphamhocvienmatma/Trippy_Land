@@ -1,8 +1,7 @@
 namespace Trippy_Land.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class PNV2 : DbMigration
     {
         public override void Up()
@@ -12,7 +11,7 @@ namespace Trippy_Land.Migrations
             DropColumn("dbo.UserRoleAndFunctions", "Sua");
             DropColumn("dbo.UserRoleAndFunctions", "Xoa");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.UserRoleAndFunctions", "Xoa", c => c.Boolean(nullable: false));

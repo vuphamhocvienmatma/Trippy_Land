@@ -1,8 +1,6 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Trippy_Land.Attribute;
 using Trippy_Land.Models;
@@ -15,7 +13,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
              LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Admin/RoleAndFunc
 
-        public void HienThiDanhSachFunc(int? Id =null)
+        public void HienThiDanhSachFunc(int? Id = null)
         {
             var lstF = DataProvider.Entities.Function.ToList();
             ViewBag.Function = new SelectList(lstF, "Id", "TenChucNang", Id.HasValue ? Id.Value : 0);
@@ -33,7 +31,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             try
             {
                 HienThiDanhSachRole();
-                HienThiDanhSachFunc();             
+                HienThiDanhSachFunc();
                 IQueryable<UserRoleAndFunction> lstRAF = DataProvider.Entities.UserRoleAndFunctions;
 
                 if (!string.IsNullOrEmpty(tuKhoa))
@@ -57,14 +55,14 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 logger.Error(ex.ToString());
                 return Redirect("~/ErrorPage/Return");
-            }            
+            }
         }
 
         [CheckAuthorize(PermissionName = "AddRoleAndFunc")]
         [HttpGet]
         public ActionResult AddRoleAndFunc()
         {
-           
+
             try
             {
                 HienThiDanhSachRole();
@@ -84,20 +82,20 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddRoleAndFunc(UserRoleAndFunction objRoleAndFunc, int? idFunction, int? idRole)
         {
-            
+
             try
             {
                 HienThiDanhSachRole();
                 HienThiDanhSachFunc();
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     DataProvider.Entities.UserRoleAndFunctions.Add(objRoleAndFunc);
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
-                    logger.Info("Add a UserRole and Function " +objRoleAndFunc.UserRole.TenRole
+                    logger.Info("Add a UserRole and Function " + objRoleAndFunc.UserRole.TenRole
                         + objRoleAndFunc.Function.TenChucNang);
                 }
-                return RedirectToAction("DanhSachRoleAndFunc");              
+                return RedirectToAction("DanhSachRoleAndFunc");
             }
             catch (Exception ex)
             {
@@ -110,7 +108,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult EditRoleAndFunc(int Id)
         {
-          
+
             try
             {
                 HienThiDanhSachRole();
@@ -135,10 +133,10 @@ namespace Trippy_Land.Areas.Admin.Controllers
             {
                 HienThiDanhSachRole();
                 HienThiDanhSachFunc();
-                var objOld_RAF = DataProvider.Entities.UserRoleAndFunctions.Find(Id);         
+                var objOld_RAF = DataProvider.Entities.UserRoleAndFunctions.Find(Id);
                 //Xử lý upload file            
                 if (objOld_RAF != null)
-                {                 
+                {
                     DataProvider.Entities.Entry(objOld_RAF).CurrentValues.SetValues(objRAF);
                     //Lưu thay đổi
                     DataProvider.Entities.SaveChanges();
@@ -157,7 +155,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
         [CheckAuthorize(PermissionName = "RemoveRoleAndFunc")]
         public ActionResult RemoveRoleAndFunc(int Id)
-        {          
+        {
             try
             {
                 UserRoleAndFunction objRAF = DataProvider.Entities.UserRoleAndFunctions.Find(Id);

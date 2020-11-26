@@ -8,7 +8,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
-   
+
     public class RoleController : Controller
     {
         private static readonly ILog logger =
@@ -20,7 +20,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             List<UserRole> lstUserRole = DataProvider.Entities.UserRoles.ToList();
             return View(lstUserRole);
         }
-        
+
         [CheckAuthorize(PermissionName = "AddRole")]
         public JsonResult AddRole(int Id, string TenRole, string MoTa)
         {

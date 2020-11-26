@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th style="width: 300px;">
+               Id
+            </th>
+            <th style="width: 300px;">
                 @Html.DisplayNameFor(model => model.TenChucNang)
             </th>
 
@@ -23,7 +26,7 @@
             <th style="width: 200px;">
                 @Html.DisplayNameFor(model => model.TenForm)
             </th>
-           
+
             <th style="width: 200px;">
                 Nghiệp vụ xử lý
             </th>
@@ -32,23 +35,26 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenChucNang)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenChucNang)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.MoTa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenForm)
-                </td>
-                
-                <td>
-                    @Html.ActionLink("Sửa", "CapNhatFunction", new { id = item.Id }, new { @class = "lnkbuttonSua" })
-                    @Html.ActionLink("Xóa", "XoaFunction", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenForm)
+            </td>
+
+            <td>
+                @Html.ActionLink("Sửa", "CapNhatFunction", new { id = item.Id }, new { @class = "lnkbuttonSua" })
+                @Html.ActionLink("Xóa", "XoaFunction", new { id = item.Id }, new { @class = "lnkbuttonXoa" })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
