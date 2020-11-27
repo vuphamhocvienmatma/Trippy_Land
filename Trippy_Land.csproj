@@ -927,7 +927,6 @@
     <Content Include="Views\Home\_Intro.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_IntroQuotes.cshtml" />
-    <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Home\_Destination.cshtml" />
     <Content Include="Views\Home\_AskForQuote.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />

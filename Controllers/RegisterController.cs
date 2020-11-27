@@ -40,7 +40,7 @@ namespace Trippy_Land.Controllers
 
         public JsonResult SaveData(User model)
         {
-            model.IsValid = false;
+            model.EmailConfirm = false;
             model.UserRoleId = 2;
             model.MatKhau = GetSHA256(model.MatKhau);
             DataProvider.Entities.Users.Add(model);
@@ -55,11 +55,12 @@ namespace Trippy_Land.Controllers
             return View();
         }
 
+   
         [HttpPost]
         public JsonResult RegisterConfirm(int regId)
         {
             User Data = DataProvider.Entities.Users.Where(x => x.Id == regId).FirstOrDefault();
-            Data.IsValid = true;
+            Data.EmailConfirm = true;
             DataProvider.Entities.SaveChanges();
             var msg = "Your Email Is Verified!";
             return Json(msg, JsonRequestBehavior.AllowGet);
