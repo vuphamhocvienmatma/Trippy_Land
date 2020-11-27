@@ -794,6 +794,7 @@
     <Content Include="Trippy_Land_Theme\js\scrollax.min.js" />
     <Content Include="Views\ErrorPage\emoji.png" />
     <Content Include="Views\ErrorPage\style.css" />
+    <Content Include="Views\Register\css\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
