@@ -13,64 +13,10 @@ namespace Trippy_Land.Controllers
     {
         private static readonly ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public ActionResult SignUp()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-
-                logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
-            }
-
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SignUp(User objUser)
-        {
-            try
-            {
-                // Code for validating the Captcha  
-                if (this.IsCaptchaValid(""))
-                {
-                    ViewBag.ErrMessage = "Mã Captcha sai";
-                }
-                if (ModelState.IsValid)
-                {
-                    var check = DataProvider.Entities.Users.FirstOrDefault(s => s.TenDangNhap == objUser.TenDangNhap);
-                    if (check == null)
-                    {
-                        objUser.MatKhau = GetSHA256(objUser.MatKhau);
-                        DataProvider.Entities.Configuration.ValidateOnSaveEnabled = false;
-                        objUser.UserRoleId = 2;
-                        DataProvider.Entities.Users.Add(objUser);
-                        DataProvider.Entities.SaveChanges();
-                        logger.Info("Have a new sign up!");
-                        return RedirectToAction("Login");
-                    }
-                    else
-                    {
-                        ViewBag.error = "Tài khoản đã tồn tại";
-                        logger.Info("Have a error when anonymous sign up!" + ViewBag.error);
-                        return View();
-                    }
-                }
-                return View();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
-            }
-        }
-
+       
         // GET: Login
         public ActionResult Login()
-        {
-            
+        {           
             return View();          
         }
         /// <summary>
@@ -82,26 +28,31 @@ namespace Trippy_Land.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
         {
+           
             Session.Clear(); //remove session 
             try
             {
                 // Code for validating the Captcha  
-                if (this.IsCaptchaValid(""))
-                {
-                    ViewBag.ErrMessage = "Mã Captcha sai";
-                }
+                //if (this.IsCaptchaValid(""))
+                //{
+                //    ViewBag.ErrMessage = "Mã Captcha sai";
+                //}
                 string HashPassword = GetSHA256(objUser.MatKhau);
                 if (ModelState.IsValid)
                 {
                     var obj = DataProvider.Entities.Users
                         .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) 
                         && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+                   
                     if (obj != null)
                     {
-                        logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-
-                        Session["SessionTenUser"] = obj.TenDangNhap;
+                        if (obj.EmailConfirm == false)
+                            ViewBag.EmailNotConfirm = "Please! Confirm your Email";
+                        logger.Info("Have a  user login! Username: " + obj.TenDangNhap);                    
                         Session["UserOnline"] = obj;
+                        Session["SessionTenUser"] = obj.TenDangNhap;
+                        if (obj.UserRole.Id == 1 || obj.UserRole.Id == 3 || obj.UserRole.Id == 4)
+                            return RedirectToAction("DanhSachTinh", "Tinh", new { area = "Admin" });
                         Session.Timeout = 5;
                         return RedirectToAction("Index", "Home", new { area = "" });                       
                     }
@@ -110,7 +61,9 @@ namespace Trippy_Land.Controllers
                         ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
                         logger.Info("Have a error when user sign in!" + "Wrong password or username");
                     }
+   
                 }
+                var e = ModelState.Values.SelectMany(v => v.Errors).ToList();
                 return View();
             }
             catch (Exception ex)

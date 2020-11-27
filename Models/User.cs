@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -48,6 +49,12 @@ namespace Trippy_Land.Models
 
         [Display(Name = "Là quản trị viên")]
         public bool IsSupper { get; set; }
+
+        [Display(Name = "Email đã xác thực")]
+        public bool EmailConfirm { get; set; }
+
+
+        public Nullable<bool> IsValid { get; set; }
 
         [Display(Name = "Role")]
         public int UserRoleId { get; set; }

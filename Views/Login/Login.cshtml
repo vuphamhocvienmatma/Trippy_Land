@@ -14,6 +14,9 @@
         text-align: center;
     }
 </style>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -39,23 +42,153 @@
                     @Html.PasswordFor(m => m.MatKhau, new { @class = "input100", placeholder = "Password" })
                     <span class="focus-input100"></span>
                 </div>
-                <div class="m-b-10 rs2-wrap-input100" style="width: 40%;">
-                    @Html.Captcha("Refresh", "Hãy nhập mã Captcha ", 4, "Bắt buộc nhập mã Captcha", true)
-                </div>
+                @*<div class="m-b-10 rs2-wrap-input100" style="width: 40%;">
+                    @Html.Captcha("Làm mới", "Hãy nhập mã Captcha ", 4, "Bắt buộc nhập mã Captcha", true)
+                </div>*@
                 <div class="container-login100-form-btn p-t-10 p-b-40">
                     <input type="submit" value="Sign in" class="login100-form-btn" />
                 </div>
                 <br />
                 <p>@ViewBag.Error</p>
                 <p>@ViewBag.ErrMessage</p>
-                <div class="w-full text-center p-t-100 p-b-40">
-                    <a href="~/Login/SignUp" class="txt3">
-                        Sign Up
-                    </a>
+                <p>@ViewBag.EmailNotConfirm</p>
+
+                <div class="w-full text-center p-t-100 p-b-40">                
+                    <div class="form-group">
+                        <a class="txt3" onclick="SignUp()">
+                            Sign Up
+                        </a>
+                    </div>
                 </div>
+
             }
             <div class="login100-more" style="background-image: url('@Url.Content("~/Login_Theme/images/bg-01.jpg")');">
             </div>
         </div>
     </div>
 </div>
+@*Design Modal With Registration form*@
+
+<div class="modal fade" id="ShowModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>Đăng kí thông tin</h4>
+                
+            </div>
+            <div class="modal-body">
+                <form id="Registration">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input class="form-control" type="text" name="TenDangNhap" id="user" placeholder="Tên đăng nhập" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" type="password" name="MatKhau" id="Password" placeholder="Mật khẩu" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" type="email" name="Email" id="Email" placeholder="Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            <input class="form-control" type="text" name="PhoneNumber" id="PhoneNumber" placeholder="Điện thoại" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pawn"></i></span>
+                            <input class="form-control" type="text" name="GioiTinh" id="GioiTinh" placeholder="Giới tính" />
+                        </div>
+                    </div>
+
+                </form>
+                <div class="form-group">
+                    <button class="btn btn-info form-control" type="submit" onclick="SaveForm()"><i class="glyphicon glyphicon-registration-mark"></i> Đăng kí</button>
+                </div>
+                <div id="message1">
+                    <div class="alert alert-success">
+                        <span class="glyphicon glyphicon-ok"></span><strong>
+                            Thành công!<br />
+                            Hệ thống đã gửi Email xác thực!<br />
+                            Vui lòng kiểm tra hộp thư đến
+                        </strong>
+                    </div>
+                </div>
+                <div id="message2">
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-remove"></span><strong> Lỗi! Đăng kí thất bại</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function SignUp() {
+        $("#ShowModal").modal();
+        $("#message1").hide();
+        $("#message2").hide();
+    }
+
+    function SaveForm() {
+        var name = $("#TenDangNhap").val();
+        var pwd = $("#MatKhau").val();
+        var email = $("#Email").val();
+        var PhoneNumber = $("#PhoneNumber").val();
+        var GioiTinh = $("#GioiTinh").val();
+
+        if (name == "" || pwd == "" || email == "") {
+            $("#message1").hide();
+            $("#message2").show();
+            return false;
+        }
+        var data = $("#Registration").serialize();
+        $.ajax({
+            type: "post",
+            data: data,
+            url: "/Register/SaveData",
+            success: function (result) {
+
+                $("#message1").show();
+                $("#message2").hide();
+                $("#Registration")[0].reset();
+            }
+        });
+    }
+
+    //Login System
+    $("#msg").hide();
+
+    var Login = function () {
+        var data = $("#loginForm").serialize();
+        $.ajax({
+            type: "post",
+            url: "/Register/CheckValidUser",
+            data: data,
+            success: function (result) {
+                if (result == "Fail") {
+                    $("#loginForm")[0].reset();
+                    $("#msg").show();
+                }
+                else {
+                    window.location.href = "/Register/AfterLogin";
+                    $("#msg").hide();
+                }
+            }
+        })
+    }
+</script>

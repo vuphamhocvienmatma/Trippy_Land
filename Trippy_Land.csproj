@@ -162,6 +162,7 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,6 +181,10 @@
     <Compile Include="Migrations\202011180953298_PNV3.cs" />
     <Compile Include="Migrations\202011180953298_PNV3.Designer.cs">
       <DependentUpon>202011180953298_PNV3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011270223594_PNV4.cs" />
+    <Compile Include="Migrations\202011270223594_PNV4.Designer.cs">
+      <DependentUpon>202011270223594_PNV4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
@@ -242,6 +247,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Video\Let%27s Take a Trip - -30 - Expedia.mp4" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -299,6 +305,7 @@
     <Content Include="Login_Theme\vendor\select2\select2.min.css" />
     <Content Include="Login_Theme\vendor\select2\select2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -399,6 +406,10 @@
     <Content Include="Areas\Admin\Views\RoleAndFunc\DanhSachRoleAndFunc.cshtml" />
     <Content Include="Areas\Admin\Views\RoleAndFunc\AddRoleAndFunc.cshtml" />
     <Content Include="Areas\Admin\Views\RoleAndFunc\EditRoleAndFunc.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="EmailTemplate\Text.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -916,7 +927,6 @@
     <Content Include="Views\Home\_Intro.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_IntroQuotes.cshtml" />
-    <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Home\_Destination.cshtml" />
     <Content Include="Views\Home\_AskForQuote.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
@@ -935,10 +945,11 @@
     <Content Include="Views\ErrorPage\Return.cshtml" />
     <Content Include="Views\ErrorPage\Login.cshtml" />
     <Content Include="Views\Home\_Comment.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -960,6 +971,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011180953298_PNV3.resx">
       <DependentUpon>202011180953298_PNV3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011270223594_PNV4.resx">
+      <DependentUpon>202011270223594_PNV4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
