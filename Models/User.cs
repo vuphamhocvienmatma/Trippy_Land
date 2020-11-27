@@ -49,6 +49,10 @@ namespace Trippy_Land.Models
         [Display(Name = "Là quản trị viên")]
         public bool IsSupper { get; set; }
 
+        [Display(Name = "Email đã xác thực")]
+        public bool EmailConfirm { get; set; }
+
+
         [Display(Name = "Role")]
         public int UserRoleId { get; set; }
 

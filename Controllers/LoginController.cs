@@ -99,9 +99,10 @@ namespace Trippy_Land.Controllers
                     if (obj != null)
                     {
                         logger.Info("Have a  user login! Usename: " + obj.TenDangNhap);
-
-                        Session["SessionTenUser"] = obj.TenDangNhap;
+                      
                         Session["UserOnline"] = obj;
+                            if(obj.UserRole.Id == 1 || obj.UserRole.Id == 3 || obj.UserRole.Id == 4)
+                            return RedirectToAction("DanhSachTinh", "Tinh", new { area = "Admin" });
                         Session.Timeout = 5;
                         return RedirectToAction("Index", "Home", new { area = "" });                       
                     }
