@@ -5,14 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CapNhatBaiViet</h2>
 @using (Html.BeginForm("CapNhatBaiViet", "BaiVietVeDiaDiem", FormMethod.Post, new
 { encType = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>BaiVietVeDiaDiem</h4>
+       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)

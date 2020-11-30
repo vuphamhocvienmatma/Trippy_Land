@@ -9,27 +9,20 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trippy_Land.Attribute;
 using Trippy_Land.Models;
 
 namespace Trippy_Land.Areas.Admin.Controllers
 {
     public class DataController : Controller
-    {      
-        /// <summary>
-        /// Show a list of Function
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ListFunc()
-        {
-            return View(DataProvider.Entities.Function.ToList());
-        }
-
+    {
+        [CheckAuthorize(PermissionName = "ImpFunc")]
         [HttpGet]
         public ActionResult ImpFunc()
         {
             return View();
         }
-
+        [CheckAuthorize(PermissionName = "ImpFunc")]
         [HttpPost]
         public ActionResult ImpFunc(HttpPostedFileBase FileUpload)
         {
@@ -160,13 +153,14 @@ namespace Trippy_Land.Areas.Admin.Controllers
             }           
         }
 
-
+        [CheckAuthorize(PermissionName = "ImpRoleAndFunc")]
         [HttpGet]
         public ActionResult ImpRoleAndFunc()
         {
             return View();
         }
 
+        [CheckAuthorize(PermissionName = "ImpRoleAndFunc")]
         [HttpPost]
         public ActionResult ImpRoleAndFunc(HttpPostedFileBase FileUpload)
         {
@@ -174,7 +168,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
             List<Function> ListFunction = DataProvider.Entities.Function.ToList();
             if (ListFunction.Count == 0)
             {
-                TempData["FunctionEmpty"] = ("Vui lòng import dữ liệu về chức năng");
+                TempData["FunctionEmpty"] = ("Vui lòng import dữ liệu về chức năng trước");
                 return RedirectToAction("ImpFunc", "Data", "Admin");
             }    
                
@@ -236,8 +230,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
                     {
                         try
                         {
-
-                            if (true)
+                            if (a[0].Value != null
+                                && a[1].Value != null)
                             {
                                 UserRoleAndFunction RF = new UserRoleAndFunction();
                                 Function F = new Function();
