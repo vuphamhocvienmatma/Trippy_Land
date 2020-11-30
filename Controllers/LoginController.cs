@@ -25,21 +25,17 @@ namespace Trippy_Land.Controllers
         /// <param name="objUser"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]     
         public ActionResult Login(User objUser)
-        {
-           
+        {          
             Session.Clear(); //remove session 
+            if (this.IsCaptchaValid(""))
+            {
+                ViewBag.ErrMessage = "Mã Captcha sai";
+            }           
             try
             {
-                // Code for validating the Captcha  
-                //if (this.IsCaptchaValid(""))
-                //{
-                //    ViewBag.ErrMessage = "Mã Captcha sai";
-                //}
-                string HashPassword = GetSHA256(objUser.MatKhau);
-                if (ModelState.IsValid)
-                {
+                string HashPassword = GetSHA256(objUser.MatKhau);                             
                     var obj = DataProvider.Entities.Users
                         .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) 
                         && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
@@ -60,10 +56,7 @@ namespace Trippy_Land.Controllers
                     {
                         ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
                         logger.Info("Have a error when user sign in!" + "Wrong password or username");
-                    }
-   
-                }
-                var e = ModelState.Values.SelectMany(v => v.Errors).ToList();
+                       }      
                 return View();
             }
             catch (Exception ex)
@@ -71,6 +64,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
+            
         }
         public ActionResult Logout()
         {
@@ -79,26 +73,7 @@ namespace Trippy_Land.Controllers
             return RedirectToAction("Login", "Login");
         }
 
-        /// <summary>
-        /// Chuyển đổi một chuỗi về MD5
-        /// </summary>
-        /// <param name="str">Chuỗi cần băm</param>
-        /// <returns></returns>
-        public static string GetMD5(string str)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.UTF8.GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            string byte2String = null;
-
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                byte2String += targetData[i].ToString("x2");
-
-            }
-            return byte2String;
-        }
-
+       
         /// <summary>
         /// Chuyển đổi một chuỗi về SHA256
         /// </summary>

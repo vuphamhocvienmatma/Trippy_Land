@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -9,10 +10,15 @@ using System.Web.Hosting;
 using System.Web.Mvc;
 using Trippy_Land.Models;
 
+
 namespace Trippy_Land.Controllers
 {
+    
     public class RegisterController : Controller
     {
+        private static readonly ILog logger =
+          log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Chuyển đổi một chuỗi về SHA256
         /// </summary>
@@ -40,13 +46,23 @@ namespace Trippy_Land.Controllers
 
         public JsonResult SaveData(User model)
         {
-            model.EmailConfirm = false;
-            model.UserRoleId = 2;
-            model.MatKhau = GetSHA256(model.MatKhau);
-            DataProvider.Entities.Users.Add(model);
-            DataProvider.Entities.SaveChanges();
-            BuildEmailTemplate(model.Id);
-            return Json("Đăng ký thành công", JsonRequestBehavior.AllowGet);
+            try
+            {
+                model.EmailConfirm = false;
+                model.UserRoleId = 2;
+                model.MatKhau = GetSHA256(model.MatKhau);
+                DataProvider.Entities.Users.Add(model);
+                DataProvider.Entities.SaveChanges();
+                BuildEmailTemplate(model.Id);
+                logger.Info("Có 1 đăng ký mới " + model.TenDangNhap);
+                return Json("Đăng ký thành công", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+           
         }
         [HttpGet]
         public ActionResult Confirm(int regId)
@@ -59,11 +75,21 @@ namespace Trippy_Land.Controllers
         [HttpPost]
         public JsonResult RegisterConfirm(int regId)
         {
-            User Data = DataProvider.Entities.Users.Where(x => x.Id == regId).FirstOrDefault();
-            Data.EmailConfirm = true;
-            DataProvider.Entities.SaveChanges();
-            var msg = "Your Email Is Verified!";
-            return Json(msg, JsonRequestBehavior.AllowGet);
+            try
+            {
+                User Data = DataProvider.Entities.Users.Where(x => x.Id == regId).FirstOrDefault();
+                Data.EmailConfirm = true;
+                DataProvider.Entities.SaveChanges();
+                var msg = "Your Email Is Verified!";
+                logger.Info("Có 1 lượt xác thực mới " + Data.TenDangNhap);
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+     
         }
 
         public void BuildEmailTemplate(int regID)
@@ -117,10 +143,11 @@ namespace Trippy_Land.Controllers
             try
             {
                 client.Send(mail);
+                logger.Info("Gửi mail xác thực đến " + mail.To);
             }
             catch (Exception ex)
             {
-                throw ex;
+                logger.Error(ex.ToString());
             }
         }
     }
