@@ -81,7 +81,9 @@ namespace Trippy_Land.Controllers
         {
             try
             {
-                BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).FirstOrDefault();
+                BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).First();
+                if(ObjbaiVietVeDiaDiem == null)
+                    return RedirectToAction("Return", "ErrorPage");
                 return View(ObjbaiVietVeDiaDiem);
             }
             catch (Exception ex)
@@ -89,7 +91,6 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-
         }
 
         /// <summary>
