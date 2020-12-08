@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -63,7 +62,7 @@ namespace Trippy_Land.Models
         public virtual UserRole UserRole { get; set; }
 
 
-        public virtual ICollection<LogHeThong> LogHeThongs { get; set; }
-        
+
+
     }
 }

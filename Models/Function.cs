@@ -8,7 +8,7 @@ namespace Trippy_Land.Models
     {
         [Key]
         public int Id { get; set; }
-       
+
         [Column(TypeName = "NVARCHAR")]
         [StringLength(50)]
         [Display(Name = "Tên chức năng")]

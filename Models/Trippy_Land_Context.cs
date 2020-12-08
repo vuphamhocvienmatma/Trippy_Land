@@ -17,9 +17,9 @@ namespace Trippy_Land.Models
         public DbSet<Tinh> Tinhs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-     
+
         public DbSet<UserRoleAndFunction> UserRoleAndFunctions { get; set; }
         public DbSet<Function> Function { get; set; }
-        public DbSet<LogHeThong> LogHeThong { get; set; }
+
     }
 }

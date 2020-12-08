@@ -1,11 +1,9 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using Trippy_Land.Models;
@@ -13,7 +11,7 @@ using Trippy_Land.Models;
 
 namespace Trippy_Land.Controllers
 {
-    
+
     public class RegisterController : Controller
     {
         private static readonly ILog logger =
@@ -62,7 +60,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return Json("", JsonRequestBehavior.AllowGet);
             }
-           
+
         }
         [HttpGet]
         public ActionResult Confirm(int regId)
@@ -71,7 +69,7 @@ namespace Trippy_Land.Controllers
             return View();
         }
 
-   
+
         [HttpPost]
         public JsonResult RegisterConfirm(int regId)
         {
@@ -89,7 +87,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return Json("", JsonRequestBehavior.AllowGet);
             }
-     
+
         }
 
         public void BuildEmailTemplate(int regID)
@@ -138,7 +136,7 @@ namespace Trippy_Land.Controllers
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            
+
             client.Credentials = new System.Net.NetworkCredential("nhomhoctapnho123@gmail.com", "Hocvienkythuatmatma123");
             try
             {

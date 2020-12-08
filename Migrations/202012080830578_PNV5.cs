@@ -1,8 +1,7 @@
 namespace Trippy_Land.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class PNV5 : DbMigration
     {
         public override void Up()
@@ -15,7 +14,7 @@ namespace Trippy_Land.Migrations
             DropIndex("dbo.DanhGia", new[] { "idUser" });
             DropColumn("dbo.DanhGia", "idUser");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.DanhGia", "idUser", c => c.Int(nullable: false));

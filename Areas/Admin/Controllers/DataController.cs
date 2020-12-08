@@ -76,8 +76,8 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                         //xóa các hàng cũ                     
                         var rows = from o in DataProvider.Entities.Function
-                                   select o;                       
-                            DataProvider.Entities.Function.RemoveRange(rows);                      
+                                   select o;
+                        DataProvider.Entities.Function.RemoveRange(rows);
                         DataProvider.Entities.SaveChanges();
                         foreach (var a in artistAlbums)
                         {
@@ -128,7 +128,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                                 }
                             }
-                        }                      
+                        }
                         return Json("success", JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -155,7 +155,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Info("Import thất bại " + ex.ToString());
                 return Json("", JsonRequestBehavior.AllowGet);
             }
-           
+
         }
 
         [CheckAuthorize(PermissionName = "ImpRoleAndFunc")]
@@ -226,7 +226,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                         //Xóa các cột cũ trong DB
                         var rows = from o in DataProvider.Entities.UserRoleAndFunctions
                                    select o;
-                  
+
                         DataProvider.Entities.UserRoleAndFunctions.RemoveRange((IEnumerable<UserRoleAndFunction>)rows);
                         DataProvider.Entities.SaveChanges();
 
@@ -274,7 +274,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
 
                                 }
                             }
-                        }                     
+                        }
                         return Json("success", JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -301,7 +301,7 @@ namespace Trippy_Land.Areas.Admin.Controllers
                 logger.Info("Import thất bại " + ex.ToString());
                 throw;
             }
-           
+
         }
     }
 }

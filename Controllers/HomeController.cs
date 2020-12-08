@@ -10,13 +10,14 @@ namespace Trippy_Land.Controllers
     public class HomeController : Controller
     {
         private static readonly ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
-      
-            
+
+
+
         public ActionResult Index()
         {
             try
             {
+
                 IQueryable<Tinh> lstTinh = DataProvider.Entities.Tinhs;
                 logger.Info("Have an access the website: Index");
                 return View(lstTinh);
@@ -70,7 +71,7 @@ namespace Trippy_Land.Controllers
             try
             {
                 BaiVietVeDiaDiem ObjbaiVietVeDiaDiem = DataProvider.Entities.BaiVietVeDiaDiems.Where(b => b.Id == Id).First();
-                if(ObjbaiVietVeDiaDiem == null)
+                if (ObjbaiVietVeDiaDiem == null)
                     return RedirectToAction("Return", "ErrorPage");
                 return View(ObjbaiVietVeDiaDiem);
             }

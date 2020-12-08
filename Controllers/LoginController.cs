@@ -1,11 +1,11 @@
-﻿using log4net;
+﻿using CaptchaMvc.HtmlHelpers;
+using log4net;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 using Trippy_Land.Models;
-using CaptchaMvc.HtmlHelpers;
 
 namespace Trippy_Land.Controllers
 {
@@ -13,11 +13,12 @@ namespace Trippy_Land.Controllers
     {
         private static readonly ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-       
+
         // GET: Login
         public ActionResult Login()
-        {           
-            return View();          
+        {
+
+            return View();
         }
         /// <summary>
         /// Đăng nhập với mật khẩu đã được băm qua SHA 256
@@ -25,38 +26,38 @@ namespace Trippy_Land.Controllers
         /// <param name="objUser"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]     
+        [ValidateAntiForgeryToken]
         public ActionResult Login(User objUser)
-        {          
+        {
             Session.Clear(); //remove session 
             if (this.IsCaptchaValid(""))
             {
                 ViewBag.ErrMessage = "Mã Captcha sai";
-            }           
+            }
             try
             {
-                string HashPassword = GetSHA256(objUser.MatKhau);                             
-                    var obj = DataProvider.Entities.Users
-                        .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap) 
-                        && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
-                   
-                    if (obj != null)
-                    {
-                        if (obj.EmailConfirm == false)
-                            ViewBag.EmailNotConfirm = "Please! Confirm your Email";
-                        logger.Info("Have a  user login! Username: " + obj.TenDangNhap);                    
-                        Session["UserOnline"] = obj;
-                        Session["SessionTenUser"] = obj.TenDangNhap;
-                        if (obj.UserRole.Id == 1 || obj.UserRole.Id == 3 || obj.UserRole.Id == 4)
-                            return RedirectToAction("DanhSachTinh", "Tinh", new { area = "Admin" });
-                        Session.Timeout = 5;
-                        return RedirectToAction("Index", "Home", new { area = "" });                       
-                    }
-                    else
-                    {
-                        ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
-                        logger.Info("Have a error when user sign in!" + "Wrong password or username");
-                       }      
+                string HashPassword = GetSHA256(objUser.MatKhau);
+                var obj = DataProvider.Entities.Users
+                    .Where(u => u.TenDangNhap.Equals(objUser.TenDangNhap)
+                    && u.MatKhau.Equals(HashPassword)).FirstOrDefault();
+
+                if (obj != null)
+                {
+                    if (obj.EmailConfirm == false)
+                        ViewBag.EmailNotConfirm = "Please! Confirm your Email";
+                    logger.Info("Have a  user login! Username: " + obj.TenDangNhap);
+                    Session["UserOnline"] = obj;
+                    Session["SessionTenUser"] = obj.TenDangNhap;
+                    if (obj.UserRole.Id == 1 || obj.UserRole.Id == 3 || obj.UserRole.Id == 4)
+                        return RedirectToAction("DanhSachTinh", "Tinh", new { area = "Admin" });
+                    Session.Timeout = 5;
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                else
+                {
+                    ViewBag.Error = "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu";
+                    logger.Info("Have a error when user sign in!" + "Wrong password or username");
+                }
                 return View();
             }
             catch (Exception ex)
@@ -64,7 +65,7 @@ namespace Trippy_Land.Controllers
                 logger.Error(ex.ToString());
                 return RedirectToAction("Return", "ErrorPage");
             }
-            
+
         }
         public ActionResult Logout()
         {
@@ -73,7 +74,7 @@ namespace Trippy_Land.Controllers
             return RedirectToAction("Login", "Login");
         }
 
-       
+
         /// <summary>
         /// Chuyển đổi một chuỗi về SHA256
         /// </summary>
