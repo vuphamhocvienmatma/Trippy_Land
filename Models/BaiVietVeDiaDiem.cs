@@ -55,6 +55,5 @@ namespace Trippy_Land.Models
         public virtual ChuDeBaiVietVeDiaDiem ChuDeBaiVietVeDiaDiem { get; set; }
 
 
-        public virtual ICollection<DanhGiaBaiViet> DanhGiaBaiViet { get; set; }
     }
 }

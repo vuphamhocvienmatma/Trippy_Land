@@ -141,6 +141,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Win32.Registry.4.4.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.Bson.1.0.1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
@@ -361,9 +364,6 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
       <Private>True</Private>
@@ -405,7 +405,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaiVietVeDiaDiemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuDeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DanhGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DataController.cs" />
     <Compile Include="Areas\Admin\Controllers\FunctionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleAndFuncController.cs" />
@@ -419,7 +418,6 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -444,14 +442,20 @@
     <Compile Include="Migrations\202011270223594_PNV4.Designer.cs">
       <DependentUpon>202011270223594_PNV4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012080830578_PNV5.cs" />
+    <Compile Include="Migrations\202012080830578_PNV5.Designer.cs">
+      <DependentUpon>202012080830578_PNV5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012080832502_PNV6.cs" />
+    <Compile Include="Migrations\202012080832502_PNV6.Designer.cs">
+      <DependentUpon>202012080832502_PNV6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaiVietVeDiaDiem.cs" />
     <Compile Include="Models\ChuDeBaiVietVeDiaDiem.cs" />
-    <Compile Include="Models\DanhGiaBaiViet.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\LogHeThong.cs" />
     <Compile Include="Models\UserRole.cs" />
-    <Compile Include="Models\DanhGia.cs" />
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\DiaDiem.cs" />
     <Compile Include="Models\KhachSan.cs" />
@@ -655,8 +659,6 @@
     <Content Include="Areas\Admin\Views\User\DanhSachUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\ThemMoiUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\CapNhatUser.cshtml" />
-    <Content Include="Areas\Admin\Views\DanhGia\DanhSachDanhGia.cshtml" />
-    <Content Include="Areas\Admin\Views\DanhGia\ThemMoiDanhGia.cshtml" />
     <Content Include="Areas\Admin\Views\Role\ListRole.cshtml" />
     <Content Include="Areas\Admin\Views\Function\DanhSachFunction.cshtml" />
     <Content Include="Areas\Admin\Views\Function\ThemMoiFunction.cshtml" />
@@ -1208,7 +1210,6 @@
     <Content Include="Views\Home\_Comment.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Confirm.cshtml" />
-    <Content Include="Views\Map\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1237,6 +1238,12 @@
     <EmbeddedResource Include="Migrations\202011270223594_PNV4.resx">
       <DependentUpon>202011270223594_PNV4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012080830578_PNV5.resx">
+      <DependentUpon>202012080830578_PNV5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012080832502_PNV6.resx">
+      <DependentUpon>202012080832502_PNV6.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1257,7 +1264,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58136</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58136/</IISUrl>
+          <IISUrl>http://localhost:8888/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

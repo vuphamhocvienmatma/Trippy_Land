@@ -64,6 +64,6 @@ namespace Trippy_Land.Models
 
 
         public virtual ICollection<LogHeThong> LogHeThongs { get; set; }
-        public virtual ICollection<DanhGia> DanhGia { get; set; }
+        
     }
 }

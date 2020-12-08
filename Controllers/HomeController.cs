@@ -11,19 +11,7 @@ namespace Trippy_Land.Controllers
     {
         private static readonly ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        public ActionResult Comment()
-        {
-            try
-            {
-                IQueryable<DanhGiaBaiViet> lstDanhGia = DataProvider.Entities.DanhGiaBaiViets;              
-                return PartialView(lstDanhGia);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex.ToString());
-                return RedirectToAction("Return", "ErrorPage");
-            }
-        }
+      
             
         public ActionResult Index()
         {
